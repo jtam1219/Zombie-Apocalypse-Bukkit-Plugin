@@ -1,0 +1,10 @@
+name: ZombieSpawn
+version: 1.0
+author: test
+main: me.pluginTest.Main
+description: Spawns a zombie
+
+commands:
+  test:
+    aliases: [ari]
+    description: /ari to spawn a zombie
