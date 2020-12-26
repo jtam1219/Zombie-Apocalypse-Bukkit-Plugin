@@ -1,0 +1,6 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "f:\\Users\\Ari\\Downloads\\spigot-1.16.4.jar"
+  ]
+}
