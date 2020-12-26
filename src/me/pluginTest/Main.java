@@ -2,10 +2,10 @@ package me.pluginTest;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class main extends JavaPlugin{
+public class Main extends JavaPlugin {
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
 
     }
 }
