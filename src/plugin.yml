@@ -1,4 +1,4 @@
-name: ZombieSpawn
+name: MC-Plugin-test
 version: 1.0
 author: test
 main: me.pluginTest.Main
