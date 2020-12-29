@@ -1,0 +1,2 @@
+Main-Class: me.pluginTest.Main
+Class-Path: yourlib.jar
