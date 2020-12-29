@@ -3,7 +3,6 @@ version: 1.0
 author: test
 main: me.pluginTest.Main
 description: Spawns a zombie
-api-version: 1.16
 
 commands:
   test:
