@@ -67,7 +67,7 @@ public class ZombieTypes implements Listener {
         Material.IRON_AXE, Material.IRON_SWORD, Material.DIAMOND_AXE, Material.DIAMOND_SWORD, Material.GOLDEN_AXE,
         Material.GOLDEN_SWORD, Material.NETHERITE_AXE, Material.NETHERITE_SWORD };
     int geared = r.nextInt(10);
-    int effects = r.nextInt(3);
+    int effects = r.nextInt(12);
     int armor = r.nextInt(15);
     int weapon = r.nextInt(18);
 
