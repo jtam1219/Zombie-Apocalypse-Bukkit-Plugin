@@ -118,6 +118,7 @@ public class ZombieTypes implements Listener {
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
           zombie.setCustomName("Tank");
+          return;
         }
       }
     }
