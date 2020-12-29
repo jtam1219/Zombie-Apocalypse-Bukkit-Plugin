@@ -69,11 +69,10 @@ public class ZombieTypes implements Listener {
     int geared = r.nextInt(10);
     int effects = r.nextInt(3);
     int armor = r.nextInt(15);
-    int weapon = r.nextInt(48);
-    zombie.setCustomName("Zombie");
+    int weapon = r.nextInt(24);
 
     if (geared > 5) {
-      if (geared <= 7){
+      if (geared <= 7) {
         if (armor < 6)
           zombie.getEquipment().setHelmet(new ItemStack(helmets[armor]));
         armor = r.nextInt(15);
@@ -87,20 +86,18 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setBoots(new ItemStack(boots[armor]));
         if (weapon < 12)
           zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-      }
-      else{
-        int num=r.nextInt(100);
-        if (num<8){
+      } else {
+        int num = r.nextInt(100);
+        if (num < 8) {
           zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
           zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
           zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
           zombie.getEquipment().setBoots(new ItemStack(boots[5]));
           if (weapon < 12)
             zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-        }
-        else{
-          if (armor==5){
-            armor=r.nextInt(5);
+        } else {
+          if (armor == 5) {
+            armor = r.nextInt(5);
           }
           if (armor < 5) {
             zombie.getEquipment().setHelmet(new ItemStack(helmets[armor]));
@@ -111,15 +108,11 @@ public class ZombieTypes implements Listener {
               zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
           }
         }
-        if (zombie.getEquipment().getHelmet().equals(helmets[5])){
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,
-                  1000000, 9));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION
-                  , 1000000, 9));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
-                  1000000, 3));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 5,
-                  100));
+        if (zombie.getEquipment().getHelmet().equals(new ItemStack(Material.NETHERITE_HELMET))) {
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 3));
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 5, 100));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
           zombie.setCustomName("Tank");
@@ -132,12 +125,10 @@ public class ZombieTypes implements Listener {
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 3));
         break;
       case 1:
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
-                1000000, 2));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
         break;
       case 2:
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
-                1000000, 4));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
       case 3:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1));
       case 4:
