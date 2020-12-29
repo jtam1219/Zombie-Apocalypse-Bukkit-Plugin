@@ -4,6 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityCombustEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -25,25 +26,33 @@ public class ZombieTypes implements Listener {
     EntityType type = e.getEntityType();
     if (type.equals(EntityType.CREEPER) || type.equals(EntityType.SPIDER) || type.equals(EntityType.CAVE_SPIDER)
         || type.equals(EntityType.SKELETON) || type.equals(EntityType.SILVERFISH) || type.equals(EntityType.HUSK)
-        || type.equals(EntityType.DROWNED) || type.equals(EntityType.SLIME) || type.equals(EntityType.WITCH)) {
+        || type.equals(EntityType.SLIME) || type.equals(EntityType.WITCH)) {
 
       Location loc = e.getLocation();
       World w = e.getEntity().getWorld();
+      e.getEntity().remove();
       Entity specialZombie = w.spawnEntity(loc, EntityType.ZOMBIE);
       setRandomEffects(specialZombie);
 
-      e.setCancelled(true);
-
     } else if (type.equals(EntityType.ZOMBIE)) {
       setRandomEffects(e.getEntity());
-    } else
-      e.setCancelled(false);
+    } else if (type.equals(EntityType.DROWNED)) {
+      if (e.getSpawnReason().equals(SpawnReason.DROWNED)) {
+        e.getEntity().remove();
+      }
+    } else if (type.equals(EntityType.PHANTOM)) {
+      Location loc = e.getLocation();
+      World w = e.getEntity().getWorld();
+      Entity riderZombie = w.spawnEntity(loc, EntityType.ZOMBIE);
+      e.getEntity().addPassenger(riderZombie);
+      setRandomEffects(riderZombie);
+    }
   }
 
   @EventHandler
-  public void onEntityCombust(EntityCombustEvent event) {
-    if (event.getEntity() instanceof Zombie) {
-      event.setCancelled(true);
+  public void onEntityCombust(EntityCombustEvent e) {
+    if (e.getEntity() instanceof Zombie) {
+      e.setCancelled(true);
     }
   }
 
@@ -93,10 +102,9 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
           zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
           zombie.getEquipment().setBoots(new ItemStack(boots[5]));
-          weapon=r.nextInt(12);
+          weapon = r.nextInt(12);
           zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-        }
-        else {
+        } else {
           if (armor == 5) {
             armor = r.nextInt(5);
           }
@@ -113,8 +121,7 @@ public class ZombieTypes implements Listener {
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 3));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 5,
-                  100));
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 5, 100));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
           zombie.setCustomName("Tank");
@@ -149,10 +156,8 @@ public class ZombieTypes implements Listener {
         zombie.setCustomName("Drowner");
         break;
       case 6:
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,
-                1000000, 0));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
-                1000000, 5));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 5));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
         zombie.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
