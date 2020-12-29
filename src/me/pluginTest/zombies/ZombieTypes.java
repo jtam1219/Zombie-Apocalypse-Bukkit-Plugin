@@ -1,8 +1,10 @@
 package me.pluginTest.zombies;
 
+import net.minecraft.server.v1_16_R3.MobEffectAbsorption;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.Collection;
@@ -16,6 +18,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class ZombieTypes implements Listener {
 
@@ -47,18 +51,51 @@ public class ZombieTypes implements Listener {
 
     Zombie zombie = (Zombie) entity;
     Random r = new Random();
-    int res = r.nextInt(5);
+    Material[] helmets={Material.LEATHER_HELMET,Material.CHAINMAIL_HELMET,
+            Material.IRON_HELMET, Material.DIAMOND_HELMET,
+            Material.GOLDEN_HELMET, Material.NETHERITE_HELMET};
+    Material[] chestplates={Material.LEATHER_CHESTPLATE,
+            Material.CHAINMAIL_CHESTPLATE,
+            Material.IRON_CHESTPLATE, Material.DIAMOND_CHESTPLATE,
+            Material.GOLDEN_CHESTPLATE, Material.NETHERITE_CHESTPLATE};
+    Material[] leggings={Material.LEATHER_LEGGINGS,
+            Material.CHAINMAIL_LEGGINGS,
+            Material.IRON_LEGGINGS, Material.DIAMOND_LEGGINGS,
+            Material.GOLDEN_LEGGINGS, Material.NETHERITE_LEGGINGS};
+    Material[] boots={Material.LEATHER_BOOTS,
+            Material.CHAINMAIL_BOOTS,
+            Material.IRON_BOOTS, Material.DIAMOND_BOOTS,
+            Material.GOLDEN_BOOTS, Material.NETHERITE_BOOTS};
+    Material[] melee={Material.WOODEN_AXE,Material.WOODEN_SWORD,
+            Material.STONE_AXE,Material.STONE_SWORD,Material.IRON_AXE,
+            Material.IRON_SWORD,Material.DIAMOND_AXE, Material.DIAMOND_SWORD,
+            Material.GOLDEN_AXE,Material.GOLDEN_SWORD, Material.NETHERITE_AXE
+            , Material.NETHERITE_SWORD};
+    int geared = r.nextInt(3);
+    int effects= r.nextInt(3);
+    int armor=r.nextInt(12);
+    int weapon=r.nextInt(36);
 
-    switch (res) {
+    if (geared>0){
+        if (armor<6) zombie.getEquipment().setHelmet(new ItemStack(helmets[armor]));
+        armor=r.nextInt(12);
+        if (armor<6) zombie.getEquipment().setChestplate(new ItemStack(chestplates[armor]));
+        armor=r.nextInt(12);
+        if (armor<6) zombie.getEquipment().setLeggings(new ItemStack(leggings[armor]));
+        armor=r.nextInt(12);
+        if (armor<6) zombie.getEquipment().setBoots(new ItemStack(boots[armor]));
+        if (weapon<12) zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
+    }
+
+    switch (effects){
       case 0:
-        zombie.getEquipment().setHelmet(new ItemStack(Material.DIAMOND_HELMET));
-        zombie.getEquipment().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
-        zombie.getEquipment().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));
-        zombie.getEquipment().setBoots(new ItemStack(Material.DIAMOND_BOOTS));
-        zombie.getEquipment().setItemInMainHand(new ItemStack(Material.DIAMOND_SWORD));
-        break;
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP,
+                1000000, 3));
+      case 1:
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
+                1000000, 3));
       default:
-        return;
+        break;
     }
   }
 }

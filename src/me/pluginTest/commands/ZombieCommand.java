@@ -6,11 +6,13 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import me.pluginTest.Main;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.server.PluginEnableEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 
 public class ZombieCommand implements CommandExecutor{
     private Main plugin;
@@ -36,5 +38,10 @@ public class ZombieCommand implements CommandExecutor{
         return false;
     }
 
+    @EventHandler
+    public void zombieSpawn(CreatureSpawnEvent e){
+        if (e.getEntityType()==EntityType.ZOMBIE){
 
+        }
+    }
 }
