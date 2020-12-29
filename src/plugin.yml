@@ -5,6 +5,6 @@ main: me.pluginTest.Main
 description: Spawns a zombie
 
 commands:
-  test:
+  summontank:
     aliases: [tank]
     description: /ari to spawn a zombie

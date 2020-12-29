@@ -32,23 +32,21 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
 
-
-public class ZombieCommand implements CommandExecutor{
+public class ZombieCommand implements CommandExecutor {
     private Main plugin;
 
-    public ZombieCommand(Main plugin){
-        this.plugin=plugin;
-        plugin.getCommand("summon tank").setExecutor(this);
+    public ZombieCommand(Main plugin) {
+        this.plugin = plugin;
+        plugin.getCommand("summontank").setExecutor(this);
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label,
-                             String[] args){
-        Player p=(Player) sender;
-        Location loc=p.getLocation();
-        World w=p.getWorld();
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        Player p = (Player) sender;
+        Location loc = p.getLocation();
+        World w = p.getWorld();
         Entity specialZombie = w.spawnEntity(loc, EntityType.ZOMBIE);
-        Zombie tank=(Zombie) specialZombie;
+        Zombie tank = (Zombie) specialZombie;
         tank.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET));
         tank.getEquipment().setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE));
         tank.getEquipment().setLeggings(new ItemStack(Material.NETHERITE_LEGGINGS));
@@ -61,7 +59,7 @@ public class ZombieCommand implements CommandExecutor{
         tank.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
         tank.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
         tank.setCustomName("Tank");
-        Server s=p.getServer();
+        Server s = p.getServer();
         s.broadcastMessage("Tank Summoned.");
         return false;
     }
