@@ -70,6 +70,7 @@ public class ZombieTypes implements Listener {
     int effects = r.nextInt(3);
     int armor = r.nextInt(15);
     int weapon = r.nextInt(48);
+    zombie.setCustomName("Zombie");
 
     if (geared > 5) {
       if (geared <= 7){
