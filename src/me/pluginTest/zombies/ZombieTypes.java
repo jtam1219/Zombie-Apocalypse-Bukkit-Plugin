@@ -35,7 +35,9 @@ public class ZombieTypes implements Listener {
       setRandomEffects(specialZombie);
 
     } else if (type.equals(EntityType.ZOMBIE)) {
-      setRandomEffects(e.getEntity());
+      if (!e.getSpawnReason().equals(SpawnReason.CUSTOM)) {
+        setRandomEffects(e.getEntity());
+      }
     } else if (type.equals(EntityType.DROWNED)) {
       if (e.getSpawnReason().equals(SpawnReason.DROWNED)) {
         e.getEntity().remove();
