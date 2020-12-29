@@ -4,6 +4,7 @@ import net.minecraft.server.v1_16_R3.MobEffectAbsorption;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 
@@ -24,7 +25,7 @@ import org.bukkit.potion.PotionEffectType;
 public class ZombieTypes implements Listener {
 
   @EventHandler
-  public void onMobSpawn(CreatureSpawnEvent e) {
+  public void onMobSpawn(CreatureSpawnEvent e, EntityCombustEvent f) {
     EntityType type = e.getEntityType();
     if (type.equals(EntityType.CREEPER) || type.equals(EntityType.SPIDER) || type.equals(EntityType.CAVE_SPIDER)
         || type.equals(EntityType.SKELETON) || type.equals(EntityType.SILVERFISH) || type.equals(EntityType.HUSK)
@@ -36,6 +37,7 @@ public class ZombieTypes implements Listener {
       setRandomEffects(specialZombie);
 
       e.setCancelled(true);
+      f.setCancelled(true);
 
     } else if (type.equals(EntityType.ZOMBIE)) {
       setRandomEffects(e.getEntity());
