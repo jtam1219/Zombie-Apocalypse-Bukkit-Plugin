@@ -38,7 +38,7 @@ public class ZombieCommand implements CommandExecutor{
 
     public ZombieCommand(Main plugin){
         this.plugin=plugin;
-        plugin.getCommand("summon tank").setExecutor(this);
+        plugin.getCommand("zombietank").setExecutor(this);
     }
 
     @Override
