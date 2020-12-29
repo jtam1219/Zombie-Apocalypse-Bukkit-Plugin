@@ -69,7 +69,7 @@ public class ZombieTypes implements Listener {
     int geared = r.nextInt(10);
     int effects = r.nextInt(3);
     int armor = r.nextInt(15);
-    int weapon = r.nextInt(24);
+    int weapon = r.nextInt(18);
 
     if (geared > 5) {
       if (geared <= 7) {
@@ -88,14 +88,15 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
       } else {
         int num = r.nextInt(100);
-        if (num < 8) {
+        if (num < 20) {
           zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
           zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
           zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
           zombie.getEquipment().setBoots(new ItemStack(boots[5]));
-          if (weapon < 12)
-            zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-        } else {
+          weapon=r.nextInt(12);
+          zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
+        }
+        else {
           if (armor == 5) {
             armor = r.nextInt(5);
           }
@@ -112,7 +113,8 @@ public class ZombieTypes implements Listener {
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 3));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 5, 100));
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 5,
+                  100));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
           zombie.setCustomName("Tank");
@@ -123,21 +125,33 @@ public class ZombieTypes implements Listener {
     switch (effects) {
       case 0:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 3));
+        zombie.setCustomName("Jumper");
         break;
       case 1:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
+        zombie.setCustomName("Zoomer");
         break;
       case 2:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
+        zombie.setCustomName("Boomer");
       case 3:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1));
+        zombie.setCustomName("Witch");
       case 4:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 1));
+        zombie.setCustomName("Floater");
       case 5:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
+        zombie.setCustomName("Drowner");
       case 6:
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,
+                1000000, 0));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
+                1000000, 5));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
+        zombie.setCustomName("Swirler");
+        zombie.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
       default:
         break;
     }
