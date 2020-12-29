@@ -6,5 +6,5 @@ description: Spawns a zombie
 
 commands:
   test:
-    aliases: [ari]
+    aliases: [tank]
     description: /ari to spawn a zombie
