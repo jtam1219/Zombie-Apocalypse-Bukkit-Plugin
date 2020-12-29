@@ -38,10 +38,4 @@ public class ZombieCommand implements CommandExecutor{
         return false;
     }
 
-    @EventHandler
-    public void zombieSpawn(CreatureSpawnEvent e){
-        if (e.getEntityType()==EntityType.ZOMBIE){
-
-        }
-    }
 }
