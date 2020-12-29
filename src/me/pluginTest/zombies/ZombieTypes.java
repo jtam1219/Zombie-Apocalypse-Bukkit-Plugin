@@ -134,15 +134,19 @@ public class ZombieTypes implements Listener {
       case 2:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         zombie.setCustomName("Boomer");
+        break;
       case 3:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 1));
         zombie.setCustomName("Witch");
+        break;
       case 4:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 1));
         zombie.setCustomName("Floater");
+        break;
       case 5:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
         zombie.setCustomName("Drowner");
+        break;
       case 6:
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,
                 1000000, 0));
@@ -150,8 +154,9 @@ public class ZombieTypes implements Listener {
                 1000000, 5));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
-        zombie.setCustomName("Swirler");
         zombie.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
+        zombie.setCustomName("Swirler");
+        break;
       default:
         break;
     }
