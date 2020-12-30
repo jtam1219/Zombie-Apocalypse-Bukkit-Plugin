@@ -165,7 +165,7 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setHelmetDropChance(0.15f);
           zombie.getEquipment().setChestplateDropChance(0.05f);
           zombie.getEquipment().setLeggingsDropChance(0.1f);
-          zombie.getEquipment().setBootsDropChance(0.15f);
+          zombie.getEquipment().setBootsDropChance(0.2f);
           zombie.setCustomName("Tank");
           return;
         }
