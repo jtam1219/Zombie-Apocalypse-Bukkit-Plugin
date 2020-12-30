@@ -72,7 +72,7 @@ public class ZombieTypes implements Listener {
       Location loc = e.getEntity().getLocation();
       World w = e.getEntity().getWorld();
       TNTPrimed explosion = (TNTPrimed) w.spawnEntity(loc, EntityType.PRIMED_TNT);
-      explosion.setYield(10);
+      explosion.setYield(3);
       explosion.setFuseTicks(0);
       explosion.setIsIncendiary(false);
     }
