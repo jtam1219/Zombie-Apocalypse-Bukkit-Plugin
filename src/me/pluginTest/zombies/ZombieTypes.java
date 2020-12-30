@@ -120,7 +120,7 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
       } else {
         int num = r.nextInt(100);
-        if (num < 15) {
+        if (num < 10) {
           zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
           zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
           zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
