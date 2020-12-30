@@ -163,7 +163,7 @@ public class ZombieTypes implements Listener {
         // Normal Faster Zombie
         break;
       case 2:
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 2));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 1));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "test"));
         // Explodes upon Death
