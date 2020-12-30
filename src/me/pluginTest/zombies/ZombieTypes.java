@@ -118,16 +118,14 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setBoots(new ItemStack(boots[armor]));
         if (weapon < 12)
           zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-      }
-      else {
+      } else {
         int num = r.nextInt(100);
         if (num < 15) {
           zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
           zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
           zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
           zombie.getEquipment().setBoots(new ItemStack(boots[5]));
-        }
-        else {
+        } else {
           if (armor == 5) {
             armor = r.nextInt(5);
           }
@@ -144,15 +142,14 @@ public class ZombieTypes implements Listener {
           entity.getServer().broadcastMessage("A Tank has been spawned!");
           zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10);
           zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
-          zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
+          // zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
           zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1);
           zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
           zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2,
-                  100));
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2, 100));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
           zombie.setCustomName("Tank");
           return;
@@ -198,27 +195,22 @@ public class ZombieTypes implements Listener {
         break;
       case 5:
         entity.remove();
-        Drowned drowner=
-                (Drowned) entity.getWorld().spawnEntity(entity.getLocation(),
-                        EntityType.DROWNED);
-        drowner.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000
-                , 1));
+        Drowned drowner = (Drowned) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.DROWNED);
+        drowner.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 1));
         drowner.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
-        zombie.setCustomName("Drowner");
+        drowner.setCustomName("Drowner");
         break;
       case 6:
         // Special Zombie with land and water capabilities, from the water.
         // One that is adept at both the ocean and the land. (Entity.DROWNED)
         entity.remove();
-        Drowned swirler=
-                (Drowned) entity.getWorld().spawnEntity(entity.getLocation(),
-                EntityType.DROWNED);
+        Drowned swirler = (Drowned) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.DROWNED);
         swirler.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0));
         swirler.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
         swirler.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
         swirler.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
-        ItemStack swirlerBoots=new ItemStack(Material.DIAMOND_BOOTS);
-        ItemStack swirlerChestPlate=new ItemStack(Material.DIAMOND_CHESTPLATE);
+        ItemStack swirlerBoots = new ItemStack(Material.DIAMOND_BOOTS);
+        ItemStack swirlerChestPlate = new ItemStack(Material.DIAMOND_CHESTPLATE);
         swirlerChestPlate.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
         swirlerBoots.addEnchantment(Enchantment.DEPTH_STRIDER, 3);
         swirler.getEquipment().setBoots(swirlerBoots);

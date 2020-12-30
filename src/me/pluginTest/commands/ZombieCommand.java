@@ -50,7 +50,7 @@ public class ZombieCommand implements CommandExecutor {
         Zombie tank = (Zombie) specialZombie;
         tank.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(19);
         tank.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
-        tank.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
+        //tank.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
         tank.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1);
         tank.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         tank.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
