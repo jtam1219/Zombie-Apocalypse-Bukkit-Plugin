@@ -206,30 +206,6 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setBootsDropChance(0.2f);
             zombie.setCustomName("Tank");
           }
-<<<<<<< HEAD
-=======
-        }
-        if (zombie.getEquipment().getHelmet().equals(new ItemStack(Material.NETHERITE_HELMET))) {
-          entity.getServer().broadcastMessage("A Tank has been spawned!");
-          zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10);
-          zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
-          // zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
-          zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.8);
-          zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
-          zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
-                  1000000, 2));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2, 100));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 0));
-          zombie.getEquipment().setHelmetDropChance(0.15f);
-          zombie.getEquipment().setChestplateDropChance(0.05f);
-          zombie.getEquipment().setLeggingsDropChance(0.1f);
-          zombie.getEquipment().setBootsDropChance(0.2f);
-          zombie.setCustomName("Tank");
-          return;
->>>>>>> 7cc86b96f56cb0dfed700cb4a9bd0bdf386e929e
         }
       }
     } else {
