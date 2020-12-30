@@ -133,7 +133,7 @@ public class ZombieTypes implements Listener {
         // Speedy, and lethal
         zombie.setCustomName("Witch");
       }
-      if (effects >= 15 && effects <= 17) {
+      if (effects >= 15) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
