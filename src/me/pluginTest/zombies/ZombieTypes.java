@@ -154,7 +154,7 @@ public class ZombieTypes implements Listener {
           zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
           // zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
           zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.8);
-          zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+          zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
           zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
@@ -173,15 +173,16 @@ public class ZombieTypes implements Listener {
     }
 
     if(effects>=0&&effects<=2) {
-      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
+      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
       zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
-      zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 1));
+      zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000,
+              0));
       zombie.setCustomName("Jumper");
       return;
       // Jumper height calculates more damage?
     }
     if(effects>=3&&effects<=9) {
-      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
+      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(70);
       zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
       zombie.setCustomName("Zoomer");
       return;
@@ -190,14 +191,15 @@ public class ZombieTypes implements Listener {
     if(effects>=10&&effects<=12) {
       zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
       zombie.setHealth(4);
-      zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
+      zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000
+              , 0));
       zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "test"));
       // Explodes upon Death
       zombie.setCustomName("Boomer");
       return;
     }
     if(effects==13||effects==14) {
-      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
+      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(20);
       zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
       zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 4));
       // Speedy, and lethal
@@ -205,7 +207,7 @@ public class ZombieTypes implements Listener {
       return;
     }
     if(effects>=15&&effects<=17) {
-      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
+      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
       zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
       // Upon JUmp, give levitation for few seconds
       // Cannot be killed by height
@@ -216,7 +218,7 @@ public class ZombieTypes implements Listener {
       entity.remove();
       Drowned drowner = (Drowned) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.DROWNED);
       drowner.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 1));
-      drowner.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
+      drowner.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
       drowner.setCustomName("Drowner");
       return;
     }
@@ -226,7 +228,8 @@ public class ZombieTypes implements Listener {
       entity.remove();
       Drowned swirler = (Drowned) entity.getWorld().spawnEntity(entity.getLocation(), EntityType.DROWNED);
       swirler.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0));
-      swirler.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
+      swirler.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
+              1000000, 1));
       swirler.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
       swirler.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
       ItemStack swirlerBoots = new ItemStack(Material.DIAMOND_BOOTS);
@@ -238,7 +241,7 @@ public class ZombieTypes implements Listener {
       swirler.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
       swirler.getEquipment().setBootsDropChance(0.01f);
       swirler.getEquipment().setChestplateDropChance(0.005f);
-      swirler.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
+      swirler.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(80);
       swirler.setCustomName("Swirler");
       return;
     }
