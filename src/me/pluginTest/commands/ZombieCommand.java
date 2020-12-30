@@ -58,9 +58,11 @@ public class ZombieCommand implements CommandExecutor {
         tank.getEquipment().setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE));
         tank.getEquipment().setLeggings(new ItemStack(Material.NETHERITE_LEGGINGS));
         tank.getEquipment().setBoots(new ItemStack(Material.NETHERITE_BOOTS));
-        tank.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
+        tank.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,
+                1000000, 4));
         tank.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
-        tank.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 3));
+        tank.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000
+                , 2));
         tank.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 5, 100));
         tank.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
         tank.setCustomName("Tank");

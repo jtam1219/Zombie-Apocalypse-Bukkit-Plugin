@@ -125,7 +125,7 @@ public class ZombieTypes implements Listener {
         zombie.getEquipment().setItemInMainHandDropChance(0.01f);
       } else {
         int num = r.nextInt(100);
-        if (num < 5) {
+        if (num < 3) {
           zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
           zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
           zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
@@ -156,7 +156,7 @@ public class ZombieTypes implements Listener {
           zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.8);
           zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
           zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
                   1000000, 2));
@@ -199,7 +199,9 @@ public class ZombieTypes implements Listener {
       return;
     }
     if(effects==13||effects==14) {
-      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(20);
+      zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(15);
+      zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
+              1000000, 4));
       zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
       zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 4));
       // Speedy, and lethal
@@ -232,6 +234,8 @@ public class ZombieTypes implements Listener {
               1000000, 1));
       swirler.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
       swirler.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
+      swirler.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
+              1000000, 4));
       ItemStack swirlerBoots = new ItemStack(Material.DIAMOND_BOOTS);
       ItemStack swirlerChestPlate = new ItemStack(Material.DIAMOND_CHESTPLATE);
       swirlerChestPlate.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
