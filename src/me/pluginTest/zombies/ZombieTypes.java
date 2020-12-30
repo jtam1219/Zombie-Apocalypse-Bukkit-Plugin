@@ -1,5 +1,6 @@
 package me.pluginTest.zombies;
 
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -16,10 +17,6 @@ import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.TNTPrimed;
-import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
@@ -86,9 +83,12 @@ public class ZombieTypes implements Listener {
 
     if (!entity.getType().equals(EntityType.ZOMBIE))
       return;
-
-    Zombie zombie = (Zombie) entity;
     Random r = new Random();
+    int geared = r.nextInt(10);
+    int effects = r.nextInt(12);
+    int armor = r.nextInt(15);
+    int weapon = r.nextInt(18);
+    Zombie zombie = (Zombie) entity;
     Material[] helmets = { Material.LEATHER_HELMET, Material.CHAINMAIL_HELMET, Material.IRON_HELMET,
         Material.DIAMOND_HELMET, Material.GOLDEN_HELMET, Material.NETHERITE_HELMET };
     Material[] chestplates = { Material.LEATHER_CHESTPLATE, Material.CHAINMAIL_CHESTPLATE, Material.IRON_CHESTPLATE,
@@ -100,10 +100,6 @@ public class ZombieTypes implements Listener {
     Material[] melee = { Material.WOODEN_AXE, Material.WOODEN_SWORD, Material.STONE_AXE, Material.STONE_SWORD,
         Material.IRON_AXE, Material.IRON_SWORD, Material.DIAMOND_AXE, Material.DIAMOND_SWORD, Material.GOLDEN_AXE,
         Material.GOLDEN_SWORD, Material.NETHERITE_AXE, Material.NETHERITE_SWORD };
-    int geared = r.nextInt(10);
-    int effects = r.nextInt(12);
-    int armor = r.nextInt(15);
-    int weapon = r.nextInt(18);
 
     if (geared > 5) {
       if (geared <= 7) {
@@ -167,7 +163,7 @@ public class ZombieTypes implements Listener {
         // Normal Faster Zombie
         break;
       case 2:
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 2));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "test"));
         // Explodes upon Death
@@ -193,12 +189,16 @@ public class ZombieTypes implements Listener {
       case 6:
         // Special Zombie with land and water capabilities, from the water.
         // One that is adept at both the ocean and the land. (Entity.DROWNED)
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
-        zombie.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
-        zombie.setCustomName("Swirler");
+        entity.remove();
+        Drowned swirler=
+                (Drowned) entity.getWorld().spawnEntity(entity.getLocation(),
+                EntityType.DROWNED);
+        swirler.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0));
+        swirler.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
+        swirler.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
+        swirler.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
+        swirler.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
+        swirler.setCustomName("Swirler");
         break;
       default:
         break;
