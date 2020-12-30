@@ -126,7 +126,7 @@ public class ZombieTypes implements Listener {
         zombie.setCustomName("Boomer");
       }
       if (effects == 13 || effects == 14) {
-        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(3);
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(4);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 4));
