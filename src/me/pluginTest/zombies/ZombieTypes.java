@@ -14,7 +14,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import me.pluginTest.Main;
 
-import java.util.Collection;
 import java.util.Random;
 
 import org.bukkit.Location;
@@ -102,7 +101,7 @@ public class ZombieTypes implements Listener {
         Material.IRON_AXE, Material.IRON_SWORD, Material.DIAMOND_AXE, Material.DIAMOND_SWORD, Material.GOLDEN_AXE,
         Material.GOLDEN_SWORD, Material.NETHERITE_AXE, Material.NETHERITE_SWORD };
 
-    if (effects <= 17 || effects > 24) {
+    if (effects <= 17) {
       specialEntity = w.spawnEntity(loc, EntityType.ZOMBIE);
       Zombie zombie = (Zombie) specialEntity;
       if (effects >= 0 && effects <= 2) {
@@ -162,14 +161,16 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setLeggingsDropChance(0.005f);
           zombie.getEquipment().setBootsDropChance(0.005f);
           zombie.getEquipment().setItemInMainHandDropChance(0.01f);
-        } else {
+        }
+        else {
           int num = r.nextInt(100);
           if (num < 3) {
             zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
             zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
             zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
             zombie.getEquipment().setBoots(new ItemStack(boots[5]));
-          } else {
+          }
+          else {
             if (armor == 5) {
               armor = r.nextInt(5);
             }
@@ -208,10 +209,11 @@ public class ZombieTypes implements Listener {
           }
         }
       }
-    } else {
+    }
+    else {
       specialEntity = w.spawnEntity(loc, EntityType.DROWNED);
       Drowned drowned = (Drowned) specialEntity;
-      if (effects >= 18 && effects <= 22) {
+      if (effects <= 22) {
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 1));
         drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
         drowned.setCustomName("Drowner");
