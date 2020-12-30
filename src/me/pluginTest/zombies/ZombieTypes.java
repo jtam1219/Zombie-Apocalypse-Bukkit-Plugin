@@ -103,7 +103,7 @@ public class ZombieTypes implements Listener {
         Material.IRON_AXE, Material.IRON_SWORD, Material.DIAMOND_AXE, Material.DIAMOND_SWORD, Material.GOLDEN_AXE,
         Material.GOLDEN_SWORD, Material.NETHERITE_AXE, Material.NETHERITE_SWORD };
 
-    if (geared > 5) {
+    if (geared > 4) {
       if (geared <= 7) {
         if (armor < 6)
           zombie.getEquipment().setHelmet(new ItemStack(helmets[armor]));
