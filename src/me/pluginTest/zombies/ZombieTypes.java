@@ -1,5 +1,7 @@
 package me.pluginTest.zombies;
 
+import org.bukkit.attribute.Attribute;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -139,6 +141,12 @@ public class ZombieTypes implements Listener {
           }
         }
         if (zombie.getEquipment().getHelmet().equals(new ItemStack(Material.NETHERITE_HELMET))) {
+          entity.getServer().broadcastMessage("A Tank has been spawned!");
+          zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
+          zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.90);
+          zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(3);
+          zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+          zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
@@ -152,17 +160,20 @@ public class ZombieTypes implements Listener {
 
     switch (effects) {
       case 0:
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 1));
         zombie.setCustomName("Jumper");
         // Jumper height calculates more damage?
         break;
       case 1:
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
         zombie.setCustomName("Zoomer");
         // Normal Faster Zombie
         break;
       case 2:
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 1));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "test"));
@@ -170,20 +181,27 @@ public class ZombieTypes implements Listener {
         zombie.setCustomName("Boomer");
         break;
       case 3:
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 3));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 4));
         // Speedy, and lethal
         zombie.setCustomName("Witch");
         break;
       case 4:
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
         // Cannot be killed by height
         zombie.setCustomName("Floater");
         break;
       case 5:
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
-        // Cannot be drowned (Entity.DROWNED?)
+        entity.remove();
+        Drowned drowner=
+                (Drowned) entity.getWorld().spawnEntity(entity.getLocation(),
+                        EntityType.DROWNED);
+        drowner.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000
+                , 1));
+        drowner.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
         zombie.setCustomName("Drowner");
         break;
       case 6:
@@ -197,7 +215,13 @@ public class ZombieTypes implements Listener {
         swirler.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
         swirler.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
         swirler.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
+        ItemStack swirlerBoots=new ItemStack(Material.DIAMOND_BOOTS);
+        ItemStack swirlerChestPlate=new ItemStack(Material.DIAMOND_CHESTPLATE);
+        swirlerChestPlate.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
+        swirlerBoots.addEnchantment(Enchantment.DEPTH_STRIDER, 3);
+        swirler.getEquipment().setBoots(swirlerBoots);
         swirler.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
+        swirler.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
         swirler.setCustomName("Swirler");
         break;
       default:
