@@ -174,7 +174,7 @@ public class ZombieTypes implements Listener {
         break;
       case 2:
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 1));
+        zombie.setHealth(4);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "test"));
         // Explodes upon Death
@@ -220,6 +220,7 @@ public class ZombieTypes implements Listener {
         swirlerChestPlate.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
         swirlerBoots.addEnchantment(Enchantment.DEPTH_STRIDER, 3);
         swirler.getEquipment().setBoots(swirlerBoots);
+        swirler.getEquipment().setChestplate(swirlerChestPlate);
         swirler.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
         swirler.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
         swirler.setCustomName("Swirler");
