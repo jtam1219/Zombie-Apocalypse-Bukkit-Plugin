@@ -105,20 +105,20 @@ public class ZombieTypes implements Listener {
       specialEntity = w.spawnEntity(loc, EntityType.ZOMBIE);
       Zombie zombie = (Zombie) specialEntity;
       if (effects >= 0 && effects <= 2) {
-        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
         zombie.setCustomName("Jumper");
         // Jumper height calculates more damage?
       }
       if (effects >= 3 && effects <= 9) {
-        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(70);
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
         zombie.setCustomName("Zoomer");
         // Normal Faster Zombie
       }
       if (effects >= 10 && effects <= 12) {
-        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(70);
         zombie.setHealth(4);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "test"));
@@ -126,7 +126,7 @@ public class ZombieTypes implements Listener {
         zombie.setCustomName("Boomer");
       }
       if (effects == 13 || effects == 14) {
-        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(15);
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(5);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 4));
@@ -134,7 +134,7 @@ public class ZombieTypes implements Listener {
         zombie.setCustomName("Witch");
       }
       if (effects >= 15) {
-        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
         // Cannot be killed by height
@@ -190,7 +190,7 @@ public class ZombieTypes implements Listener {
           }
           if (zombie.getEquipment().getHelmet().equals(new ItemStack(Material.NETHERITE_HELMET))) {
             // entity.getServer().broadcastMessage("A Tank has been spawned!");
-            zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10);
+            zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(12);
             zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
             // zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
             zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.8);
@@ -215,7 +215,7 @@ public class ZombieTypes implements Listener {
       Drowned drowned = (Drowned) specialEntity;
       if (effects <= 22) {
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 1));
-        drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
+        drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         drowned.setCustomName("Drowner");
       }
       if (effects == 23 || effects == 24) {
@@ -235,7 +235,7 @@ public class ZombieTypes implements Listener {
         drowned.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
         drowned.getEquipment().setBootsDropChance(0.01f);
         drowned.getEquipment().setChestplateDropChance(0.005f);
-        drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(80);
+        drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(70);
         drowned.setCustomName("Swirler");
       }
     }
