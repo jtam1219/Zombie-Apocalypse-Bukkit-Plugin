@@ -101,7 +101,7 @@ public class ZombieTypes implements Listener {
         Material.IRON_AXE, Material.IRON_SWORD, Material.DIAMOND_AXE, Material.DIAMOND_SWORD, Material.GOLDEN_AXE,
         Material.GOLDEN_SWORD, Material.NETHERITE_AXE, Material.NETHERITE_SWORD };
 
-    if (effects <= 17) {
+    if (effects <= 17 || effects>=25) {
       specialEntity = w.spawnEntity(loc, EntityType.ZOMBIE);
       Zombie zombie = (Zombie) specialEntity;
       if (effects >= 0 && effects <= 2) {
@@ -133,14 +133,13 @@ public class ZombieTypes implements Listener {
         // Speedy, and lethal
         zombie.setCustomName("Witch");
       }
-      if (effects >= 15) {
+      if (effects >= 15 && effects <=17) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
         // Cannot be killed by height
         zombie.setCustomName("Floater");
       }
-
       if (geared > 4) {
         if (geared <= 7) {
           if (armor < 6)
