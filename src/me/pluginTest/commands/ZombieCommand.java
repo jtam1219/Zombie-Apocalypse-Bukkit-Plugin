@@ -48,7 +48,7 @@ public class ZombieCommand implements CommandExecutor {
         World w = p.getWorld();
         Entity specialZombie = w.spawnEntity(loc, EntityType.ZOMBIE);
         Zombie tank = (Zombie) specialZombie;
-        tank.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(19);
+        tank.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10);
         tank.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
         //tank.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
         tank.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1);
