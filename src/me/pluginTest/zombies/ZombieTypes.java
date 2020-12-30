@@ -118,16 +118,16 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setBoots(new ItemStack(boots[armor]));
         if (weapon < 12)
           zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-      } else {
+      }
+      else {
         int num = r.nextInt(100);
         if (num < 15) {
           zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
           zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
           zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
           zombie.getEquipment().setBoots(new ItemStack(boots[5]));
-          weapon = r.nextInt(12);
-          zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-        } else {
+        }
+        else {
           if (armor == 5) {
             armor = r.nextInt(5);
           }
@@ -142,7 +142,6 @@ public class ZombieTypes implements Listener {
         }
         if (zombie.getEquipment().getHelmet().equals(new ItemStack(Material.NETHERITE_HELMET))) {
           entity.getServer().broadcastMessage("A Tank has been spawned!");
-          zombie.getEquipment().setItemInMainHand(null);
           zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10);
           zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
           zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
