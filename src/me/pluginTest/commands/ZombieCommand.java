@@ -64,7 +64,8 @@ public class ZombieCommand implements CommandExecutor {
         tank.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000
                 , 2));
         tank.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 5, 100));
-        tank.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
+        tank.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,
+                1000000, 0));
         tank.setCustomName("Tank");
         Server s = p.getServer();
         s.broadcastMessage("Tank Summoned.");
