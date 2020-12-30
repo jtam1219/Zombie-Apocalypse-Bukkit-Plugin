@@ -142,15 +142,18 @@ public class ZombieTypes implements Listener {
         }
         if (zombie.getEquipment().getHelmet().equals(new ItemStack(Material.NETHERITE_HELMET))) {
           entity.getServer().broadcastMessage("A Tank has been spawned!");
+          zombie.getEquipment().setItemInMainHand(null);
+          zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(19);
+          zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
           zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
-          zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.90);
-          zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(3);
+          zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1);
           zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
           zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
-          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 5, 100));
+          zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2,
+                  100));
           zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
           zombie.setCustomName("Tank");
           return;
@@ -182,7 +185,7 @@ public class ZombieTypes implements Listener {
         break;
       case 3:
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(100);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 3));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 4));
         // Speedy, and lethal
         zombie.setCustomName("Witch");
