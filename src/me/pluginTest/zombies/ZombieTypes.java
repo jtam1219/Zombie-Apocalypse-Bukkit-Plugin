@@ -165,7 +165,7 @@ public class ZombieTypes implements Listener {
         }
         else {
           int num = r.nextInt(100);
-          if (num < 40) {
+          if (num < 30) {
             zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
             zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
             zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
