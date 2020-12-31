@@ -236,6 +236,7 @@ public class ZombieTypes implements Listener {
         drowned.getEquipment().setItemInMainHand(new ItemStack(Material.TRIDENT));
         drowned.getEquipment().setBootsDropChance(0.01f);
         drowned.getEquipment().setChestplateDropChance(0.005f);
+        drowned.getEquipment().setItemInMainHandDropChance(0.03f);
         drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(70);
         drowned.setCustomName("Swirler");
       }
