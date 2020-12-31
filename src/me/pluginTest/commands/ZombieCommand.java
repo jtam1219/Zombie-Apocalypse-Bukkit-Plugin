@@ -76,10 +76,10 @@ public class ZombieCommand implements CommandExecutor {
                             for (int z = -1; z <= 1; z++) {
                                 if (x == 0 && z == 0)
                                     continue;
-                                if (zombie.getLocation().add(new Vector(x, 2, z)).getBlock().getType().isSolid()) {
+                                if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType().isSolid()) {
                                     canClimb = true;
                                     break;
-                                } else if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType()
+                                } else if (zombie.getLocation().add(new Vector(x, 0, z)).getBlock().getType()
                                         .isSolid()) {
                                     climbVector = new Vector(x, 1, z);
                                     break;
