@@ -1,5 +1,6 @@
 package me.pluginTest;
 
+import me.pluginTest.commands.HordeSpawn;
 import me.pluginTest.commands.ZombieCommand;
 import me.pluginTest.zombies.ZombieTypes;
 
@@ -12,6 +13,7 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new ZombieTypes(this), this);
         new ZombieCommand(this);
+        new HordeSpawn(this);
 
     }
 }

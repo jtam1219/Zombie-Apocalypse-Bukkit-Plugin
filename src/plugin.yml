@@ -8,3 +8,6 @@ commands:
   summontank:
     aliases: [tank]
     description: /tank to spawn a zombie
+  summonhorde:
+    aliases: [horde]
+    description: /horde to spawn horde
