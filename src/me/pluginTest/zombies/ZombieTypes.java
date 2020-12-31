@@ -34,25 +34,26 @@ public class ZombieTypes implements Listener {
   public void onMobSpawn(CreatureSpawnEvent e) {
     try {
       EntityType type = e.getEntityType();
-      if (type.equals(EntityType.CREEPER) || type.equals(EntityType.SPIDER) || type.equals(EntityType.CAVE_SPIDER)
-          || type.equals(EntityType.SKELETON) || type.equals(EntityType.SILVERFISH) || type.equals(EntityType.HUSK)
-          || type.equals(EntityType.SLIME) || type.equals(EntityType.WITCH) || type.equals(EntityType.ZOMBIE)) {
-        if (e.getSpawnReason().equals(SpawnReason.CUSTOM) || e.getSpawnReason().equals(SpawnReason.DEFAULT))
-          return;
-        Location loc = e.getLocation();
-        World w = e.getEntity().getWorld();
-        e.getEntity().remove();
-        createSpecialZombie(w, loc);
-
-      } else if (type.equals(EntityType.DROWNED)) {
-        if (e.getSpawnReason().equals(SpawnReason.DROWNED)) {
+      World w = e.getEntity().getWorld();
+      if (w.getEnvironment().equals(World.Environment.NORMAL)) {
+        if (type.equals(EntityType.CREEPER) || type.equals(EntityType.SPIDER) || type.equals(EntityType.CAVE_SPIDER)
+                || type.equals(EntityType.SKELETON) || type.equals(EntityType.SILVERFISH) || type.equals(EntityType.HUSK)
+                || type.equals(EntityType.SLIME) || type.equals(EntityType.WITCH) || type.equals(EntityType.ZOMBIE)) {
+          if (e.getSpawnReason().equals(SpawnReason.CUSTOM) || e.getSpawnReason().equals(SpawnReason.DEFAULT))
+            return;
+          Location loc = e.getLocation();
           e.getEntity().remove();
+          createSpecialZombie(w, loc);
+
+        } else if (type.equals(EntityType.DROWNED)) {
+          if (e.getSpawnReason().equals(SpawnReason.DROWNED)) {
+            e.getEntity().remove();
+          }
+        } else if (type.equals(EntityType.PHANTOM)) {
+          Location loc = e.getLocation();
+          Entity riderZombie = createSpecialZombie(w, loc);
+          e.getEntity().addPassenger(riderZombie);
         }
-      } else if (type.equals(EntityType.PHANTOM)) {
-        Location loc = e.getLocation();
-        World w = e.getEntity().getWorld();
-        Entity riderZombie = createSpecialZombie(w, loc);
-        e.getEntity().addPassenger(riderZombie);
       }
     } catch (Exception ex) {
       System.out.println("Error creating a special Zombie");
@@ -127,11 +128,12 @@ public class ZombieTypes implements Listener {
         zombie.setCustomName("Boomer");
       }
       if (effects == 13 || effects == 14) {
-        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(4);
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(5);
         zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.25);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 4));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
+                1000000, 3));
         // Speedy, and lethal
         zombie.setCustomName("Witch");
       }
@@ -222,7 +224,6 @@ public class ZombieTypes implements Listener {
       if (effects == 23 || effects == 24) {
         // Special Zombie with land and water capabilities, from the water.
         // One that is adept at both the ocean and the land. (Entity.DROWNED)
-        drowned.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0));
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
