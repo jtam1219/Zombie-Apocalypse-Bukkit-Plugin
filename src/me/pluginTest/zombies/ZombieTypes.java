@@ -157,11 +157,11 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setBoots(new ItemStack(boots[armor]));
           if (weapon < 12)
             zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-          zombie.getEquipment().setHelmetDropChance(0.005f);
-          zombie.getEquipment().setChestplateDropChance(0.005f);
-          zombie.getEquipment().setLeggingsDropChance(0.005f);
-          zombie.getEquipment().setBootsDropChance(0.005f);
-          zombie.getEquipment().setItemInMainHandDropChance(0.01f);
+          zombie.getEquipment().setHelmetDropChance(0.01f);
+          zombie.getEquipment().setChestplateDropChance(0.01f);
+          zombie.getEquipment().setLeggingsDropChance(0.01f);
+          zombie.getEquipment().setBootsDropChance(0.01f);
+          zombie.getEquipment().setItemInMainHandDropChance(0.02f);
         }
         else {
           int num = r.nextInt(100);
