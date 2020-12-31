@@ -119,6 +119,7 @@ public class ZombieTypes implements Listener {
       }
       if (effects >= 10 && effects <= 12) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(70);
+        zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.5);
         zombie.setHealth(4);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "test"));
@@ -127,6 +128,7 @@ public class ZombieTypes implements Listener {
       }
       if (effects == 13 || effects == 14) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(4);
+        zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.25);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 4));
@@ -192,7 +194,7 @@ public class ZombieTypes implements Listener {
             zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(12);
             zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
             // zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
-            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.8);
+            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.9);
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
             zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4));
