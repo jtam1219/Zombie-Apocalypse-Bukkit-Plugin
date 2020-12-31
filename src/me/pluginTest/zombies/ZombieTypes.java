@@ -93,7 +93,7 @@ public class ZombieTypes implements Listener {
       zombie.setTarget(p);
     }
   }
-  private Entity createSpecialZombie(World w, Location loc) {
+  public Entity createSpecialZombie(World w, Location loc) {
 
     Random r = new Random();
     int geared = r.nextInt(10);

@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import me.pluginTest.zombies.ZombieTypes;
 
 public class HordeSpawn implements CommandExecutor {
     private Main plugin;
@@ -22,9 +23,10 @@ public class HordeSpawn implements CommandExecutor {
         Player p = (Player) sender;
         Location loc = p.getLocation();
         World w = p.getWorld();
+        p.getServer().broadcastMessage("Spawned 50 Zombies");
         for (int i=0; i<50; i++){
-            p.getServer().broadcastMessage("Spawned 50 Zombies");
-            w.spawnEntity(loc, EntityType.ZOMBIE);
+            ZombieTypes spawner=new ZombieTypes(plugin);
+            spawner.createSpecialZombie(w,loc);
         }
         return false;
     }
