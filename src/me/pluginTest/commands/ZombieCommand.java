@@ -1,6 +1,7 @@
 package me.pluginTest.commands;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
@@ -13,6 +14,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import me.pluginTest.Main;
 import org.bukkit.entity.Zombie;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -37,6 +39,10 @@ public class ZombieCommand implements CommandExecutor {
         World w = p.getWorld();
         Entity specialZombie = w.spawnEntity(loc, EntityType.ZOMBIE);
         Zombie zombie = (Zombie) specialZombie;
+        zombie.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET));
+        zombie.getEquipment().setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE));
+        zombie.getEquipment().setLeggings(new ItemStack(Material.NETHERITE_LEGGINGS));
+        zombie.getEquipment().setBoots(new ItemStack(Material.NETHERITE_BOOTS));
         // entity.getServer().broadcastMessage("A Tank has been spawned!");
         zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(12);
         zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
