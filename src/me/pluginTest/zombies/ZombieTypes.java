@@ -165,7 +165,7 @@ public class ZombieTypes implements Listener {
         }
         else {
           int num = r.nextInt(100);
-          if (num < 3) {
+          if (num < 40) {
             zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
             zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
             zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
@@ -194,7 +194,7 @@ public class ZombieTypes implements Listener {
             zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(12);
             zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
             // zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
-            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.9);
+            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.95);
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
             zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4));
