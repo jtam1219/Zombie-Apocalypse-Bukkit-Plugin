@@ -1,6 +1,8 @@
 package me.pluginTest.commands;
 
 import me.pluginTest.Main;
+import net.minecraft.server.v1_16_R3.GameRules;
+import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -27,6 +29,7 @@ public class HordeSpawn implements CommandExecutor {
         for (int i=0; i<50; i++){
             ZombieTypes spawner=new ZombieTypes(plugin);
             spawner.createSpecialZombie(w,loc);
+            //entity cramming kills the mobs... FIX
         }
         return false;
     }
