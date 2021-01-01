@@ -82,7 +82,14 @@ public class ZombieTypes implements Listener {
 
   @EventHandler
   public void grabAndToss(EntityInteractEvent e){
+    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Wailer")){
 
+    }
+  }
+
+  @EventHandler
+  public void tankFallDamage(){
+    
   }
 
   @EventHandler
