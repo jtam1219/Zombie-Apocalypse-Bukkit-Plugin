@@ -229,6 +229,10 @@ public class ZombieTypes implements Listener {
             zombie.setCustomName("Tank");
             BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
               public void run() {
+                if (zombie.isDead()) {
+                  ((BukkitTask) zombie.getMetadata("climbCycle").get(0)).cancel();
+                  zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + " dead. climbCycle cancelled");
+                }
                 if (!(zombie.getTarget() == null)) {
                   LivingEntity target = zombie.getTarget();
                   Vector attackVector = new Vector(target.getLocation().getX() - zombie.getLocation().getX(),
@@ -252,24 +256,23 @@ public class ZombieTypes implements Listener {
                     }
                     if (canClimb) {
                       zombie.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 1000000, 4));
-                      zombie.getServer().broadcastMessage("COLLISION BITCH");
                     } else if (zombie.hasPotionEffect(PotionEffectType.LEVITATION)) {
                       zombie.setCollidable(false);
                       zombie.teleport(zombie.getLocation().add(climbVector.normalize()).add(0, 0.5, 0));
                       zombie.removePotionEffect(PotionEffectType.LEVITATION);
-                      zombie.getServer().broadcastMessage("test2 - " + climbVector.toString());
                     }
                   } else if (zombie.hasPotionEffect(PotionEffectType.LEVITATION)) {
                     zombie.setCollidable(true);
                     zombie.teleport(zombie.getLocation().add(climbVector.multiply(-1)));
                     zombie.removePotionEffect(PotionEffectType.LEVITATION);
-                    zombie.getServer().broadcastMessage("test3");
                   }
+
                 } else {
                   zombie.removePotionEffect(PotionEffectType.LEVITATION);
                 }
               }
             }, 5, 5);
+            zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision));
           }
         }
       }
