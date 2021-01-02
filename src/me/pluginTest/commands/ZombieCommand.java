@@ -2,6 +2,7 @@ package me.pluginTest.commands;
 
 import java.text.Format;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Server;
@@ -10,7 +11,6 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -67,9 +67,9 @@ public class ZombieCommand implements CommandExecutor {
         BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
             public void run() {
                 if (zombie.isDead()) {
-                    ((BukkitTask) zombie.getMetadata("climbCycle").get(0)).cancel();
-                    zombie.getServer()
-                            .broadcastMessage("Zombie " + zombie.getEntityId() + " dead. climbCycle cancelled");
+                    Bukkit.getScheduler().cancelTask(zombie.getMetadata("climbCycle").get(0).asInt());
+                    // zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + "
+                    // dead. climbCycle cancelled");
                 }
                 if (!(zombie.getTarget() == null)) {
                     LivingEntity target = zombie.getTarget();
@@ -111,7 +111,7 @@ public class ZombieCommand implements CommandExecutor {
                 }
             }
         }, 5, 5);
-        zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision));
+        zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision.getTaskId()));
         return true;
     }
 
