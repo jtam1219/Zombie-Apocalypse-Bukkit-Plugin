@@ -86,9 +86,18 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
-  public void grabAndToss(EntityInteractEvent e) {
-    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Wailer")) {
-
+  public void grabAndToss(EntityDamageByEntityEvent e) {
+    if (e.getEntity() instanceof Player && e.getDamager() instanceof Zombie && e.getDamager().hasMetadata("Wailer")) {
+      e.setDamage(0);
+      e.getDamager().addPassenger(e.getEntity());
+      e.getEntity().getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+        public void run() {
+          e.getDamager().removePassenger(e.getEntity());
+          double x = Math.cos(e.getDamager().getLocation().getPitch());
+          double z = Math.sin(e.getDamager().getLocation().getPitch());
+          e.getEntity().setVelocity(new Vector(10 * x, 10, 10 * z));
+        }
+      }, 2);
     }
   }
 
@@ -96,12 +105,12 @@ public class ZombieTypes implements Listener {
   public void tankHealthChecker(EntityDamageEvent e) {
     if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Tank")) {
       Zombie tank = (Zombie) e.getEntity();
-      //if (!tank.hasPotionEffect(PotionEffectType.ABSORPTION)) {
-        //tank.getServer().broadcastMessage("Health: " + (tank.getHealth() -
+      // if (!tank.hasPotionEffect(PotionEffectType.ABSORPTION)) {
+      // tank.getServer().broadcastMessage("Health: " + (tank.getHealth() -
       // e.getDamage()));
-      //} else {
-       // tank.getServer().broadcastMessage("Health: " + tank.getHealth());
-      //}
+      // } else {
+      // tank.getServer().broadcastMessage("Health: " + tank.getHealth());
+      // }
     }
   }
 
@@ -219,7 +228,7 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
-        // Cannot be killed by height   (NOT DONE)
+        // Cannot be killed by height (NOT DONE)
         zombie.setCustomName("Floater");
       }
       if (effects == 18 || effects == 19) {
@@ -227,7 +236,7 @@ public class ZombieTypes implements Listener {
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 2));
         zombie.setCustomName("Wailer");
-        // use metadata grabandtoss, Grabs and hurls you to death : P   (NOT
+        // use metadata grabandtoss, Grabs and hurls you to death : P (NOT
         // DONE)
         zombie.setMetadata("Wailer", new FixedMetadataValue(plugin, "Wailer"));
       }
