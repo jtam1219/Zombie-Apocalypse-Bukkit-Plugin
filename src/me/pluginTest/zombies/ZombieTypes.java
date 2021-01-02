@@ -109,7 +109,6 @@ public class ZombieTypes implements Listener {
       if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
         Zombie tank = (Zombie) e.getEntity();
         e.setCancelled(true);
-        tank.getServer().broadcastMessage("Tank New health:" + tank.getHealth());
       }
     }
   }
