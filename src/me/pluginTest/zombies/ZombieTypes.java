@@ -1,5 +1,6 @@
 package me.pluginTest.zombies;
 
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
@@ -90,39 +91,26 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
-  public void tankFallDamage(Entity entity){
-    if (entity instanceof  Zombie && entity.hasMetadata("Tank")){
-      Zombie tank=(Zombie) entity;
-      while (!tank.isDead()) {
-        if (!tank.isOnGround())
-          tank.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1, 255));
+  public void tankFallDamage(EntityDamageEvent e){
+    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Tank")){
+      if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
+        Zombie tank=(Zombie) e.getEntity();
+        tank.getServer().broadcastMessage("Health: "+tank.getHealth());
+        tank.setLastDamage(0);
+        tank.getServer().broadcastMessage("New health:"+tank.getHealth());
       }
     }
   }
-
-  @EventHandler
-  public void jumperIsOnGround(Entity entity){
-    if (entity instanceof Zombie && entity.hasMetadata("Jumper")){
-      Zombie zombie=(Zombie) entity;
-      while(!zombie.isDead()) {
-        if (!zombie.isOnGround())
-          zombie.removePotionEffect(PotionEffectType.JUMP);
-      }
-    }
-  }
-
   @EventHandler
   public void jumperCalculation(EntityDamageEvent e){
     if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Jumper")){
-      if (e.getEntity().getLastDamageCause().equals(EntityDamageEvent.DamageCause.FALL)){
+      if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
         Zombie zombie=(Zombie) e.getEntity();
         AttributeInstance damage=
                 zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
         zombie.getServer().broadcastMessage("old Damage: "+damage.getValue());
-        damage.setBaseValue(damage.getBaseValue()+zombie.getLastDamage());
+        damage.setBaseValue(damage.getBaseValue()+e.getDamage());
         zombie.getServer().broadcastMessage("new Damage: "+damage.getValue());
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000,
-                4));
       }
     }
   }
@@ -166,8 +154,25 @@ public class ZombieTypes implements Listener {
                 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
         zombie.setCustomName("Jumper");
-        zombie.setMetadata("Jumper", new FixedMetadataValue(plugin, "Jumper"));
-        jumperIsOnGround(zombie);
+        zombie.setMetadata("DamageAddOn", new FixedMetadataValue(plugin,
+                "Jumper"));
+        BukkitTask isOnGround=
+                zombie.getServer().getScheduler().runTaskTimer(plugin,
+                        new Runnable(){
+                          public void run(){
+                            if (zombie.isDead()) {
+                              Bukkit.getScheduler().cancelTask(zombie.getMetadata("Jumper").get(0).asInt());
+                              // zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + "
+                              // dead. climbCycle cancelled");
+                            }
+                            if (!zombie.isOnGround())
+                              zombie.removePotionEffect(PotionEffectType.JUMP);
+                            else if(!zombie.hasPotionEffect(PotionEffectType.JUMP))
+                            zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
+                          }
+                        }, 5, 5);
+        zombie.setMetadata("Jumper", new FixedMetadataValue(plugin,
+                isOnGround.getTaskId()));
         // Jumper height calculates more damage?
       }
       if (effects >= 3 && effects <= 9) {
@@ -278,12 +283,12 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setBootsDropChance(0.2f);
             zombie.setCustomName("Tank");
             zombie.setMetadata("Tank", new FixedMetadataValue(plugin, "Tank"));
-            tankFallDamage(zombie);
             BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
               public void run() {
                 if (zombie.isDead()) {
-                  ((BukkitTask) zombie.getMetadata("climbCycle").get(0)).cancel();
-                  zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + " dead. climbCycle cancelled");
+                  Bukkit.getScheduler().cancelTask(zombie.getMetadata("climbCycle").get(0).asInt());
+                  // zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + "
+                  // dead. climbCycle cancelled");
                 }
                 if (!(zombie.getTarget() == null)) {
                   LivingEntity target = zombie.getTarget();
@@ -297,10 +302,10 @@ public class ZombieTypes implements Listener {
                       for (int z = -1; z <= 1; z++) {
                         if (x == 0 && z == 0)
                           continue;
-                        if (zombie.getLocation().add(new Vector(x, 2, z)).getBlock().getType().isSolid()) {
+                        if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType().isSolid()) {
                           canClimb = true;
                           break;
-                        } else if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType()
+                        } else if (zombie.getLocation().add(new Vector(x, 0, z)).getBlock().getType()
                                 .isSolid()) {
                           climbVector = new Vector(x, 1, z);
                           break;
@@ -325,7 +330,7 @@ public class ZombieTypes implements Listener {
                 }
               }
             }, 5, 5);
-            zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision));
+            zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision.getTaskId()));
           }
         }
       }
