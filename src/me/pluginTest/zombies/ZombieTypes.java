@@ -92,6 +92,18 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
+  public void tankHealthChecker(EntityDamageEvent e){
+    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Tank")) {
+      Zombie tank= (Zombie) e.getEntity();
+      if(!tank.hasPotionEffect(PotionEffectType.ABSORPTION)) {
+        tank.getServer().broadcastMessage("Health: " + (tank.getHealth() - e.getDamage()));
+      }
+      else{
+        tank.getServer().broadcastMessage("Health: "+tank.getHealth());
+      }
+    }
+  }
+  @EventHandler
   public void tankFallDamage(EntityDamageEvent e) {
     if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Tank")) {
       if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
@@ -110,7 +122,7 @@ public class ZombieTypes implements Listener {
         AttributeInstance damage = zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
         zombie.getServer().broadcastMessage("jumper old Damage: " + damage.getValue());
         zombie.getServer().broadcastMessage("jumper health left: " + zombie.getHealth());
-        zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage.getBaseValue() + e.getDamage());
+        zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage.getBaseValue() + (e.getDamage()/2));
         zombie.getServer()
             .broadcastMessage("jumper new Damage: " + zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());
       }
@@ -153,7 +165,8 @@ public class ZombieTypes implements Listener {
       Zombie zombie = (Zombie) specialEntity;
       if (effects >= 0 && effects <= 2) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP,
+                1000000, 3));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
         zombie.setCustomName("Jumper");
         zombie.setMetadata("DamageAddOn", new FixedMetadataValue(plugin, "Jumper"));
@@ -167,7 +180,8 @@ public class ZombieTypes implements Listener {
             if (!zombie.isOnGround())
               zombie.removePotionEffect(PotionEffectType.JUMP);
             else if (!zombie.hasPotionEffect(PotionEffectType.JUMP))
-              zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
+              zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP,
+                      1000000, 3));
           }
         }, 5, 5);
         zombie.setMetadata("Jumper", new FixedMetadataValue(plugin, isOnGround.getTaskId()));
