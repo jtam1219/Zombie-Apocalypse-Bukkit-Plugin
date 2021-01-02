@@ -41,14 +41,13 @@ public class ZombieCommand implements CommandExecutor {
         World w = p.getWorld();
         Entity specialZombie = w.spawnEntity(loc, EntityType.ZOMBIE);
         Zombie zombie = (Zombie) specialZombie;
+        zombie.getServer().broadcastMessage("Tank spawned");
         zombie.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET));
         zombie.getEquipment().setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE));
         zombie.getEquipment().setLeggings(new ItemStack(Material.NETHERITE_LEGGINGS));
         zombie.getEquipment().setBoots(new ItemStack(Material.NETHERITE_BOOTS));
-        // entity.getServer().broadcastMessage("A Tank has been spawned!");
         zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(12);
         zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
-        // zombie.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(.5);
         zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.95);
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);

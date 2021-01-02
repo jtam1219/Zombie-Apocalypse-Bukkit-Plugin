@@ -95,9 +95,8 @@ public class ZombieTypes implements Listener {
     if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Tank")){
       if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
         Zombie tank=(Zombie) e.getEntity();
-        tank.getServer().broadcastMessage("Health: "+tank.getHealth());
         tank.setLastDamage(0);
-        tank.getServer().broadcastMessage("New health:"+tank.getHealth());
+        tank.getServer().broadcastMessage("Tank New health:"+tank.getHealth());
       }
     }
   }
@@ -108,9 +107,10 @@ public class ZombieTypes implements Listener {
         Zombie zombie=(Zombie) e.getEntity();
         AttributeInstance damage=
                 zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
-        zombie.getServer().broadcastMessage("old Damage: "+damage.getValue());
-        damage.setBaseValue(damage.getBaseValue()+e.getDamage());
-        zombie.getServer().broadcastMessage("new Damage: "+damage.getValue());
+        zombie.getServer().broadcastMessage("jumper old Damage: "+damage.getValue());
+        zombie.getServer().broadcastMessage("jumper health left: "+zombie.getHealth());
+        zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage.getBaseValue()+e.getDamage());
+        zombie.getServer().broadcastMessage("jumper new Damage: "+zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());
       }
     }
   }
