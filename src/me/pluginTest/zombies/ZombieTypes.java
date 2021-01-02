@@ -112,7 +112,9 @@ public class ZombieTypes implements Listener {
         Zombie zombie=(Zombie) e.getEntity();
         AttributeInstance damage=
                 zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+        zombie.getServer().broadcastMessage("old Damage: "+damage.getValue());
         damage.setBaseValue(damage.getBaseValue()+zombie.getLastDamage());
+        zombie.getServer().broadcastMessage("new Damage: "+damage.getValue());
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000,
                 4));
       }
