@@ -1,12 +1,14 @@
 package me.pluginTest.zombies;
 
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -88,8 +90,33 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
-  public void tankFallDamage(){
-    
+  public void tankFallDamage(EntityEvent e){
+    if (e.getEntity() instanceof  Zombie && e.getEntity().hasMetadata("Tank")){
+      Zombie tank=(Zombie) e.getEntity();
+      if (!tank.isOnGround()) tank.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1, 255));
+    }
+  }
+
+  @EventHandler
+  public void jumperIsOnGround(EntityEvent e){
+    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Jumper")){
+      Zombie zombie=(Zombie) e.getEntity();
+      if (!zombie.isOnGround()) zombie.removePotionEffect(PotionEffectType.JUMP);
+    }
+  }
+
+  @EventHandler
+  public void jumperCalculation(EntityDamageEvent e){
+    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Jumper")){
+      if (e.getEntity().getLastDamageCause().equals(EntityDamageEvent.DamageCause.FALL)){
+        Zombie zombie=(Zombie) e.getEntity();
+        AttributeInstance damage=
+                zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+        damage.setBaseValue(damage.getBaseValue()+zombie.getLastDamage());
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000,
+                4));
+      }
+    }
   }
 
   @EventHandler
@@ -104,7 +131,7 @@ public class ZombieTypes implements Listener {
 
     Random r = new Random();
     int geared = r.nextInt(10);
-    int effects = r.nextInt(40);
+    int effects = r.nextInt(45);
     int armor = r.nextInt(15);
     int weapon = r.nextInt(18);
 
@@ -127,9 +154,11 @@ public class ZombieTypes implements Listener {
       Zombie zombie = (Zombie) specialEntity;
       if (effects >= 0 && effects <= 2) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP,
+                1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
         zombie.setCustomName("Jumper");
+        zombie.setMetadata("Jumper", new FixedMetadataValue(plugin, "Jumper"));
         // Jumper height calculates more damage?
       }
       if (effects >= 3 && effects <= 9) {
@@ -239,6 +268,7 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setLeggingsDropChance(0.1f);
             zombie.getEquipment().setBootsDropChance(0.2f);
             zombie.setCustomName("Tank");
+            zombie.setMetadata("Tank", new FixedMetadataValue(plugin, "Tank"));
             BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
               public void run() {
                 if (zombie.isDead()) {
