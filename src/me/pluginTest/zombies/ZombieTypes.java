@@ -169,6 +169,7 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 2));
+        zombie.setCustomName("Wailer");
         // use metadata grabandtoss, Grabs and hurls you to death : P
         zombie.setMetadata("Wailer", new FixedMetadataValue(plugin, "Wailer"));
       }
