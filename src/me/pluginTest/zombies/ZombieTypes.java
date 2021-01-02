@@ -189,7 +189,7 @@ public class ZombieTypes implements Listener {
           }
         }, 5, 5);
         zombie.setMetadata("Jumper", new FixedMetadataValue(plugin, isOnGround.getTaskId()));
-        // Jumper height calculates more damage?
+        // Jumper height calculates more damage
       }
       if (effects >= 3 && effects <= 9) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
@@ -219,7 +219,7 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
-        // Cannot be killed by height
+        // Cannot be killed by height   (NOT DONE)
         zombie.setCustomName("Floater");
       }
       if (effects == 18 || effects == 19) {
@@ -227,7 +227,8 @@ public class ZombieTypes implements Listener {
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 2));
         zombie.setCustomName("Wailer");
-        // use metadata grabandtoss, Grabs and hurls you to death : P
+        // use metadata grabandtoss, Grabs and hurls you to death : P   (NOT
+        // DONE)
         zombie.setMetadata("Wailer", new FixedMetadataValue(plugin, "Wailer"));
       }
       if (geared > 4) {
