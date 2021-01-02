@@ -290,7 +290,6 @@ public class ZombieTypes implements Listener {
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2, 100));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
             zombie.getEquipment().setHelmetDropChance(0.15f);
             zombie.getEquipment().setChestplateDropChance(0.05f);
             zombie.getEquipment().setLeggingsDropChance(0.1f);
