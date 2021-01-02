@@ -96,11 +96,12 @@ public class ZombieTypes implements Listener {
   public void tankHealthChecker(EntityDamageEvent e) {
     if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Tank")) {
       Zombie tank = (Zombie) e.getEntity();
-      if (!tank.hasPotionEffect(PotionEffectType.ABSORPTION)) {
-        tank.getServer().broadcastMessage("Health: " + (tank.getHealth() - e.getDamage()));
-      } else {
-        tank.getServer().broadcastMessage("Health: " + tank.getHealth());
-      }
+      //if (!tank.hasPotionEffect(PotionEffectType.ABSORPTION)) {
+        //tank.getServer().broadcastMessage("Health: " + (tank.getHealth() -
+      // e.getDamage()));
+      //} else {
+       // tank.getServer().broadcastMessage("Health: " + tank.getHealth());
+      //}
     }
   }
 
@@ -119,11 +120,7 @@ public class ZombieTypes implements Listener {
       if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
         Zombie zombie = (Zombie) e.getEntity();
         AttributeInstance damage = zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
-        zombie.getServer().broadcastMessage("jumper old Damage: " + damage.getValue());
-        zombie.getServer().broadcastMessage("jumper health left: " + zombie.getHealth());
         zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage.getBaseValue() + (e.getDamage() / 2));
-        zombie.getServer()
-            .broadcastMessage("jumper new Damage: " + zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());
       }
     }
   }
@@ -255,7 +252,8 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setItemInMainHandDropChance(0.02f);
         } else {
           int num = r.nextInt(100);
-          if (num < 30) {
+          if (num < 15) {
+            zombie.setAdult();
             zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
             zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
             zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
@@ -286,8 +284,7 @@ public class ZombieTypes implements Listener {
             zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.95);
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
             zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.25);
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 9));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 19));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2, 100));
             zombie.getEquipment().setHelmetDropChance(0.15f);
