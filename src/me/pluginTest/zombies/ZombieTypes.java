@@ -1,5 +1,6 @@
 package me.pluginTest.zombies;
 
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
@@ -91,33 +92,27 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
-  public void tankFallDamage(EntityEvent e) {
+  public void tankFallDamage(EntityDamageEvent e) {
     if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Tank")) {
-      Zombie tank = (Zombie) e.getEntity();
-      if (!tank.isOnGround())
-        tank.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1, 255));
-    }
-  }
-
-  @EventHandler
-  public void jumperIsOnGround(EntityEvent e) {
-    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Jumper")) {
-      Zombie zombie = (Zombie) e.getEntity();
-      if (!zombie.isOnGround())
-        zombie.removePotionEffect(PotionEffectType.JUMP);
+      if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
+        Zombie tank = (Zombie) e.getEntity();
+        e.setCancelled(true);
+        tank.getServer().broadcastMessage("Tank New health:" + tank.getHealth());
+      }
     }
   }
 
   @EventHandler
   public void jumperCalculation(EntityDamageEvent e) {
     if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Jumper")) {
-      if (e.getEntity().getLastDamageCause().equals(EntityDamageEvent.DamageCause.FALL)) {
+      if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
         Zombie zombie = (Zombie) e.getEntity();
         AttributeInstance damage = zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
-        zombie.getServer().broadcastMessage("old Damage: " + damage.getValue());
-        damage.setBaseValue(damage.getBaseValue() + zombie.getLastDamage());
-        zombie.getServer().broadcastMessage("new Damage: " + damage.getValue());
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
+        zombie.getServer().broadcastMessage("jumper old Damage: " + damage.getValue());
+        zombie.getServer().broadcastMessage("jumper health left: " + zombie.getHealth());
+        zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(damage.getBaseValue() + e.getDamage());
+        zombie.getServer()
+            .broadcastMessage("jumper new Damage: " + zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue());
       }
     }
   }
@@ -161,7 +156,21 @@ public class ZombieTypes implements Listener {
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
         zombie.setCustomName("Jumper");
-        zombie.setMetadata("Jumper", new FixedMetadataValue(plugin, "Jumper"));
+        zombie.setMetadata("DamageAddOn", new FixedMetadataValue(plugin, "Jumper"));
+        BukkitTask isOnGround = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
+          public void run() {
+            if (zombie.isDead()) {
+              Bukkit.getScheduler().cancelTask(zombie.getMetadata("Jumper").get(0).asInt());
+              // zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + "
+              // dead. climbCycle cancelled");
+            }
+            if (!zombie.isOnGround())
+              zombie.removePotionEffect(PotionEffectType.JUMP);
+            else if (!zombie.hasPotionEffect(PotionEffectType.JUMP))
+              zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 4));
+          }
+        }, 5, 5);
+        zombie.setMetadata("Jumper", new FixedMetadataValue(plugin, isOnGround.getTaskId()));
         // Jumper height calculates more damage?
       }
       if (effects >= 3 && effects <= 9) {
@@ -284,7 +293,7 @@ public class ZombieTypes implements Listener {
                       for (int z = -1; z <= 1; z++) {
                         if (x == 0 && z == 0)
                           continue;
-                        if (zombie.getLocation().add(new Vector(x, 2, z)).getBlock().getType().isSolid()) {
+                        if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType().isSolid()) {
                           canClimb = true;
                           break;
                         } else if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType().isSolid()) {

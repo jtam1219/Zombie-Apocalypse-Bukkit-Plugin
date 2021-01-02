@@ -2,6 +2,7 @@ package me.pluginTest;
 
 import me.pluginTest.commands.HordeSpawn;
 import me.pluginTest.commands.ZombieCommand;
+import me.pluginTest.zombies.SpawnJumper;
 import me.pluginTest.zombies.ZombieTypes;
 
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new ZombieTypes(this), this);
         new ZombieCommand(this);
         new HordeSpawn(this);
+        new SpawnJumper(this);
 
     }
 }

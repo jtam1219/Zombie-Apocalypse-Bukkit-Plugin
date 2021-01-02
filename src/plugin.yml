@@ -7,7 +7,10 @@ description: Spawns a zombie
 commands:
   summontank:
     aliases: [tank]
-    description: /tank to spawn a zombie
+    description: /tank to spawn tank
   summonhorde:
     aliases: [horde]
     description: /horde to spawn horde
+  summonjumper:
+    aliases: [jumper]
+    description: /jumper to spawn jumper
