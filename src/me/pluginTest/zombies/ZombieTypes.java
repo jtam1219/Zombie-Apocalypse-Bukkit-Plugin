@@ -90,18 +90,24 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
-  public void tankFallDamage(EntityEvent e){
-    if (e.getEntity() instanceof  Zombie && e.getEntity().hasMetadata("Tank")){
-      Zombie tank=(Zombie) e.getEntity();
-      if (!tank.isOnGround()) tank.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1, 255));
+  public void tankFallDamage(Entity entity){
+    if (entity instanceof  Zombie && entity.hasMetadata("Tank")){
+      Zombie tank=(Zombie) entity;
+      while (!tank.isDead()) {
+        if (!tank.isOnGround())
+          tank.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1, 255));
+      }
     }
   }
 
   @EventHandler
-  public void jumperIsOnGround(EntityEvent e){
-    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Jumper")){
-      Zombie zombie=(Zombie) e.getEntity();
-      if (!zombie.isOnGround()) zombie.removePotionEffect(PotionEffectType.JUMP);
+  public void jumperIsOnGround(Entity entity){
+    if (entity instanceof Zombie && entity.hasMetadata("Jumper")){
+      Zombie zombie=(Zombie) entity;
+      while(!zombie.isDead()) {
+        if (!zombie.isOnGround())
+          zombie.removePotionEffect(PotionEffectType.JUMP);
+      }
     }
   }
 
@@ -161,6 +167,7 @@ public class ZombieTypes implements Listener {
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
         zombie.setCustomName("Jumper");
         zombie.setMetadata("Jumper", new FixedMetadataValue(plugin, "Jumper"));
+        jumperIsOnGround(zombie);
         // Jumper height calculates more damage?
       }
       if (effects >= 3 && effects <= 9) {
@@ -271,6 +278,7 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setBootsDropChance(0.2f);
             zombie.setCustomName("Tank");
             zombie.setMetadata("Tank", new FixedMetadataValue(plugin, "Tank"));
+            tankFallDamage(zombie);
             BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
               public void run() {
                 if (zombie.isDead()) {
