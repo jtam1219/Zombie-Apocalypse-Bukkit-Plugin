@@ -26,10 +26,11 @@ public class HordeSpawn implements CommandExecutor {
         Location loc = p.getLocation();
         World w = p.getWorld();
         p.getServer().broadcastMessage("Spawned 50 Zombies");
-        for (int i=0; i<50; i++){
-            ZombieTypes spawner=new ZombieTypes(plugin);
-            spawner.createSpecialZombie(w,loc);
-            //entity cramming kills the mobs... FIX
+        for (int x = -5; x < 5; x++) {
+            for (int z = -5; z < 5; z++) {
+                ZombieTypes spawner = new ZombieTypes(plugin);
+                spawner.createSpecialZombie(w, loc.add(x, 0, z));
+            }
         }
         return false;
     }

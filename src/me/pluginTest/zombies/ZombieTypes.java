@@ -14,6 +14,7 @@ import me.pluginTest.Main;
 
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.inventory.ItemStack;
@@ -37,8 +38,8 @@ public class ZombieTypes implements Listener {
       World w = e.getEntity().getWorld();
       if (w.getEnvironment().equals(World.Environment.NORMAL)) {
         if (type.equals(EntityType.CREEPER) || type.equals(EntityType.SPIDER) || type.equals(EntityType.CAVE_SPIDER)
-                || type.equals(EntityType.SKELETON) || type.equals(EntityType.SILVERFISH) || type.equals(EntityType.HUSK)
-                || type.equals(EntityType.SLIME) || type.equals(EntityType.WITCH) || type.equals(EntityType.ZOMBIE)) {
+            || type.equals(EntityType.SKELETON) || type.equals(EntityType.SILVERFISH) || type.equals(EntityType.HUSK)
+            || type.equals(EntityType.SLIME) || type.equals(EntityType.WITCH) || type.equals(EntityType.ZOMBIE)) {
           if (e.getSpawnReason().equals(SpawnReason.CUSTOM) || e.getSpawnReason().equals(SpawnReason.DEFAULT))
             return;
           Location loc = e.getLocation();
@@ -81,25 +82,26 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
-  public void grabAndToss(EntityInteractEvent e){
-    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Wailer")){
+  public void grabAndToss(EntityInteractEvent e) {
+    if (e.getEntity() instanceof Zombie && e.getEntity().hasMetadata("Wailer")) {
 
     }
   }
 
   @EventHandler
-  public void tankFallDamage(){
-    
+  public void tankFallDamage() {
+
   }
 
   @EventHandler
-  public void changeTarget(EntityDamageByEntityEvent e){
-    if (e.getEntity() instanceof Zombie){
-      Player p=(Player) e.getDamager();
-      Zombie zombie=(Zombie) e.getEntity();
+  public void changeTarget(EntityDamageByEntityEvent e) {
+    if (e.getEntity() instanceof Zombie) {
+      Player p = (Player) e.getDamager();
+      Zombie zombie = (Zombie) e.getEntity();
       zombie.setTarget(p);
     }
   }
+
   public Entity createSpecialZombie(World w, Location loc) {
 
     Random r = new Random();
@@ -122,7 +124,7 @@ public class ZombieTypes implements Listener {
         Material.IRON_AXE, Material.IRON_SWORD, Material.DIAMOND_AXE, Material.DIAMOND_SWORD, Material.GOLDEN_AXE,
         Material.GOLDEN_SWORD, Material.NETHERITE_AXE, Material.NETHERITE_SWORD };
 
-    if (effects <= 19 || effects>=28) {
+    if (effects <= 19 || effects >= 28) {
       specialEntity = w.spawnEntity(loc, EntityType.ZOMBIE);
       Zombie zombie = (Zombie) specialEntity;
       if (effects >= 0 && effects <= 2) {
@@ -152,12 +154,11 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.25);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
-                1000000, 3));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 3));
         // Speedy, and lethal
         zombie.setCustomName("Witch");
       }
-      if (effects >= 15 && effects <=17) {
+      if (effects >= 15 && effects <= 17) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
@@ -166,10 +167,8 @@ public class ZombieTypes implements Listener {
       }
       if (effects == 18 || effects == 19) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
-                1000000, 0));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
-                1000000, 2));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 2));
         // use metadata grabandtoss, Grabs and hurls you to death : P
         zombie.setMetadata("Wailer", new FixedMetadataValue(plugin, "Wailer"));
       }
@@ -193,16 +192,14 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setLeggingsDropChance(0.01f);
           zombie.getEquipment().setBootsDropChance(0.01f);
           zombie.getEquipment().setItemInMainHandDropChance(0.02f);
-        }
-        else {
+        } else {
           int num = r.nextInt(100);
           if (num < 30) {
             zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
             zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
             zombie.getEquipment().setLeggings(new ItemStack(leggings[5]));
             zombie.getEquipment().setBoots(new ItemStack(boots[5]));
-          }
-          else {
+          } else {
             if (armor == 5) {
               armor = r.nextInt(5);
             }
@@ -241,14 +238,14 @@ public class ZombieTypes implements Listener {
             BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
               public void run() {
                 if (zombie.isDead()) {
-                  ((BukkitTask) zombie.getMetadata("climbCycle").get(0)).cancel();
+                  Bukkit.getScheduler().cancelTask(zombie.getMetadata("climbCycle").get(0).asInt());
                   zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + " dead. climbCycle cancelled");
                 }
                 if (!(zombie.getTarget() == null)) {
                   LivingEntity target = zombie.getTarget();
                   Vector attackVector = new Vector(target.getLocation().getX() - zombie.getLocation().getX(),
-                          target.getLocation().getY() - zombie.getLocation().getY(),
-                          target.getLocation().getZ() - zombie.getLocation().getZ());
+                      target.getLocation().getY() - zombie.getLocation().getY(),
+                      target.getLocation().getZ() - zombie.getLocation().getZ());
                   boolean canClimb = false;
                   Vector climbVector = new Vector(0, 1, 0);
                   if (attackVector.getY() > 0) {
@@ -256,11 +253,10 @@ public class ZombieTypes implements Listener {
                       for (int z = -1; z <= 1; z++) {
                         if (x == 0 && z == 0)
                           continue;
-                        if (zombie.getLocation().add(new Vector(x, 2, z)).getBlock().getType().isSolid()) {
+                        if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType().isSolid()) {
                           canClimb = true;
                           break;
-                        } else if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType()
-                                .isSolid()) {
+                        } else if (zombie.getLocation().add(new Vector(x, 0, z)).getBlock().getType().isSolid()) {
                           climbVector = new Vector(x, 1, z);
                           break;
                         }
@@ -284,12 +280,11 @@ public class ZombieTypes implements Listener {
                 }
               }
             }, 5, 5);
-            zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision));
+            zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision.getTaskId()));
           }
         }
       }
-    }
-    else {
+    } else {
       specialEntity = w.spawnEntity(loc, EntityType.DROWNED);
       Drowned drowned = (Drowned) specialEntity;
       if (effects <= 25) {
