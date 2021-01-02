@@ -87,17 +87,22 @@ public class ZombieTypes implements Listener {
 
   @EventHandler
   public void grabAndToss(EntityDamageByEntityEvent e) {
-    if (e.getEntity() instanceof Player && e.getDamager() instanceof Zombie && e.getDamager().hasMetadata("Wailer")) {
+    if (e.getDamager() instanceof Zombie && e.getDamager().hasMetadata("Wailer")) {
       e.setDamage(0);
+      if (e.getEntity().getVehicle() != null)
+        return;
       e.getDamager().addPassenger(e.getEntity());
+      ((Zombie) e.getDamager()).setAI(false);
       e.getEntity().getServer().getScheduler().runTaskLater(plugin, new Runnable() {
         public void run() {
+          ((Zombie) e.getDamager()).setAI(true);
+          Vector directionVector = e.getDamager().getLocation().getDirection();
           e.getDamager().removePassenger(e.getEntity());
-          double x = Math.cos(e.getDamager().getLocation().getPitch());
-          double z = Math.sin(e.getDamager().getLocation().getPitch());
-          e.getEntity().setVelocity(new Vector(10 * x, 10, 10 * z));
+          directionVector = directionVector.multiply(new Vector(1, 0, 1)).normalize().multiply(1.5);
+          e.getEntity().getServer().broadcastMessage(directionVector.toString());
+          e.getEntity().setVelocity(directionVector.add(new Vector(0, 1.25, 0)));
         }
-      }, 2);
+      }, 15);
     }
   }
 

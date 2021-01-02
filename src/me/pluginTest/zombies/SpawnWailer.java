@@ -22,8 +22,8 @@ import org.bukkit.scheduler.BukkitTask;
 public class SpawnWailer implements CommandExecutor {
     private Main plugin;
 
-    public SpawnWailer(Main plugin){
-        this.plugin=plugin;
+    public SpawnWailer(Main plugin) {
+        this.plugin = plugin;
         plugin.getCommand("summonwailer").setExecutor(this);
     }
 
@@ -39,6 +39,7 @@ public class SpawnWailer implements CommandExecutor {
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 2));
         zombie.setCustomName("Wailer");
+        zombie.setMetadata("Wailer", new FixedMetadataValue(plugin, "Wailer"));
         return false;
     }
 }
