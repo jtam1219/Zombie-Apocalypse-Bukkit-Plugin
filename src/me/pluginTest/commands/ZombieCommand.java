@@ -68,8 +68,8 @@ public class ZombieCommand implements CommandExecutor {
             public void run() {
                 if (zombie.isDead()) {
                     Bukkit.getScheduler().cancelTask(zombie.getMetadata("climbCycle").get(0).asInt());
-                    zombie.getServer()
-                            .broadcastMessage("Zombie " + zombie.getEntityId() + " dead. climbCycle cancelled");
+                    // zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + "
+                    // dead. climbCycle cancelled");
                 }
                 if (!(zombie.getTarget() == null)) {
                     LivingEntity target = zombie.getTarget();

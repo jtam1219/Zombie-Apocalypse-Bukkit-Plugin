@@ -50,11 +50,12 @@ public class ZombieTypes implements Listener {
           if (e.getSpawnReason().equals(SpawnReason.DROWNED)) {
             e.getEntity().remove();
           }
-        } else if (type.equals(EntityType.PHANTOM)) {
-          Location loc = e.getLocation();
-          Entity riderZombie = createSpecialZombie(w, loc);
-          e.getEntity().addPassenger(riderZombie);
         }
+        // else if (type.equals(EntityType.PHANTOM)) {
+        // Location loc = e.getLocation();
+        // Entity riderZombie = createSpecialZombie(w, loc);
+        // e.getEntity().addPassenger(riderZombie);
+        // }
       }
     } catch (Exception ex) {
       System.out.println("Error creating a special Zombie");
@@ -146,6 +147,7 @@ public class ZombieTypes implements Listener {
         zombie.setHealth(4);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "Boomer"));
+        zombie.getEquipment().setHelmet(new ItemStack(Material.TNT));
         // Explodes upon Death
         zombie.setCustomName("Boomer");
       }
@@ -240,7 +242,8 @@ public class ZombieTypes implements Listener {
               public void run() {
                 if (zombie.isDead()) {
                   Bukkit.getScheduler().cancelTask(zombie.getMetadata("climbCycle").get(0).asInt());
-                  zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + " dead. climbCycle cancelled");
+                  // zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + "
+                  // dead. climbCycle cancelled");
                 }
                 if (!(zombie.getTarget() == null)) {
                   LivingEntity target = zombie.getTarget();
