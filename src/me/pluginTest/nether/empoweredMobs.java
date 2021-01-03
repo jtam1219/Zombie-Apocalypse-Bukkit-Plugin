@@ -157,7 +157,7 @@ public class empoweredMobs implements Listener {
                                                 }
                                                 List<Player> list= piglin.getWorld().getPlayers();
                                                 for(Player player: list){
-                                                    if (piglin.getTarget()==null && piglin.hasLineOfSight(player)){
+                                                    if (piglin.getTarget()==null && piglin.hasLineOfSight(player) && !player.getGameMode().equals(GameMode.CREATIVE)){
                                                         piglin.setTarget(player);
                                                     }
                                                 }
