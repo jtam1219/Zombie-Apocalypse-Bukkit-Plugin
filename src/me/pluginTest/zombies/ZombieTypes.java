@@ -170,7 +170,7 @@ public class ZombieTypes implements Listener {
 
     Random r = new Random();
     int geared = r.nextInt(10);
-    int effects = r.nextInt(45);
+    int effects = r.nextInt(50);
     int armor = r.nextInt(15);
     int weapon = r.nextInt(18);
 
@@ -281,7 +281,7 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setItemInMainHandDropChance(0.02f);
         } else {
           int num = r.nextInt(100);
-          if (num < 15) {
+          if (num < 20) {
             zombie.setAdult();
             zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
             zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
