@@ -124,15 +124,19 @@ public class empoweredMobs implements Listener {
             } else if (type.equals(EntityType.PIGLIN)) {
                 if (empowered >= 6) {
                     Piglin piglin = (Piglin) e.getEntity();
+                    piglin.setAdult();
                     piglin.getEquipment().setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
                     piglin.getEquipment().setBoots(new ItemStack(Material.GOLDEN_BOOTS));
                     if (empowered >= 8) {
+                        piglin.setAdult();
                         piglin.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
                     }
                     if (empowered >= 9) {
+                        piglin.setAdult();
                         piglin.getEquipment().setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS));
                     }
                     if (empowered >= 10) {
+                        piglin.setAdult();
                         ItemStack sword = new ItemStack(Material.GOLDEN_SWORD);
                         ItemStack chest = new ItemStack(Material.GOLDEN_CHESTPLATE);
                         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
@@ -142,6 +146,7 @@ public class empoweredMobs implements Listener {
                         piglin.getEquipment().setChestplate(chest);
                     }
                     if (empowered == 11) {
+                        piglin.setAdult();
                         ItemStack sword = new ItemStack(Material.IRON_SWORD);
                         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
                         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
