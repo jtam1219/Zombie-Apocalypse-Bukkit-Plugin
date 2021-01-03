@@ -99,7 +99,7 @@ public class empoweredMobs implements Listener{
                     wither.getEquipment().setBoots(boots);
                     wither.getEquipment().setBootsDropChance(0.01f);
                     if (empowered>=8){
-                        wither.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(45);
+                        wither.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
                         wither.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,1000000,0));
                         ItemStack sword=new ItemStack(Material.IRON_SWORD);
                         ItemStack helmet=new ItemStack(Material.IRON_HELMET);
