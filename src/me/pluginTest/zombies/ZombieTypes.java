@@ -86,6 +86,14 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
+  public void leech(EntityDamageByEntityEvent e){
+    if (e.getDamager() instanceof Zombie && e.getDamager().hasMetadata(
+            "Leech")) {
+        e.getEntity().addPassenger(e.getDamager());
+    }
+  }
+
+  @EventHandler
   public void grabAndToss(EntityDamageByEntityEvent e) {
     if (e.getDamager() instanceof Zombie && e.getDamager().hasMetadata("Wailer")) {
       e.setDamage(0);
@@ -162,7 +170,7 @@ public class ZombieTypes implements Listener {
 
     Random r = new Random();
     int geared = r.nextInt(10);
-    int effects = r.nextInt(45);
+    int effects = r.nextInt(50);
     int armor = r.nextInt(15);
     int weapon = r.nextInt(18);
 
@@ -180,7 +188,7 @@ public class ZombieTypes implements Listener {
         Material.IRON_AXE, Material.IRON_SWORD, Material.DIAMOND_AXE, Material.DIAMOND_SWORD, Material.GOLDEN_AXE,
         Material.GOLDEN_SWORD, Material.NETHERITE_AXE, Material.NETHERITE_SWORD };
 
-    if (effects <= 19 || effects >= 28) {
+    if (effects <= 21 || effects >= 30) {
       specialEntity = w.spawnEntity(loc, EntityType.ZOMBIE);
       Zombie zombie = (Zombie) specialEntity;
       if (effects >= 0 && effects <= 2) {
@@ -233,7 +241,7 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
-        // Cannot be killed by height (NOT DONE)
+        // Cannot be killed by height (NOT DONE) ?  ? ?
         zombie.setCustomName("Floater");
       }
       if (effects == 18 || effects == 19) {
@@ -241,9 +249,15 @@ public class ZombieTypes implements Listener {
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 2));
         zombie.setCustomName("Wailer");
-        // use metadata grabandtoss, Grabs and hurls you to death : P (NOT
-        // DONE)
+        // use metadata grabandtoss, Grabs and hurls you to death : P
         zombie.setMetadata("Wailer", new FixedMetadataValue(plugin, "Wailer"));
+      }
+      if (effects == 20|| effects==21){
+        zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
+        zombie.setCustomName("Leech");
+        zombie.setMetadata("Leech", new FixedMetadataValue(plugin, "Leech"));
+        //use metadata leech, rides you and hits you on your head
       }
       if (geared > 4) {
         if (geared <= 7) {
@@ -267,7 +281,7 @@ public class ZombieTypes implements Listener {
           zombie.getEquipment().setItemInMainHandDropChance(0.02f);
         } else {
           int num = r.nextInt(100);
-          if (num < 15) {
+          if (num < 20) {
             zombie.setAdult();
             zombie.getEquipment().setHelmet(new ItemStack(helmets[5]));
             zombie.getEquipment().setChestplate(new ItemStack(chestplates[5]));
@@ -335,7 +349,7 @@ public class ZombieTypes implements Listener {
                       }
                     }
                     if (canClimb) {
-                      zombie.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 1000000, 4));
+                      zombie.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 1000000, 2));
                     } else if (zombie.hasPotionEffect(PotionEffectType.LEVITATION)) {
                       zombie.setCollidable(false);
                       zombie.teleport(zombie.getLocation().add(climbVector.normalize()).add(0, 0.5, 0));
@@ -358,12 +372,12 @@ public class ZombieTypes implements Listener {
     } else {
       specialEntity = w.spawnEntity(loc, EntityType.DROWNED);
       Drowned drowned = (Drowned) specialEntity;
-      if (effects <= 25) {
+      if (effects <= 28) {
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 1));
         drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         drowned.setCustomName("Drowner");
       }
-      if (effects == 26 || effects == 27) {
+      if (effects == 29 || effects == 30) {
         // Special Zombie with land and water capabilities, from the water.
         // One that is adept at both the ocean and the land. (Entity.DROWNED)
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));

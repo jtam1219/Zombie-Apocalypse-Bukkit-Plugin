@@ -5,6 +5,7 @@ import me.pluginTest.commands.SpawnGiantTest;
 import me.pluginTest.commands.ZombieCommand;
 import me.pluginTest.commands.SpawnJumper;
 import me.pluginTest.commands.SpawnWailer;
+
 import me.pluginTest.zombies.ZombieTypes;
 
 import org.bukkit.event.Listener;
@@ -20,5 +21,6 @@ public class Main extends JavaPlugin implements Listener {
         new SpawnJumper(this);
         new SpawnWailer(this);
         new SpawnGiantTest(this);
+        new SpawnLeech(this);
     }
 }
