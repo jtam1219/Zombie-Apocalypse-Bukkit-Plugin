@@ -39,7 +39,6 @@ public class empoweredMobs implements Listener{
             EntityType type = e.getEntityType();
             int empowered=num.nextInt(12);
             if (type.equals(EntityType.SKELETON)){
-                e.getEntity().getServer().broadcastMessage("empowered: "+empowered);
                 if (empowered>=7){
                     Skeleton skeleton=(Skeleton) e.getEntity();
                     ItemStack helmet=new ItemStack(Material.GOLDEN_HELMET);
