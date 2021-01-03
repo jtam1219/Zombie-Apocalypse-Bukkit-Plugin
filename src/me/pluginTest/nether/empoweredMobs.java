@@ -37,11 +37,10 @@ public class empoweredMobs implements Listener {
         try {
             Random num = new Random();
             EntityType type = e.getEntityType();
-            World w = e.getEntity().getWorld();
-            int empowered = num.nextInt(10);
-            e.getEntity().getServer().broadcastMessage("empowered: " + empowered);
+            int empowered = num.nextInt(12);
             if (type.equals(EntityType.SKELETON)) {
-                if (empowered >= 5) {
+                e.getEntity().getServer().broadcastMessage("empowered: " + empowered);
+                if (empowered >= 7) {
                     Skeleton skeleton = (Skeleton) e.getEntity();
                     ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET);
                     ItemStack boots = new ItemStack(Material.GOLDEN_BOOTS);
@@ -51,14 +50,14 @@ public class empoweredMobs implements Listener {
                     skeleton.getEquipment().setBoots(boots);
                     skeleton.getEquipment().setHelmetDropChance(0.05f);
                     skeleton.getEquipment().setBootsDropChance(0.05f);
-                    if (empowered >= 8) {
+                    if (empowered >= 10) {
                         skeleton.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
                         ItemStack bow = new ItemStack(Material.BOW);
                         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
                         skeleton.getEquipment().setItemInMainHand(bow);
                         skeleton.getEquipment().setItemInMainHandDropChance(0.05f);
                     }
-                    if (empowered == 9) {
+                    if (empowered == 12) {
                         skeleton.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(80);
                         skeleton.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
                         helmet = new ItemStack(Material.NETHERITE_HELMET);
@@ -68,7 +67,7 @@ public class empoweredMobs implements Listener {
                         ItemStack bow = new ItemStack(Material.BOW);
                         helmet.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
                         helmet.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
-                        boots.addEnchantment(Enchantment.SOUL_SPEED, 4);
+                        boots.addEnchantment(Enchantment.SOUL_SPEED, 3);
                         boots.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
                         bow.addEnchantment(Enchantment.MULTISHOT, 1);
                         bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
@@ -83,7 +82,7 @@ public class empoweredMobs implements Listener {
                     }
                 }
             } else if (type.equals(EntityType.WITHER_SKELETON)) {
-                if (empowered >= 5) {
+                if (empowered >= 7) {
                     WitherSkeleton wither = (WitherSkeleton) e.getEntity();
                     ItemStack chest = new ItemStack(Material.GOLDEN_CHESTPLATE);
                     ItemStack legs = new ItemStack(Material.GOLDEN_LEGGINGS);
@@ -96,7 +95,7 @@ public class empoweredMobs implements Listener {
                     wither.getEquipment().setLeggings(legs);
                     wither.getEquipment().setBoots(boots);
                     wither.getEquipment().setBootsDropChance(0.01f);
-                    if (empowered >= 8) {
+                    if (empowered >= 10) {
                         wither.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
                         wither.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
                         ItemStack sword = new ItemStack(Material.IRON_SWORD);
@@ -124,17 +123,17 @@ public class empoweredMobs implements Listener {
                     }
                 }
             } else if (type.equals(EntityType.PIGLIN)) {
-                if (empowered >= 5) {
+                if (empowered >= 6) {
                     Piglin piglin = (Piglin) e.getEntity();
                     piglin.getEquipment().setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
                     piglin.getEquipment().setBoots(new ItemStack(Material.GOLDEN_BOOTS));
-                    if (empowered >= 6) {
+                    if (empowered >= 8) {
                         piglin.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
                     }
-                    if (empowered >= 7) {
+                    if (empowered >= 9) {
                         piglin.getEquipment().setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS));
                     }
-                    if (empowered >= 8) {
+                    if (empowered >= 10) {
                         ItemStack sword = new ItemStack(Material.GOLDEN_SWORD);
                         ItemStack chest = new ItemStack(Material.GOLDEN_CHESTPLATE);
                         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
@@ -143,7 +142,7 @@ public class empoweredMobs implements Listener {
                         piglin.getEquipment().setItemInMainHand(sword);
                         piglin.getEquipment().setChestplate(chest);
                     }
-                    if (empowered == 9) {
+                    if (empowered == 11) {
                         ItemStack sword = new ItemStack(Material.IRON_SWORD);
                         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
                         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
@@ -164,10 +163,10 @@ public class empoweredMobs implements Listener {
                     }
                 }
             } else if (type.equals(EntityType.BLAZE)) {
-                if (empowered >= 5) {
+                if (empowered >= 6) {
                     Blaze blaze = (Blaze) e.getEntity();
                     blaze.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
-                    if (empowered >= 8) {
+                    if (empowered >= 9) {
                         blaze.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
                         blaze.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4));
                         blaze.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 10));
@@ -175,8 +174,7 @@ public class empoweredMobs implements Listener {
                 }
             }
         } catch (Exception o) {
-            System.out.println(o.getMessage());
-            System.out.println(o.getStackTrace().toString());
+            o.printStackTrace();
             e.setCancelled(true);
         }
     }
