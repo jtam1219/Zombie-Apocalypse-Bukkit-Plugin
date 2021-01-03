@@ -101,7 +101,6 @@ public class ZombieCommand implements CommandExecutor {
                         }
                     } else if (zombie.hasPotionEffect(PotionEffectType.LEVITATION)) {
                         zombie.setCollidable(true);
-                        zombie.teleport(zombie.getLocation().add(climbVector.multiply(-1)));
                         zombie.removePotionEffect(PotionEffectType.LEVITATION);
                     }
 
