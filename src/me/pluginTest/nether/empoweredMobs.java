@@ -132,13 +132,13 @@ public class empoweredMobs implements Listener{
                     Piglin piglin=(Piglin) e.getEntity();
                     piglin.getEquipment().setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
                     piglin.getEquipment().setBoots(new ItemStack(Material.GOLDEN_BOOTS));
-                    if(empowered==6) {
+                    if(empowered>=6) {
                         piglin.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
                     }
-                    if(empowered==7){
+                    if(empowered>=7){
                         piglin.getEquipment().setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS));
                     }
-                    if (empowered==8){
+                    if (empowered>=8){
                         ItemStack sword=new ItemStack(Material.GOLDEN_SWORD);
                         ItemStack chest=new ItemStack(Material.GOLDEN_CHESTPLATE);
                         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
