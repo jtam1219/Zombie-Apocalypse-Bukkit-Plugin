@@ -11,12 +11,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import me.pluginTest.Main;
 
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.World;
@@ -147,6 +149,22 @@ public class empoweredMobs implements Listener {
                     }
                     if (empowered == 11) {
                         piglin.setAdult();
+                        BukkitTask hostile =
+                                piglin.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
+                                            public void run() {
+                                                if (piglin.isDead()) {
+                                                    Bukkit.getScheduler().cancelTask(piglin.getMetadata("Guardlin").get(0).asInt());
+                                                }
+                                                List<Player> list= piglin.getWorld().getPlayers();
+                                                for(Player player: list){
+                                                    if (piglin.getTarget()==null && piglin.hasLineOfSight(player)){
+                                                        piglin.setTarget(player);
+                                                    }
+                                                }
+                                            }
+                                        }, 5, 5);
+                        piglin.setMetadata("Guardlin",
+                                new FixedMetadataValue(plugin, hostile.getTaskId()));
                         ItemStack sword = new ItemStack(Material.IRON_SWORD);
                         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
                         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
