@@ -3,6 +3,7 @@ package me.pluginTest;
 import me.pluginTest.commands.HordeSpawn;
 import me.pluginTest.commands.ZombieCommand;
 import me.pluginTest.zombies.SpawnJumper;
+import me.pluginTest.zombies.SpawnLeech;
 import me.pluginTest.zombies.SpawnWailer;
 import me.pluginTest.zombies.ZombieTypes;
 
@@ -18,5 +19,6 @@ public class Main extends JavaPlugin implements Listener {
         new HordeSpawn(this);
         new SpawnJumper(this);
         new SpawnWailer(this);
+        new SpawnLeech(this);
     }
 }
