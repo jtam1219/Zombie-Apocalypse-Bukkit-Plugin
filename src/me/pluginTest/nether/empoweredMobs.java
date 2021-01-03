@@ -39,6 +39,7 @@ public class empoweredMobs implements Listener{
             EntityType type = e.getEntityType();
             World w = e.getEntity().getWorld();
             int empowered=num.nextInt(10);
+            e.getEntity().getServer().broadcastMessage("empowered: "+empowered);
             if (type.equals(EntityType.SKELETON)){
                 if (empowered>=5){
                     Skeleton skeleton=(Skeleton) e.getEntity();
