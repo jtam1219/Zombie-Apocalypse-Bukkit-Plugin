@@ -25,7 +25,7 @@ import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-public class empoweredMobs implements Listener{
+public class empoweredMobs implements Listener {
     private Main plugin;
 
     public empoweredMobs(Main plugin) {
@@ -35,38 +35,37 @@ public class empoweredMobs implements Listener{
     @EventHandler
     public void onMobSpawn(CreatureSpawnEvent e) {
         try {
-            Random num=new Random();
+            Random num = new Random();
             EntityType type = e.getEntityType();
             World w = e.getEntity().getWorld();
-            int empowered=num.nextInt(10);
-            e.getEntity().getServer().broadcastMessage("empowered: "+empowered);
-            if (type.equals(EntityType.SKELETON)){
-                if (empowered>=5){
-                    Skeleton skeleton=(Skeleton) e.getEntity();
-                    ItemStack helmet=new ItemStack(Material.GOLDEN_HELMET);
-                    ItemStack boots=new ItemStack(Material.GOLDEN_BOOTS);
+            int empowered = num.nextInt(10);
+            e.getEntity().getServer().broadcastMessage("empowered: " + empowered);
+            if (type.equals(EntityType.SKELETON)) {
+                if (empowered >= 5) {
+                    Skeleton skeleton = (Skeleton) e.getEntity();
+                    ItemStack helmet = new ItemStack(Material.GOLDEN_HELMET);
+                    ItemStack boots = new ItemStack(Material.GOLDEN_BOOTS);
                     helmet.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
                     boots.addEnchantment(Enchantment.SOUL_SPEED, 3);
                     skeleton.getEquipment().setHelmet(helmet);
                     skeleton.getEquipment().setBoots(boots);
                     skeleton.getEquipment().setHelmetDropChance(0.05f);
                     skeleton.getEquipment().setBootsDropChance(0.05f);
-                    if (empowered>=8){
+                    if (empowered >= 8) {
                         skeleton.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
-                        ItemStack bow=new ItemStack(Material.BOW);
+                        ItemStack bow = new ItemStack(Material.BOW);
                         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
                         skeleton.getEquipment().setItemInMainHand(bow);
                         skeleton.getEquipment().setItemInMainHandDropChance(0.05f);
                     }
-                    if (empowered==9){
+                    if (empowered == 9) {
                         skeleton.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(80);
-                        skeleton.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,1000000,0));
-                        helmet= new ItemStack(Material.NETHERITE_HELMET);
-                        ItemStack chest=
-                                new ItemStack(Material.GOLDEN_CHESTPLATE);
-                        ItemStack legs= new ItemStack(Material.GOLDEN_LEGGINGS);
-                        boots= new ItemStack(Material.NETHERITE_BOOTS);
-                        ItemStack bow=new ItemStack(Material.BOW);
+                        skeleton.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
+                        helmet = new ItemStack(Material.NETHERITE_HELMET);
+                        ItemStack chest = new ItemStack(Material.GOLDEN_CHESTPLATE);
+                        ItemStack legs = new ItemStack(Material.GOLDEN_LEGGINGS);
+                        boots = new ItemStack(Material.NETHERITE_BOOTS);
+                        ItemStack bow = new ItemStack(Material.BOW);
                         helmet.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
                         helmet.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
                         boots.addEnchantment(Enchantment.SOUL_SPEED, 4);
@@ -83,38 +82,35 @@ public class empoweredMobs implements Listener{
                         skeleton.getEquipment().setItemInMainHandDropChance(0.02f);
                     }
                 }
-            }
-            else if(type.equals(EntityType.WITHER_SKELETON)){
-                if (empowered>=5){
-                    WitherSkeleton wither=(WitherSkeleton) e.getEntity();
-                    ItemStack chest=new ItemStack(Material.GOLDEN_CHESTPLATE);
-                    ItemStack legs=new ItemStack(Material.GOLDEN_LEGGINGS);
-                    ItemStack boots=new ItemStack(Material.NETHERITE_BOOTS);
+            } else if (type.equals(EntityType.WITHER_SKELETON)) {
+                if (empowered >= 5) {
+                    WitherSkeleton wither = (WitherSkeleton) e.getEntity();
+                    ItemStack chest = new ItemStack(Material.GOLDEN_CHESTPLATE);
+                    ItemStack legs = new ItemStack(Material.GOLDEN_LEGGINGS);
+                    ItemStack boots = new ItemStack(Material.NETHERITE_BOOTS);
                     chest.addEnchantment(Enchantment.PROTECTION_FIRE, 3);
-                    legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,1);
-                    boots.addEnchantment(Enchantment.PROTECTION_FIRE,3);
-                    boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL
-                            , 1);
+                    legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+                    boots.addEnchantment(Enchantment.PROTECTION_FIRE, 3);
+                    boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
                     wither.getEquipment().setChestplate(chest);
                     wither.getEquipment().setLeggings(legs);
                     wither.getEquipment().setBoots(boots);
                     wither.getEquipment().setBootsDropChance(0.01f);
-                    if (empowered>=8){
+                    if (empowered >= 8) {
                         wither.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
-                        wither.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,1000000,0));
-                        ItemStack sword=new ItemStack(Material.IRON_SWORD);
-                        ItemStack helmet=new ItemStack(Material.IRON_HELMET);
-                        chest=new ItemStack(Material.NETHERITE_CHESTPLATE);
-                        legs=new ItemStack(Material.IRON_LEGGINGS);
-                        boots=new ItemStack(Material.NETHERITE_BOOTS);
+                        wither.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
+                        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+                        ItemStack helmet = new ItemStack(Material.IRON_HELMET);
+                        chest = new ItemStack(Material.NETHERITE_CHESTPLATE);
+                        legs = new ItemStack(Material.IRON_LEGGINGS);
+                        boots = new ItemStack(Material.NETHERITE_BOOTS);
                         helmet.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1);
-                        chest.addEnchantment(Enchantment.PROTECTION_FIRE,4);
-                        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,2);
+                        chest.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+                        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
                         chest.addEnchantment(Enchantment.DURABILITY, 3);
-                        legs.addEnchantment(Enchantment.PROTECTION_PROJECTILE
-                                , 1);
-                        boots.addEnchantment(Enchantment.PROTECTION_FIRE,4);
-                        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,2);
+                        legs.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1);
+                        boots.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+                        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
                         sword.addEnchantment(Enchantment.SWEEPING_EDGE, 1);
                         sword.addEnchantment(Enchantment.FIRE_ASPECT, 2);
                         wither.getEquipment().setHelmet(helmet);
@@ -127,34 +123,33 @@ public class empoweredMobs implements Listener{
                         wither.getEquipment().setItemInMainHandDropChance(0.01f);
                     }
                 }
-            }
-            else if(type.equals(EntityType.PIGLIN)){
-                if (empowered>=5){
-                    Piglin piglin=(Piglin) e.getEntity();
+            } else if (type.equals(EntityType.PIGLIN)) {
+                if (empowered >= 5) {
+                    Piglin piglin = (Piglin) e.getEntity();
                     piglin.getEquipment().setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
                     piglin.getEquipment().setBoots(new ItemStack(Material.GOLDEN_BOOTS));
-                    if(empowered>=6) {
+                    if (empowered >= 6) {
                         piglin.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
                     }
-                    if(empowered>=7){
+                    if (empowered >= 7) {
                         piglin.getEquipment().setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS));
                     }
-                    if (empowered>=8){
-                        ItemStack sword=new ItemStack(Material.GOLDEN_SWORD);
-                        ItemStack chest=new ItemStack(Material.GOLDEN_CHESTPLATE);
+                    if (empowered >= 8) {
+                        ItemStack sword = new ItemStack(Material.GOLDEN_SWORD);
+                        ItemStack chest = new ItemStack(Material.GOLDEN_CHESTPLATE);
                         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
                         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-                        chest.addEnchantment(Enchantment.PROTECTION_PROJECTILE,1);
+                        chest.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1);
                         piglin.getEquipment().setItemInMainHand(sword);
                         piglin.getEquipment().setChestplate(chest);
                     }
-                    if (empowered==9){
-                        ItemStack sword=new ItemStack(Material.IRON_SWORD);
-                        ItemStack chest=new ItemStack(Material.IRON_CHESTPLATE);
-                        ItemStack boots=new ItemStack(Material.IRON_BOOTS);
+                    if (empowered == 9) {
+                        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+                        ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
+                        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
                         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
                         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-                        chest.addEnchantment(Enchantment.PROTECTION_PROJECTILE,1);
+                        chest.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 1);
                         boots.addEnchantment(Enchantment.PROTECTION_FALL, 2);
                         piglin.getEquipment().setItemInMainHand(sword);
                         piglin.getEquipment().setChestplate(chest);
@@ -168,20 +163,20 @@ public class empoweredMobs implements Listener{
                         piglin.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000, 1));
                     }
                 }
-            }
-            else if (type.equals(EntityType.BLAZE)){
-                if(empowered>=5){
-                    Blaze blaze= (Blaze) e.getEntity();
+            } else if (type.equals(EntityType.BLAZE)) {
+                if (empowered >= 5) {
+                    Blaze blaze = (Blaze) e.getEntity();
                     blaze.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
-                    if(empowered>=8){
+                    if (empowered >= 8) {
                         blaze.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
                         blaze.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 4));
                         blaze.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 10));
                     }
                 }
             }
-        }catch(Exception o){
-            System.out.println("Error: Unable to spawn nether mob.");
+        } catch (Exception o) {
+            System.out.println(o.getMessage());
+            System.out.println(o.getStackTrace().toString());
             e.setCancelled(true);
         }
     }
