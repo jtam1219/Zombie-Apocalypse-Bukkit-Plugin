@@ -86,10 +86,9 @@ public class ZombieTypes implements Listener {
   }
 
   @EventHandler
-  public void leech(EntityDamageByEntityEvent e){
-    if (e.getDamager() instanceof Zombie && e.getDamager().hasMetadata(
-            "Leech")) {
-        e.getEntity().addPassenger(e.getDamager());
+  public void leech(EntityDamageByEntityEvent e) {
+    if (e.getDamager() instanceof Zombie && e.getDamager().hasMetadata("Leech")) {
+      e.getEntity().addPassenger(e.getDamager());
     }
   }
 
@@ -107,7 +106,6 @@ public class ZombieTypes implements Listener {
           Vector directionVector = e.getDamager().getLocation().getDirection();
           e.getDamager().removePassenger(e.getEntity());
           directionVector = directionVector.multiply(new Vector(1, 0, 1)).normalize().multiply(1.5);
-          e.getEntity().getServer().broadcastMessage(directionVector.toString());
           e.getEntity().setVelocity(directionVector.add(new Vector(0, 1.25, 0)));
         }
       }, 15);
@@ -241,7 +239,7 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
-        // Cannot be killed by height (NOT DONE) ?  ? ?
+        // Cannot be killed by height (NOT DONE) ? ? ?
         zombie.setCustomName("Floater");
       }
       if (effects == 18 || effects == 19) {
@@ -252,12 +250,12 @@ public class ZombieTypes implements Listener {
         // use metadata grabandtoss, Grabs and hurls you to death : P
         zombie.setMetadata("Wailer", new FixedMetadataValue(plugin, "Wailer"));
       }
-      if (effects == 20|| effects==21){
+      if (effects == 20 || effects == 21) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.setCustomName("Leech");
         zombie.setMetadata("Leech", new FixedMetadataValue(plugin, "Leech"));
-        //use metadata leech, rides you and hits you on your head
+        // use metadata leech, rides you and hits you on your head
       }
       if (geared > 4) {
         if (geared <= 7) {
@@ -326,6 +324,8 @@ public class ZombieTypes implements Listener {
               public void run() {
                 if (zombie.isDead()) {
                   Bukkit.getScheduler().cancelTask(zombie.getMetadata("climbCycle").get(0).asInt());
+                  // zombie.getServer().broadcastMessage("Zombie " + zombie.getEntityId() + "
+                  // dead. climbCycle cancelled");
                 }
                 if (!(zombie.getTarget() == null)) {
                   LivingEntity target = zombie.getTarget();
@@ -342,14 +342,14 @@ public class ZombieTypes implements Listener {
                         if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType().isSolid()) {
                           canClimb = true;
                           break;
-                        } else if (zombie.getLocation().add(new Vector(x, 1, z)).getBlock().getType().isSolid()) {
+                        } else if (zombie.getLocation().add(new Vector(x, 0, z)).getBlock().getType().isSolid()) {
                           climbVector = new Vector(x, 1, z);
                           break;
                         }
                       }
                     }
                     if (canClimb) {
-                      zombie.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 1000000, 2));
+                      zombie.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 1000000, 4));
                     } else if (zombie.hasPotionEffect(PotionEffectType.LEVITATION)) {
                       zombie.setCollidable(false);
                       zombie.teleport(zombie.getLocation().add(climbVector.normalize()).add(0, 0.5, 0));
@@ -357,6 +357,7 @@ public class ZombieTypes implements Listener {
                     }
                   } else if (zombie.hasPotionEffect(PotionEffectType.LEVITATION)) {
                     zombie.setCollidable(true);
+                    zombie.teleport(zombie.getLocation().add(climbVector.multiply(-1)));
                     zombie.removePotionEffect(PotionEffectType.LEVITATION);
                   }
 

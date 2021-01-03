@@ -17,6 +17,8 @@ commands:
   summonwailer:
     aliases: [wailer]
     description: ari is awesome
+  summongiant:
+    aliases: [gianttest]
   summonleech:
     aliases: [leech]
     description: /leech
