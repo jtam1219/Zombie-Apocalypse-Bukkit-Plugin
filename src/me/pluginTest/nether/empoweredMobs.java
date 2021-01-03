@@ -50,14 +50,14 @@ public class empoweredMobs implements Listener{
                     skeleton.getEquipment().setBoots(boots);
                     skeleton.getEquipment().setHelmetDropChance(0.05f);
                     skeleton.getEquipment().setBootsDropChance(0.05f);
-                    if (empowered>=10){
+                    if (empowered>=9){
                         skeleton.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(60);
                         ItemStack bow=new ItemStack(Material.BOW);
                         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
                         skeleton.getEquipment().setItemInMainHand(bow);
                         skeleton.getEquipment().setItemInMainHandDropChance(0.05f);
                     }
-                    if (empowered==12){
+                    if (empowered==11){
                         skeleton.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(80);
                         skeleton.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,1000000,0));
                         helmet= new ItemStack(Material.NETHERITE_HELMET);
