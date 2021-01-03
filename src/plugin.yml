@@ -17,3 +17,5 @@ commands:
   summonwailer:
     aliases: [wailer]
     description: ari is awesome
+  summongiant:
+    aliases: [gianttest]
