@@ -5,7 +5,7 @@ import me.pluginTest.commands.SpawnGiantTest;
 import me.pluginTest.commands.ZombieCommand;
 import me.pluginTest.commands.SpawnJumper;
 import me.pluginTest.commands.SpawnWailer;
-
+import me.pluginTest.commands.SpawnLeech;
 import me.pluginTest.zombies.ZombieTypes;
 
 import org.bukkit.event.Listener;
