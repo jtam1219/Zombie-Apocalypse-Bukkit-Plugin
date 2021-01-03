@@ -69,7 +69,7 @@ public class empoweredMobs implements Listener{
                         helmet.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
                         boots.addEnchantment(Enchantment.SOUL_SPEED, 3);
                         boots.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
-                        bow.addEnchantment(Enchantment.MULTISHOT, 1);
+                        bow.addEnchantment(Enchantment.PIERCING, 1);
                         bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
                         skeleton.getEquipment().setHelmet(helmet);
                         skeleton.getEquipment().setChestplate(chest);
