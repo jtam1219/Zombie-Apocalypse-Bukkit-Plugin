@@ -54,11 +54,12 @@ public class ZombieTypes implements Listener {
           if (e.getSpawnReason().equals(SpawnReason.DROWNED)) {
             e.getEntity().remove();
           }
-        } else if (type.equals(EntityType.PHANTOM)) {
-          Location loc = e.getLocation();
-          Entity riderZombie = createSpecialZombie(w, loc);
-          e.getEntity().addPassenger(riderZombie);
         }
+        // else if (type.equals(EntityType.PHANTOM)) {
+        // Location loc = e.getLocation();
+        // Entity riderZombie = createSpecialZombie(w, loc);
+        // e.getEntity().addPassenger(riderZombie);
+        // }
       }
     } catch (Exception ex) {
       System.out.println("Error creating a special Zombie");

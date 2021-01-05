@@ -149,22 +149,6 @@ public class empoweredMobs implements Listener {
                     }
                     if (empowered == 11) {
                         piglin.setAdult();
-                        BukkitTask hostile =
-                                piglin.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
-                                            public void run() {
-                                                if (piglin.isDead()) {
-                                                    Bukkit.getScheduler().cancelTask(piglin.getMetadata("Guardlin").get(0).asInt());
-                                                }
-                                                List<Player> list= piglin.getWorld().getPlayers();
-                                                for(Player player: list){
-                                                    if (piglin.getTarget()==null && piglin.hasLineOfSight(player) && !player.getGameMode().equals(GameMode.CREATIVE)){
-                                                        piglin.setTarget(player);
-                                                    }
-                                                }
-                                            }
-                                        }, 5, 5);
-                        piglin.setMetadata("Guardlin",
-                                new FixedMetadataValue(plugin, hostile.getTaskId()));
                         ItemStack sword = new ItemStack(Material.IRON_SWORD);
                         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
                         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
