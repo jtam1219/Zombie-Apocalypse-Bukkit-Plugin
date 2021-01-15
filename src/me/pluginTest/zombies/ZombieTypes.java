@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -81,7 +82,7 @@ public class ZombieTypes implements Listener {
       World w = e.getEntity().getWorld();
       TNTPrimed explosion = (TNTPrimed) w.spawnEntity(loc, EntityType.PRIMED_TNT);
       explosion.setYield(3);
-      explosion.setFuseTicks(0);
+      explosion.setFuseTicks(30);
       explosion.setIsIncendiary(false);
     }
   }
@@ -146,6 +147,18 @@ public class ZombieTypes implements Listener {
     }
   }
 
+  public void noSleep(PlayerBedEnterEvent e) {
+    e.setCancelled(true);
+    e.getPlayer().sendMessage("NO SLEEPING!");
+  }
+
+  @EventHandler
+  public void dropPearl(EntityDeathEvent e) {
+    if (e.getEntity() instanceof Enderman) {
+      e.getDrops().add(new ItemStack(Material.ENDER_PEARL));
+    }
+  }
+
   @EventHandler
   public void changeTarget(EntityDamageByEntityEvent e) {
     if (e.getEntity() instanceof Zombie) {
@@ -194,7 +207,7 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 3));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
-        zombie.setCustomName("Jumper");
+        // zombie.setCustomName("Jumper");
         zombie.setMetadata("DamageAddOn", new FixedMetadataValue(plugin, "Jumper"));
         BukkitTask isOnGround = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
           public void run() {
@@ -215,7 +228,7 @@ public class ZombieTypes implements Listener {
       if (effects >= 3 && effects <= 9) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
-        zombie.setCustomName("Zoomer");
+        // zombie.setCustomName("Zoomer");
         // Normal Faster Zombie
       }
       if (effects >= 10 && effects <= 12) {
@@ -223,9 +236,10 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.5);
         zombie.setHealth(4);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
+        zombie.getEquipment().setHelmet(new ItemStack(Material.TNT));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "Boomer"));
         // Explodes upon Death
-        zombie.setCustomName("Boomer");
+        // zombie.setCustomName("Boomer");
       }
       if (effects == 13 || effects == 14) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(5);
@@ -234,27 +248,27 @@ public class ZombieTypes implements Listener {
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 3));
         // Speedy, and lethal
-        zombie.setCustomName("Witch");
+        // zombie.setCustomName("Witch");
       }
       if (effects >= 15 && effects <= 17) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 1000000, 2));
         // Upon JUmp, give levitation for few seconds
         // Cannot be killed by height (NOT DONE) ? ? ?
-        zombie.setCustomName("Floater");
+        // zombie.setCustomName("Floater");
       }
       if (effects == 18 || effects == 19) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 2));
-        zombie.setCustomName("Wailer");
+        // zombie.setCustomName("Wailer");
         // use metadata grabandtoss, Grabs and hurls you to death : P
         zombie.setMetadata("Wailer", new FixedMetadataValue(plugin, "Wailer"));
       }
       if (effects == 20 || effects == 21) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
-        zombie.setCustomName("Leech");
+        // zombie.setCustomName("Leech");
         zombie.setMetadata("Leech", new FixedMetadataValue(plugin, "Leech"));
         // use metadata leech, rides you and hits you on your head
       }
@@ -319,7 +333,7 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setChestplateDropChance(0.05f);
             zombie.getEquipment().setLeggingsDropChance(0.1f);
             zombie.getEquipment().setBootsDropChance(0.2f);
-            zombie.setCustomName("Tank");
+            // zombie.setCustomName("Tank");
             zombie.setMetadata("Tank", new FixedMetadataValue(plugin, "Tank"));
             BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
               public void run() {
@@ -376,7 +390,7 @@ public class ZombieTypes implements Listener {
       if (effects <= 28) {
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 1));
         drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
-        drowned.setCustomName("Drowner");
+        // drowned.setCustomName("Drowner");
       }
       if (effects == 29 || effects == 30) {
         // Special Zombie with land and water capabilities, from the water.
@@ -396,7 +410,7 @@ public class ZombieTypes implements Listener {
         drowned.getEquipment().setChestplateDropChance(0.005f);
         drowned.getEquipment().setItemInMainHandDropChance(0.03f);
         drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(70);
-        drowned.setCustomName("Swirler");
+        // drowned.setCustomName("Swirler");
       }
     }
     return specialEntity;
