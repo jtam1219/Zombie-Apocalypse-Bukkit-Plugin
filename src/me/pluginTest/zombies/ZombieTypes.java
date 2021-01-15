@@ -147,6 +147,7 @@ public class ZombieTypes implements Listener {
     }
   }
 
+  @EventHandler
   public void noSleep(PlayerBedEnterEvent e) {
     e.setCancelled(true);
     e.getPlayer().sendMessage("NO SLEEPING!");
