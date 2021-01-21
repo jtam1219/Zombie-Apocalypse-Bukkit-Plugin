@@ -288,8 +288,8 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
         }
         else {
-          int num = r.nextInt(100);
-          if (num < 10) {
+          int num = r.nextInt(200);
+          if (num < 15) {
             zombie.setAdult();
             ItemStack chestplate=new ItemStack(Material.NETHERITE_CHESTPLATE);
             chestplate.addEnchantment(Enchantment.DURABILITY, 3);
@@ -299,6 +299,19 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setChestplate(chestplate);
             zombie.getEquipment().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
             zombie.getEquipment().setBoots(boot);
+          }
+          else if (num > 15 && num <= 25){
+            zombie.setAdult();
+            ItemStack chestplate=new ItemStack(Material.DIAMOND_CHESTPLATE);
+            chestplate.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
+            chestplate.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
+            chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+            zombie.getEquipment().setHelmet(new ItemStack(Material.IRON_HELMET));
+            zombie.getEquipment().setChestplate(chestplate);
+            zombie.getEquipment().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+            zombie.getEquipment().setBoots(new ItemStack(Material.IRON_BOOTS));
+            zombie.getEquipment().setItemInMainHand(new ItemStack(Material.IRON_AXE));
+            zombie.getEquipment().setItemInOffHand(new ItemStack(Material.SHIELD));
           }
           else {
             if (armor < 3) {
@@ -377,6 +390,22 @@ public class ZombieTypes implements Listener {
               }
             }, 5, 5);
             zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision.getTaskId()));
+          }
+          else if (zombie.getEquipment().getChestplate().equals(new ItemStack(Material.DIAMOND_CHESTPLATE))){
+            zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
+            zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(2);
+            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.5);
+            zombie.getEquipment().setHelmetDropChance(0.05f);
+            zombie.getEquipment().setChestplateDropChance(0.01f);
+            zombie.getEquipment().setLeggingsDropChance(0.05f);
+            zombie.getEquipment().setBootsDropChance(0.05f);
+            zombie.getEquipment().setItemInMainHandDropChance(0.05f);
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
+                    1000000, 1));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000,24));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2,
+                    100));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
           }
         }
       }
