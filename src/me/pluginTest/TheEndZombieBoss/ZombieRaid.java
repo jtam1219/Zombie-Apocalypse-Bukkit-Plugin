@@ -110,6 +110,8 @@ public class ZombieRaid implements Listener {
                         stage++;
                     }
                     if ((wither.getHealth() <= 75) && (stage == 3)) {
+                        Location loc=wither.getLocation();
+                        w.strikeLightningEffect(loc);
                         wither.getServer()
                                 .broadcastMessage("[Core System]: " + "WARNING, CORE HAS SUSTAINED CRITICAL DAMAGE."
                                         + "REMOVING ALL LIMITERS. ACTIVATING CORE " + "REPAIR. ");
