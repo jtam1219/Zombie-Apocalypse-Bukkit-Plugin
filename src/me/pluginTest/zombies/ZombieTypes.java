@@ -330,9 +330,9 @@ public class ZombieTypes implements Listener {
           }
           if (zombie.getEquipment().getChestplate().equals(new ItemStack(Material.NETHERITE_CHESTPLATE))) {
             // entity.getServer().broadcastMessage("A Tank has been spawned!");
-            zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(10);
+            zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(9);
             zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
-            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.8);
+            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.85);
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(35);
             zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.5);
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 14));

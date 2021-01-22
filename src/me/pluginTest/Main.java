@@ -1,5 +1,6 @@
 package me.pluginTest;
 
+import me.pluginTest.TheEndZombieBoss.ZombieRaid;
 import me.pluginTest.commands.HordeSpawn;
 import me.pluginTest.commands.SpawnGiantTest;
 import me.pluginTest.commands.ZombieCommand;
@@ -18,6 +19,8 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new ZombieTypes(this), this);
         getServer().getPluginManager().registerEvents(new empoweredMobs(this), this);
+        getServer().getPluginManager().registerEvents(new ZombieRaid(this),
+                this);
         new ZombieCommand(this);
         new HordeSpawn(this);
         new SpawnJumper(this);
