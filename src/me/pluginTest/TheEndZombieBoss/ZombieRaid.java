@@ -37,10 +37,12 @@ public class ZombieRaid implements Listener {
         if (e.getEntity() instanceof Wither) {
             Location loc = e.getEntity().getLocation();
             World w = e.getEntity().getWorld();
-            TNTPrimed explosion = (TNTPrimed) w.spawnEntity(loc, EntityType.PRIMED_TNT);
-            explosion.setYield(500);
-            explosion.setFuseTicks(200);
-            explosion.setIsIncendiary(true);
+            for (int i=0; i<10; i++) {
+                TNTPrimed explosion = (TNTPrimed) w.spawnEntity(loc, EntityType.PRIMED_TNT);
+                explosion.setYield(10);
+                explosion.setFuseTicks(200);
+                explosion.setIsIncendiary(false);
+            }
         }
     }
 
