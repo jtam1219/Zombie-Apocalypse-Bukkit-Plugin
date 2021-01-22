@@ -31,15 +31,16 @@ public class ZombieRaid implements Listener {
     public ZombieRaid(Main plugin) {
         this.plugin = plugin;
     }
+
     @EventHandler
     public void onDeath(EntityDeathEvent e) {
         if (e.getEntity() instanceof Wither) {
             Location loc = e.getEntity().getLocation();
             World w = e.getEntity().getWorld();
             TNTPrimed explosion = (TNTPrimed) w.spawnEntity(loc, EntityType.PRIMED_TNT);
-            explosion.setYield(100);
+            explosion.setYield(500);
             explosion.setFuseTicks(200);
-            explosion.setIsIncendiary(false);
+            explosion.setIsIncendiary(true);
         }
     }
 
@@ -71,8 +72,7 @@ public class ZombieRaid implements Listener {
             wither.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 49));
             wither.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1));
             wither.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0));
-            wither.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,
-                    1000000, 1));
+            wither.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1000000, 1));
             BukkitTask checkStage = wither.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
                 int stage = 0;
 
@@ -97,46 +97,38 @@ public class ZombieRaid implements Listener {
                     }
                     if ((wither.getHealth() <= 150) && (stage == 2)) {
                         wither.getServer().broadcastMessage("[Core System]: Core "
-                                + "has sustained medium damage. Activating " +
-                                "defensive-limiter protocols.");
+                                + "has sustained medium damage. Activating " + "defensive-limiter protocols.");
                         wither.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000000, 0));
                         wither.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 1000000, 0));
                         wither.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
                         stage++;
                     }
-                    if ((wither.getHealth() <= 75) && (stage==3)){
-                        wither.getServer().broadcastMessage("[Core System]: " +
-                                "WARNING, CORE HAS SUSTAINED CRITICAL DAMAGE." +
-                                "REMOVING ALL LIMITERS. ACTIVATING CORE " +
-                                "REPAIR. ");
+                    if ((wither.getHealth() <= 75) && (stage == 3)) {
+                        wither.getServer()
+                                .broadcastMessage("[Core System]: " + "WARNING, CORE HAS SUSTAINED CRITICAL DAMAGE."
+                                        + "REMOVING ALL LIMITERS. ACTIVATING CORE " + "REPAIR. ");
                         wither.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2, 6));
                         wither.removePotionEffect(PotionEffectType.GLOWING);
                         wither.removePotionEffect(PotionEffectType.INVISIBILITY);
                         stage++;
                     }
                     if (wither.isDead() && (stage == 4)) {
-                        wither.getServer().broadcastMessage(
-                                "[Core System]: Core " + "has been destroyed." +
-                                        " " + "Releasing end portal escape. " +
-                                        "Self-destruction in 10 seconds.");
-                        BukkitTask selfDestruct=
-                                wither.getServer().getScheduler().runTaskTimer(plugin,
+                        wither.getServer().broadcastMessage("[Core System]: Core " + "has been destroyed." + " "
+                                + "Releasing end portal escape. " + "Self-destruction in 10 seconds.");
+                        BukkitTask selfDestruct = wither.getServer().getScheduler().runTaskTimer(plugin,
                                 new Runnable() {
-                            int count=10;
-                            public void run() {
-                                if(count!=0) {
-                                    wither.getServer().broadcastMessage(
-                                            "[Core System]:" + count);
-                                    count--;
-                                }
-                                else{
-                                    Bukkit.getScheduler().cancelTask(wither.getMetadata("boom").get(0).asInt());
-                                }
-                           }
-                        },0, 20);
-                        wither.setMetadata("boom",
-                                new FixedMetadataValue(plugin,
-                                        selfDestruct.getTaskId()));
+                                    int count = 10;
+
+                                    public void run() {
+                                        if (count != 0) {
+                                            wither.getServer().broadcastMessage("[Core System]:" + count);
+                                            count--;
+                                        } else {
+                                            Bukkit.getScheduler().cancelTask(wither.getMetadata("boom").get(0).asInt());
+                                        }
+                                    }
+                                }, 0, 20);
+                        wither.setMetadata("boom", new FixedMetadataValue(plugin, selfDestruct.getTaskId()));
                     }
                     if (wither.isDead()) {
                         Bukkit.getScheduler().cancelTask(wither.getMetadata("wither").get(0).asInt());
