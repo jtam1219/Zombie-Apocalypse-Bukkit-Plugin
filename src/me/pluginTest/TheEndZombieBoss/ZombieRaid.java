@@ -37,7 +37,9 @@ public class ZombieRaid implements Listener {
 
     @EventHandler
     public void witherDeath(EntityDeathEvent e) {
-        if (e.getEntity() instanceof Wither) {
+        if (e.getEntity() instanceof Wither
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
+                && !(e.getEntity().getWorld().getEnderDragonBattle().hasBeenPreviouslyKilled())) {
             Location loc = e.getEntity().getLocation();
             World w = e.getEntity().getWorld();
             double x = loc.getBlockX(), y = loc.getBlockY(), z = loc.getBlockZ();
@@ -52,119 +54,115 @@ public class ZombieRaid implements Listener {
             }
         }
     }
+
     @EventHandler
-    public void poisonArrow(EntityShootBowEvent e){
-        if (e.getEntity() instanceof Pillager && e.getEntity().hasMetadata("poisonPillager")){
+    public void poisonArrow(EntityShootBowEvent e) {
+        if (e.getEntity() instanceof Pillager && e.getEntity().hasMetadata("poisonPillager")) {
             e.setCancelled(true);
-            Location start=e.getProjectile().getLocation();
-            Vector direction=e.getProjectile().getVelocity();
-            Arrow poison=start.getWorld().spawnArrow(start,direction,
-                    2, 12);
-            poison.addCustomEffect(new PotionEffect(PotionEffectType.POISON,
-                    120, 1), true);
+            Location start = e.getProjectile().getLocation();
+            Vector direction = e.getProjectile().getVelocity();
+            Arrow poison = start.getWorld().spawnArrow(start, direction, 2, 12);
+            poison.addCustomEffect(new PotionEffect(PotionEffectType.POISON, 120, 1), true);
 
         }
     }
 
     @EventHandler
     public void stage1Pass(EntityDeathEvent e) {
-        if (e.getEntity() instanceof Illager && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount>44){
-           illagerCount--;
-           e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
+        if (e.getEntity() instanceof Illager
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 44) {
+            illagerCount--;
+            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
         }
-        if(illagerCount==44){
-            World w=e.getEntity().getWorld();
-            Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
+        if (illagerCount == 44) {
+            World w = e.getEntity().getWorld();
+            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
             blockPortal(w, exitPortal);
-            Location illagerSpawn=
-                    new Location(w,
-                            exitPortal.getBlockX()-5,
-                            exitPortal.getBlockY()+2,exitPortal.getBlockZ()-5);
-            illagerRaidStage2(w,illagerSpawn);
+            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                    exitPortal.getBlockZ() - 5);
+            illagerRaidStage2(w, illagerSpawn);
         }
     }
 
     @EventHandler
     public void stage2Pass(EntityDeathEvent e) {
-        if (e.getEntity() instanceof Illager && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
-                && illagerCount>36 && illagerCount<=44){
+        if (e.getEntity() instanceof Illager
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 36
+                && illagerCount <= 44) {
             illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
+            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
         }
-        if(illagerCount==36){
-            World w=e.getEntity().getWorld();
-            Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn=
-                    new Location(w,
-                            exitPortal.getBlockX()-5,
-                            exitPortal.getBlockY()+2,exitPortal.getBlockZ()-5);
-            illagerRaidStage3(w,illagerSpawn);
+        if (illagerCount == 36) {
+            World w = e.getEntity().getWorld();
+            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                    exitPortal.getBlockZ() - 5);
+            illagerRaidStage3(w, illagerSpawn);
         }
     }
 
     @EventHandler
     public void stage3Pass(EntityDeathEvent e) {
-        if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager) && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
-                && illagerCount>26 && illagerCount<=36){
+        if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager)
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 26
+                && illagerCount <= 36) {
             illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
+            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
         }
-        if(illagerCount==26){
-            World w=e.getEntity().getWorld();
-            Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn=
-                    new Location(w,
-                            exitPortal.getBlockX()-5,
-                            exitPortal.getBlockY()+2,exitPortal.getBlockZ()-5);
-            illagerRaidStage4(w,illagerSpawn);
+        if (illagerCount == 26) {
+            World w = e.getEntity().getWorld();
+            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                    exitPortal.getBlockZ() - 5);
+            illagerRaidStage4(w, illagerSpawn);
         }
     }
 
     @EventHandler
     public void stage4Pass(EntityDeathEvent e) {
-        if (e.getEntity() instanceof Illager && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
-                && illagerCount>15 && illagerCount<=26){
+        if (e.getEntity() instanceof Illager
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 15
+                && illagerCount <= 26) {
             illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
+            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
         }
-        if(illagerCount==15){
-            World w=e.getEntity().getWorld();
-            Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn=
-                    new Location(w,
-                            exitPortal.getBlockX()-5,
-                            exitPortal.getBlockY()+2,exitPortal.getBlockZ()-5);
-            illagerRaidStage5(w,illagerSpawn);
+        if (illagerCount == 15) {
+            World w = e.getEntity().getWorld();
+            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                    exitPortal.getBlockZ() - 5);
+            illagerRaidStage5(w, illagerSpawn);
         }
     }
 
     @EventHandler
     public void stage5Pass(EntityDeathEvent e) {
-        if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager) && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
-                && illagerCount>0 && illagerCount<=15){
+        if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager)
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 0
+                && illagerCount <= 15) {
             illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
+            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
         }
-        if(e.getEntity() instanceof Illager && illagerCount==0){
-            World w=e.getEntity().getWorld();
-            Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn=
-                    new Location(w,
-                            exitPortal.getBlockX()-5,
-                            exitPortal.getBlockY()+2,exitPortal.getBlockZ()-5);
+        if (e.getEntity() instanceof Illager && illagerCount == 0) {
+            World w = e.getEntity().getWorld();
+            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                    exitPortal.getBlockZ() - 5);
             Wither wither = (Wither) w.spawnEntity(illagerSpawn, EntityType.WITHER);
-            finalBoss(w,illagerSpawn,wither);
+            finalBoss(w, illagerSpawn, wither);
         }
     }
 
     @EventHandler
-    public void invincibleToFall(EntityDamageEvent e){
-        if (e.getEntity() instanceof Illager && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)){
+    public void invincibleToFall(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Illager
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)) {
             if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
                 e.setCancelled(true);
             }
         }
     }
+
     @EventHandler
     public void stopSpawns(EntitySpawnEvent e) {
         if (e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
@@ -175,15 +173,15 @@ public class ZombieRaid implements Listener {
 
     @EventHandler
     public void commencement(EntityDeathEvent e) {
-        if (e.getEntity() instanceof EnderDragon) {
-            illagerCount=50;
-            //Location loc = e.getEntity().getLocation();
+        if (e.getEntity() instanceof EnderDragon
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
+                && !(e.getEntity().getWorld().getEnderDragonBattle().hasBeenPreviouslyKilled())) {
+            illagerCount = 50;
+            // Location loc = e.getEntity().getLocation();
             World w = e.getEntity().getWorld();
-            Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn=
-                    new Location(w,
-                            exitPortal.getBlockX()-5,
-                            exitPortal.getBlockY()+2,exitPortal.getBlockZ()-5);
+            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                    exitPortal.getBlockZ() - 5);
             e.getEntity().getWorld().getLivingEntities().forEach(entity -> {
                 if (entity instanceof Monster) {
                     ((Monster) entity).damage(1000000);
@@ -191,21 +189,16 @@ public class ZombieRaid implements Listener {
             });
             canLeave = false;
             blockPortal(w, w.getEnderDragonBattle().getEndPortalLocation());
-            e.getEntity().getServer().broadcastMessage("Illagers have been " +
-                    "discovered to be hiding in the End! They must be behind " +
-                    "the zombie outbreak. Defeat them!");
-            illagerRaidStage1(w,illagerSpawn);
+            e.getEntity().getServer().broadcastMessage("Illagers have been "
+                    + "discovered to be hiding in the End! They must be behind " + "the zombie outbreak. Defeat them!");
+            illagerRaidStage1(w, illagerSpawn);
         }
     }
-    public void finalBoss(World w, Location loc, Wither wither){
+
+    public void finalBoss(World w, Location loc, Wither wither) {
         wither.getServer().broadcastMessage("You have breached the"
                 + " core of the spread of the disease. Activating defensive" + " breach protocol.");
         blockPortal(w, w.getEnderDragonBattle().getEndPortalLocation());
-        wither.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
-            public void run() {
-                blockPortal(w, loc);
-            }
-        }, 200);
         wither.getServer().broadcastMessage("[Wither]: Die.\n" + "[Core System]: Forcefield " + "activated.");
         wither.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 49));
         wither.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1));
@@ -217,8 +210,8 @@ public class ZombieRaid implements Listener {
             public void run() {
 
                 if (wither.getAbsorptionAmount() <= 0 && (stage == 0)) {
-                    wither.getServer().broadcastMessage("[Core " + "System]: Forcefield sustained"
-                            + " heavy damage, unleashing limiter stage 1.");
+                    wither.getServer().broadcastMessage(
+                            "[Core " + "System]: Forcefield sustained" + " heavy damage, unleashing limiter stage 1.");
                     wither.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
                     wither.removePotionEffect(PotionEffectType.SLOW);
                     wither.removePotionEffect(PotionEffectType.WEAKNESS);
@@ -227,17 +220,14 @@ public class ZombieRaid implements Listener {
                 if ((wither.getHealth() <= 225) && (stage == 1)) {
                     wither.getServer().broadcastMessage("[Core System]: Core " + "has sustained "
                             + "supplementary damage, unleashing limiter stage 2" + ".");
-                    wither.getServer()
-                            .broadcastMessage("[Core System]: " + "Wither has received Speed and Strength.");
+                    wither.getServer().broadcastMessage("[Core System]: " + "Wither has received Speed and Strength.");
                     wither.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
                     wither.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
                     stage++;
                 }
                 if ((wither.getHealth() <= 150) && (stage == 2)) {
                     wither.getServer().broadcastMessage("[Core System]: Core "
-                            + "has sustained medium damage, unleashing " +
-                            "limiter stage 3." +
-                            ".");
+                            + "has sustained medium damage, unleashing " + "limiter stage 3." + ".");
                     wither.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000000, 0));
                     wither.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 1000000, 0));
                     wither.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
@@ -257,19 +247,18 @@ public class ZombieRaid implements Listener {
                 if (wither.isDead() && (stage == 4)) {
                     wither.getServer().broadcastMessage("[Core System]: Core " + "has been destroyed." + " "
                             + "Releasing end portal escape. " + "Self-destruction in 10 seconds.");
-                    BukkitTask selfDestruct = wither.getServer().getScheduler().runTaskTimer(plugin,
-                            new Runnable() {
-                                int count = 10;
+                    BukkitTask selfDestruct = wither.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
+                        int count = 10;
 
-                                public void run() {
-                                    if (count != 0) {
-                                        wither.getServer().broadcastMessage("[Core System]:" + count);
-                                        count--;
-                                    } else {
-                                        Bukkit.getScheduler().cancelTask(wither.getMetadata("boom").get(0).asInt());
-                                    }
-                                }
-                            }, 0, 20);
+                        public void run() {
+                            if (count != 0) {
+                                wither.getServer().broadcastMessage("[Core System]:" + count);
+                                count--;
+                            } else {
+                                Bukkit.getScheduler().cancelTask(wither.getMetadata("boom").get(0).asInt());
+                            }
+                        }
+                    }, 0, 20);
                     wither.setMetadata("boom", new FixedMetadataValue(plugin, selfDestruct.getTaskId()));
                 }
                 if (wither.isDead()) {
@@ -284,52 +273,51 @@ public class ZombieRaid implements Listener {
     }
 
     private void blockPortal(World w, Location loc) {
-        int y = loc.getBlockY() + 1;
-        for (int x = -2; x <= 2; x++) {
-            for (int z = -2; z <= 2; z++) {
-                if (x == 0 && z == 0)
-                    continue;
-                w.getBlockAt(x, y, z).setType(Material.BARRIER);
-                w.getBlockAt(x, y + 1, z).setType(Material.BARRIER);
+        int y_start = loc.getBlockY();
+        for (int y = y_start + 1; y <= 255; y++) {
+            for (int x = -3; x <= 3; x++) {
+                for (int z = -3; z <= 3; z++) {
+                    if (x == 0 && z == 0)
+                        continue;
+                    w.getBlockAt(x, y, z).setType(Material.BARRIER);
+                }
             }
         }
     }
 
     private void unblockPortal(World w, Location loc) {
-        int y = loc.getBlockY() + 1;
-        for (int x = -2; x <= 2; x++) {
-            for (int z = -2; z <= 2; z++) {
-                if (x == 0 && z == 0)
-                    continue;
-                w.getBlockAt(x, y, z).setType(Material.AIR);
-                w.getBlockAt(x, y + 1, z).setType(Material.AIR);
+        int y_start = loc.getBlockY();
+        for (int y = y_start + 1; y <= 255; y++) {
+            for (int x = -3; x <= 3; x++) {
+                for (int z = -3; z <= 3; z++) {
+                    if (x == 0 && z == 0)
+                        continue;
+                    w.getBlockAt(x, y, z).setType(Material.AIR);
+                }
             }
         }
     }
 
-    public void illagerRaidStage1(World w, Location loc){
-        for (int i=0; i<3; i++) {
+    public void illagerRaidStage1(World w, Location loc) {
+        for (int i = 0; i < 3; i++) {
             w.spawnEntity(loc, EntityType.PILLAGER);
         }
-        for (int i=0; i<3; i++){
-            w.spawnEntity(loc,
-                    EntityType.VINDICATOR);
+        for (int i = 0; i < 3; i++) {
+            w.spawnEntity(loc, EntityType.VINDICATOR);
         }
     }
 
-    public void illagerRaidStage2(World w, Location loc){
-        for (int i=0; i<5; i++) {
+    public void illagerRaidStage2(World w, Location loc) {
+        for (int i = 0; i < 5; i++) {
             w.spawnEntity(loc, EntityType.PILLAGER);
         }
-        for (int i=0; i<3; i++){
-            ItemStack[] gear={new ItemStack(Material.LEATHER_HELMET),
-                    new ItemStack(Material.LEATHER_CHESTPLATE),
-                    new ItemStack(Material.LEATHER_LEGGINGS),
-                    new ItemStack(Material.LEATHER_BOOTS)};
-            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0].getItemMeta();
-            LeatherArmorMeta color2=(LeatherArmorMeta)gear[1].getItemMeta();
-            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2].getItemMeta();
-            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3].getItemMeta();
+        for (int i = 0; i < 3; i++) {
+            ItemStack[] gear = { new ItemStack(Material.LEATHER_HELMET), new ItemStack(Material.LEATHER_CHESTPLATE),
+                    new ItemStack(Material.LEATHER_LEGGINGS), new ItemStack(Material.LEATHER_BOOTS) };
+            LeatherArmorMeta color1 = (LeatherArmorMeta) gear[0].getItemMeta();
+            LeatherArmorMeta color2 = (LeatherArmorMeta) gear[1].getItemMeta();
+            LeatherArmorMeta color3 = (LeatherArmorMeta) gear[2].getItemMeta();
+            LeatherArmorMeta color4 = (LeatherArmorMeta) gear[3].getItemMeta();
             color1.setColor(Color.BLUE);
             color2.setColor(Color.BLUE);
             color3.setColor(Color.BLUE);
@@ -338,53 +326,50 @@ public class ZombieRaid implements Listener {
             gear[1].setItemMeta(color2);
             gear[2].setItemMeta(color3);
             gear[3].setItemMeta(color4);
-            Vindicator vindicator=(Vindicator) w.spawnEntity(loc,
-                    EntityType.VINDICATOR);
+            Vindicator vindicator = (Vindicator) w.spawnEntity(loc, EntityType.VINDICATOR);
             vindicator.getEquipment().setHelmet(gear[0]);
             vindicator.getEquipment().setChestplate(gear[1]);
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
         }
     }
-    public void illagerRaidStage3(World w, Location loc){
-        for (int i=0; i<1; i++){
-            w.spawnEntity(loc,EntityType.EVOKER);
+
+    public void illagerRaidStage3(World w, Location loc) {
+        for (int i = 0; i < 1; i++) {
+            w.spawnEntity(loc, EntityType.EVOKER);
         }
-        for (int i=0; i<5; i++) {
-           Pillager pillager=(Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
-            ItemStack crossBow=new ItemStack(Material.CROSSBOW);
+        for (int i = 0; i < 5; i++) {
+            Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
+            ItemStack crossBow = new ItemStack(Material.CROSSBOW);
             crossBow.addEnchantment(Enchantment.MULTISHOT, 1);
             pillager.getEquipment().setItemInMainHand(crossBow);
         }
-        for (int i=0; i<3; i++){
-            w.spawnEntity(loc,
-                    EntityType.VINDICATOR);
+        for (int i = 0; i < 3; i++) {
+            w.spawnEntity(loc, EntityType.VINDICATOR);
         }
-        for (int i=0; i<1; i++){
+        for (int i = 0; i < 1; i++) {
             w.spawnEntity(loc, EntityType.RAVAGER);
         }
     }
-    public void illagerRaidStage4(World w, Location loc){
-        for (int i=0; i<2; i++) {
+
+    public void illagerRaidStage4(World w, Location loc) {
+        for (int i = 0; i < 2; i++) {
             w.spawnEntity(loc, EntityType.EVOKER);
         }
-        for (int i=0; i<1; i++){
+        for (int i = 0; i < 1; i++) {
             w.spawnEntity(loc, EntityType.ILLUSIONER);
         }
-        for (int i=0; i<3; i++){
-            Pillager pillager=(Pillager)w.spawnEntity(loc, EntityType.PILLAGER);
-            pillager.setMetadata("poisonPillager",
-                    new FixedMetadataValue(plugin, "poisonPillager"));
-            ItemStack poisonBow=new ItemStack(Material.CROSSBOW);
+        for (int i = 0; i < 3; i++) {
+            Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
+            pillager.setMetadata("poisonPillager", new FixedMetadataValue(plugin, "poisonPillager"));
+            ItemStack poisonBow = new ItemStack(Material.CROSSBOW);
             poisonBow.addEnchantment(Enchantment.MULTISHOT, 1);
-            ItemStack[] gear={new ItemStack(Material.LEATHER_HELMET),
-                    new ItemStack(Material.LEATHER_CHESTPLATE),
-                    new ItemStack(Material.LEATHER_LEGGINGS),
-                    new ItemStack(Material.LEATHER_BOOTS)};
-            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0].getItemMeta();
-            LeatherArmorMeta color2=(LeatherArmorMeta)gear[1].getItemMeta();
-            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2].getItemMeta();
-            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3].getItemMeta();
+            ItemStack[] gear = { new ItemStack(Material.LEATHER_HELMET), new ItemStack(Material.LEATHER_CHESTPLATE),
+                    new ItemStack(Material.LEATHER_LEGGINGS), new ItemStack(Material.LEATHER_BOOTS) };
+            LeatherArmorMeta color1 = (LeatherArmorMeta) gear[0].getItemMeta();
+            LeatherArmorMeta color2 = (LeatherArmorMeta) gear[1].getItemMeta();
+            LeatherArmorMeta color3 = (LeatherArmorMeta) gear[2].getItemMeta();
+            LeatherArmorMeta color4 = (LeatherArmorMeta) gear[3].getItemMeta();
             color1.setColor(Color.BLUE);
             color2.setColor(Color.BLUE);
             color3.setColor(Color.BLUE);
@@ -399,37 +384,32 @@ public class ZombieRaid implements Listener {
             pillager.getEquipment().setBoots(gear[3]);
             pillager.getEquipment().setItemInMainHand(poisonBow);
         }
-        for (int i=0; i<5; i++){
-            ItemStack[] gear={new ItemStack(Material.CHAINMAIL_HELMET),
-                    new ItemStack(Material.CHAINMAIL_CHESTPLATE),
-                    new ItemStack(Material.CHAINMAIL_LEGGINGS),
-                    new ItemStack(Material.CHAINMAIL_BOOTS)};
-            Vindicator vindicator=(Vindicator)w.spawnEntity(loc,
-                    EntityType.VINDICATOR);
+        for (int i = 0; i < 5; i++) {
+            ItemStack[] gear = { new ItemStack(Material.CHAINMAIL_HELMET), new ItemStack(Material.CHAINMAIL_CHESTPLATE),
+                    new ItemStack(Material.CHAINMAIL_LEGGINGS), new ItemStack(Material.CHAINMAIL_BOOTS) };
+            Vindicator vindicator = (Vindicator) w.spawnEntity(loc, EntityType.VINDICATOR);
             vindicator.getEquipment().setHelmet(gear[0]);
             vindicator.getEquipment().setChestplate(gear[1]);
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
         }
     }
-    public void illagerRaidStage5(World w, Location loc){
-        for (int i=0; i<2; i++) {
+
+    public void illagerRaidStage5(World w, Location loc) {
+        for (int i = 0; i < 2; i++) {
             w.spawnEntity(loc, EntityType.ILLUSIONER);
         }
-        for(int i=0; i<3; i++){
+        for (int i = 0; i < 3; i++) {
             w.spawnEntity(loc, EntityType.EVOKER);
         }
-        for (int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             w.spawnEntity(loc, EntityType.RAVAGER);
         }
-        for (int i=0; i<5; i++){
-            Vindicator vindicator=(Vindicator) w.spawnEntity(loc,
-                    EntityType.VINDICATOR);
-            ItemStack[] gear={new ItemStack(Material.LEATHER_HELMET),
-                    new ItemStack(Material.IRON_CHESTPLATE),
-                    new ItemStack(Material.IRON_LEGGINGS),
-                    new ItemStack(Material.IRON_BOOTS)};
-            LeatherArmorMeta color1=(LeatherArmorMeta) gear[0].getItemMeta();
+        for (int i = 0; i < 5; i++) {
+            Vindicator vindicator = (Vindicator) w.spawnEntity(loc, EntityType.VINDICATOR);
+            ItemStack[] gear = { new ItemStack(Material.LEATHER_HELMET), new ItemStack(Material.IRON_CHESTPLATE),
+                    new ItemStack(Material.IRON_LEGGINGS), new ItemStack(Material.IRON_BOOTS) };
+            LeatherArmorMeta color1 = (LeatherArmorMeta) gear[0].getItemMeta();
             color1.setColor(Color.BLUE);
             gear[0].setItemMeta(color1);
             vindicator.getEquipment().setHelmet(gear[0]);
@@ -437,21 +417,17 @@ public class ZombieRaid implements Listener {
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
         }
-        for (int i=0; i<3; i++){
-            Pillager pillager=(Pillager) w.spawnEntity(loc,
-                    EntityType.PILLAGER);
-            pillager.setMetadata("poisonPillager",
-                    new FixedMetadataValue(plugin, "poisonPillager"));
-            ItemStack poisonBow=new ItemStack(Material.CROSSBOW);
+        for (int i = 0; i < 3; i++) {
+            Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
+            pillager.setMetadata("poisonPillager", new FixedMetadataValue(plugin, "poisonPillager"));
+            ItemStack poisonBow = new ItemStack(Material.CROSSBOW);
             poisonBow.addEnchantment(Enchantment.MULTISHOT, 1);
             poisonBow.addEnchantment(Enchantment.QUICK_CHARGE, 3);
-            ItemStack[] gear={new ItemStack(Material.LEATHER_HELMET),
-                    new ItemStack(Material.CHAINMAIL_CHESTPLATE),
-                    new ItemStack(Material.LEATHER_LEGGINGS),
-                    new ItemStack(Material.LEATHER_BOOTS)};
-            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0].getItemMeta();
-            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2].getItemMeta();
-            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3].getItemMeta();
+            ItemStack[] gear = { new ItemStack(Material.LEATHER_HELMET), new ItemStack(Material.CHAINMAIL_CHESTPLATE),
+                    new ItemStack(Material.LEATHER_LEGGINGS), new ItemStack(Material.LEATHER_BOOTS) };
+            LeatherArmorMeta color1 = (LeatherArmorMeta) gear[0].getItemMeta();
+            LeatherArmorMeta color3 = (LeatherArmorMeta) gear[2].getItemMeta();
+            LeatherArmorMeta color4 = (LeatherArmorMeta) gear[3].getItemMeta();
             color1.setColor(Color.BLUE);
             color3.setColor(Color.BLUE);
             color4.setColor(Color.BLUE);
