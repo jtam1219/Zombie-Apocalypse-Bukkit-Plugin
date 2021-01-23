@@ -65,7 +65,7 @@ public class SpawnBulwark implements CommandExecutor {
         zombie.getEquipment().setItemInMainHandDropChance(0.05f);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,
-                1000000, 19));
+                1000000, 9));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 1, 100));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
         return true;

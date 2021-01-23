@@ -54,11 +54,11 @@ public class ZombieCommand implements CommandExecutor {
         zombie.getEquipment().setBoots(boot);
         zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(9);
         zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
-        zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.85);
+        zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.75);
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(35);
         zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.5);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,
-                1000000, 9));
+                1000000, 4));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 1, 100));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
         zombie.getEquipment().setHelmetDropChance(0.15f);
