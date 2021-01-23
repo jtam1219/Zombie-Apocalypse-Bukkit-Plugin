@@ -332,7 +332,10 @@ public class ZombieRaid implements Listener {
             gear[3].setItemMeta(color4);
             Vindicator vindicator=(Vindicator) w.spawnEntity(loc,
                     EntityType.VINDICATOR);
-            vindicator.getEquipment().setArmorContents(gear);
+            vindicator.getEquipment().setHelmet(gear[0]);
+            vindicator.getEquipment().setChestplate(gear[1]);
+            vindicator.getEquipment().setLeggings(gear[2]);
+            vindicator.getEquipment().setBoots(gear[3]);
         }
     }
     public void illagerRaidStage3(World w, Location loc){
@@ -382,7 +385,10 @@ public class ZombieRaid implements Listener {
             gear[1].setItemMeta(color2);
             gear[2].setItemMeta(color3);
             gear[3].setItemMeta(color4);
-            pillager.getEquipment().setArmorContents(gear);
+            pillager.getEquipment().setHelmet(gear[0]);
+            pillager.getEquipment().setChestplate(gear[1]);
+            pillager.getEquipment().setLeggings(gear[2]);
+            pillager.getEquipment().setBoots(gear[3]);
             pillager.getEquipment().setItemInMainHand(poisonBow);
         }
         for (int i=0; i<5; i++){
@@ -392,7 +398,10 @@ public class ZombieRaid implements Listener {
                     new ItemStack(Material.CHAINMAIL_BOOTS)};
             Vindicator vindicator=(Vindicator)w.spawnEntity(loc,
                     EntityType.VINDICATOR);
-            vindicator.getEquipment().setArmorContents(gear);
+            vindicator.getEquipment().setHelmet(gear[0]);
+            vindicator.getEquipment().setChestplate(gear[1]);
+            vindicator.getEquipment().setLeggings(gear[2]);
+            vindicator.getEquipment().setBoots(gear[3]);
         }
     }
     public void illagerRaidStage5(World w, Location loc){
@@ -415,7 +424,10 @@ public class ZombieRaid implements Listener {
             LeatherArmorMeta color1=(LeatherArmorMeta) gear[0].getItemMeta();
             color1.setColor(Color.BLUE);
             gear[0].setItemMeta(color1);
-            vindicator.getEquipment().setArmorContents(gear);
+            vindicator.getEquipment().setHelmet(gear[0]);
+            vindicator.getEquipment().setChestplate(gear[1]);
+            vindicator.getEquipment().setLeggings(gear[2]);
+            vindicator.getEquipment().setBoots(gear[3]);
         }
         for (int i=0; i<3; i++){
             Pillager pillager=(Pillager) w.spawnEntity(loc,
@@ -438,7 +450,10 @@ public class ZombieRaid implements Listener {
             gear[0].setItemMeta(color1);
             gear[2].setItemMeta(color3);
             gear[3].setItemMeta(color4);
-            pillager.getEquipment().setArmorContents(gear);
+            pillager.getEquipment().setHelmet(gear[0]);
+            pillager.getEquipment().setChestplate(gear[1]);
+            pillager.getEquipment().setLeggings(gear[2]);
+            pillager.getEquipment().setBoots(gear[3]);
             pillager.getEquipment().setItemInMainHand(poisonBow);
         }
     }
