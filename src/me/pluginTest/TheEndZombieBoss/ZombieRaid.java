@@ -318,10 +318,10 @@ public class ZombieRaid implements Listener {
                     new ItemStack(Material.LEATHER_CHESTPLATE),
                     new ItemStack(Material.LEATHER_LEGGINGS),
                     new ItemStack(Material.LEATHER_BOOTS)};
-            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0];
-            LeatherArmorMeta color2=(LeatherArmorMeta)gear[1];
-            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2];
-            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3];
+            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0].getItemMeta();
+            LeatherArmorMeta color2=(LeatherArmorMeta)gear[1].getItemMeta();
+            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2].getItemMeta();
+            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3].getItemMeta();
             color1.setColor(Color.BLUE);
             color2.setColor(Color.BLUE);
             color3.setColor(Color.BLUE);
@@ -370,10 +370,10 @@ public class ZombieRaid implements Listener {
                     new ItemStack(Material.LEATHER_CHESTPLATE),
                     new ItemStack(Material.LEATHER_LEGGINGS),
                     new ItemStack(Material.LEATHER_BOOTS)};
-            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0];
-            LeatherArmorMeta color2=(LeatherArmorMeta)gear[1];
-            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2];
-            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3];
+            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0].getItemMeta();
+            LeatherArmorMeta color2=(LeatherArmorMeta)gear[1].getItemMeta();
+            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2].getItemMeta();
+            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3].getItemMeta();
             color1.setColor(Color.BLUE);
             color2.setColor(Color.BLUE);
             color3.setColor(Color.BLUE);
@@ -412,7 +412,7 @@ public class ZombieRaid implements Listener {
                     new ItemStack(Material.IRON_CHESTPLATE),
                     new ItemStack(Material.IRON_LEGGINGS),
                     new ItemStack(Material.IRON_BOOTS)};
-            LeatherArmorMeta color1=(LeatherArmorMeta) gear[0];
+            LeatherArmorMeta color1=(LeatherArmorMeta) gear[0].getItemMeta();
             color1.setColor(Color.BLUE);
             gear[0].setItemMeta(color1);
             vindicator.getEquipment().setArmorContents(gear);
@@ -429,9 +429,9 @@ public class ZombieRaid implements Listener {
                     new ItemStack(Material.CHAINMAIL_CHESTPLATE),
                     new ItemStack(Material.LEATHER_LEGGINGS),
                     new ItemStack(Material.LEATHER_BOOTS)};
-            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0];
-            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2];
-            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3];
+            LeatherArmorMeta color1=(LeatherArmorMeta)gear[0].getItemMeta();
+            LeatherArmorMeta color3=(LeatherArmorMeta)gear[2].getItemMeta();
+            LeatherArmorMeta color4=(LeatherArmorMeta)gear[3].getItemMeta();
             color1.setColor(Color.BLUE);
             color3.setColor(Color.BLUE);
             color4.setColor(Color.BLUE);
