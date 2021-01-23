@@ -326,9 +326,9 @@ public class ZombieTypes implements Listener {
             zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.85);
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(35);
             zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.5);
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 14));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
+                    1000000, 14));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2, 100));
             zombie.getEquipment().setHelmetDropChance(0.15f);
             zombie.getEquipment().setChestplateDropChance(0.05f);
             zombie.getEquipment().setLeggingsDropChance(0.1f);
@@ -391,8 +391,8 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setBootsDropChance(0.05f);
             zombie.getEquipment().setItemInMainHandDropChance(0.05f);
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 24));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2, 100));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
+                    1000000, 19));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
           }
         }
