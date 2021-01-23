@@ -140,7 +140,7 @@ public class ZombieRaid implements Listener {
                 && illagerCount>0 && illagerCount<=15){
             illagerCount--;
         }
-        if(illagerCount==0){
+        if(e.getEntity() instanceof Illager && illagerCount==0){
             World w=e.getEntity().getWorld();
             Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
             Location illagerSpawn=
