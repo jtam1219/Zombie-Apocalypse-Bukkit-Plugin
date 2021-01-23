@@ -89,6 +89,7 @@ public class ZombieRaid implements Listener {
         if (e.getEntity() instanceof Illager && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
                 && illagerCount>36 && illagerCount<=44){
             illagerCount--;
+            e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
         }
         if(illagerCount==36){
             World w=e.getEntity().getWorld();
@@ -106,6 +107,7 @@ public class ZombieRaid implements Listener {
         if (e.getEntity() instanceof Illager && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
                 && illagerCount>26 && illagerCount<=36){
             illagerCount--;
+            e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
         }
         if(illagerCount==26){
             World w=e.getEntity().getWorld();
@@ -123,6 +125,7 @@ public class ZombieRaid implements Listener {
         if (e.getEntity() instanceof Illager && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
                 && illagerCount>15 && illagerCount<=26){
             illagerCount--;
+            e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
         }
         if(illagerCount==15){
             World w=e.getEntity().getWorld();
@@ -140,6 +143,7 @@ public class ZombieRaid implements Listener {
         if (e.getEntity() instanceof Illager && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
                 && illagerCount>0 && illagerCount<=15){
             illagerCount--;
+            e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
         }
         if(e.getEntity() instanceof Illager && illagerCount==0){
             World w=e.getEntity().getWorld();
