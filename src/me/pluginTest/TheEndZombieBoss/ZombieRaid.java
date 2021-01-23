@@ -75,7 +75,6 @@ public class ZombieRaid implements Listener {
         if(illagerCount==44){
             World w=e.getEntity().getWorld();
             Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
-            blockPortal(w, exitPortal);
             Location illagerSpawn=
                     new Location(w,
                             exitPortal.getBlockX()-5,
