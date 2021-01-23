@@ -136,7 +136,7 @@ public class ZombieTypes implements Listener {
       // .getHealth() -
        //         e.getDamage()));
       //} else {
-        bulwark.getServer().broadcastMessage("Health: " +(bulwark.getHealth());
+        bulwark.getServer().broadcastMessage("Health: " +bulwark.getHealth());
       //}
     }
   }
@@ -338,12 +338,13 @@ public class ZombieTypes implements Listener {
             // entity.getServer().broadcastMessage("A Tank has been spawned!");
             zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(9);
             zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
-            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.85);
+            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.75);
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(35);
             zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.5);
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,
-                    1000000, 9));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 1, 100));
+                    1000000, 4));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2,
+                    6));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 2));
             zombie.getEquipment().setHelmetDropChance(0.15f);
             zombie.getEquipment().setChestplateDropChance(0.05f);
@@ -408,8 +409,9 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setItemInMainHandDropChance(0.05f);
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,
-                    1000000, 19));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 1, 100));
+                    1000000, 9));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2,
+                    6));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
             zombie.setMetadata("bulwark", new FixedMetadataValue(plugin, "bulwark"));
           }
