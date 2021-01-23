@@ -68,87 +68,50 @@ public class ZombieRaid implements Listener {
     }
 
     @EventHandler
-    public void stage1Pass(EntityDeathEvent e) {
-        if (e.getEntity() instanceof Illager
-                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 44) {
+    public void stagePass(EntityDeathEvent e) {
+        if((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager)
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END))
             illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
-        }
-        if (illagerCount == 44) {
-            World w = e.getEntity().getWorld();
-            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+        switch (illagerCount) {
+            World w; Location exitPortal; Location illagerSpawn;
+            case 44:
+                w = e.getEntity().getWorld();
+                exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+                illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                        exitPortal.getBlockZ() - 5);
+                illagerRaidStage2(w, illagerSpawn);
+                break;
+            case 36:
+                w = e.getEntity().getWorld();
+                exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+                illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                        exitPortal.getBlockZ() - 5);
+                illagerRaidStage3(w, illagerSpawn);
+                break;
+            case 26: 
+                w = e.getEntity().getWorld();
+                exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+                illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
                     exitPortal.getBlockZ() - 5);
-            illagerRaidStage2(w, illagerSpawn);
-        }
-    }
-
-    @EventHandler
-    public void stage2Pass(EntityDeathEvent e) {
-        if (e.getEntity() instanceof Illager
-                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 36
-                && illagerCount <= 44) {
-            illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
-        }
-        if (illagerCount == 36) {
-            World w = e.getEntity().getWorld();
-            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                illagerRaidStage4(w, illagerSpawn);
+                break;
+            case 15:
+               w = e.getEntity().getWorld();
+                exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+                illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
                     exitPortal.getBlockZ() - 5);
-            illagerRaidStage3(w, illagerSpawn);
-        }
-    }
-
-    @EventHandler
-    public void stage3Pass(EntityDeathEvent e) {
-        if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager)
-                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 26
-                && illagerCount <= 36) {
-            illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
-        }
-        if (illagerCount == 26) {
-            World w = e.getEntity().getWorld();
-            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
+                illagerRaidStage5(w, illagerSpawn);
+                break;
+            case 0:
+                w = e.getEntity().getWorld();
+                exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
+                illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
                     exitPortal.getBlockZ() - 5);
-            illagerRaidStage4(w, illagerSpawn);
-        }
-    }
-
-    @EventHandler
-    public void stage4Pass(EntityDeathEvent e) {
-        if (e.getEntity() instanceof Illager
-                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 15
-                && illagerCount <= 26) {
-            illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
-        }
-        if (illagerCount == 15) {
-            World w = e.getEntity().getWorld();
-            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
-                    exitPortal.getBlockZ() - 5);
-            illagerRaidStage5(w, illagerSpawn);
-        }
-    }
-
-    @EventHandler
-    public void stage5Pass(EntityDeathEvent e) {
-        if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager)
-                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount >= 0
-                && illagerCount <= 15) {
-            illagerCount--;
-            e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
-        }
-        if (e.getEntity() instanceof Illager && illagerCount == 0) {
-            World w = e.getEntity().getWorld();
-            Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
-            Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
-                    exitPortal.getBlockZ() - 5);
-            Wither wither = (Wither) w.spawnEntity(illagerSpawn, EntityType.WITHER);
-            finalBoss(w, illagerSpawn, wither);
+                Wither wither = (Wither) w.spawnEntity(illagerSpawn, EntityType.WITHER);
+                finalBoss(w, illagerSpawn, wither);
+                break;
+            default:
+                return;
         }
     }
 
