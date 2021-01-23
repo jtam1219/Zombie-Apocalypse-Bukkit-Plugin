@@ -61,7 +61,7 @@ public class ZombieRaid implements Listener {
             e.setCancelled(true);
             Location start = e.getProjectile().getLocation();
             Vector direction = e.getProjectile().getVelocity();
-            Arrow poison = start.getWorld().spawnArrow(start, direction, 2, 12);
+            Arrow poison = start.getWorld().spawnArrow(start, direction, 1.5f, 8);
             poison.addCustomEffect(new PotionEffect(PotionEffectType.POISON, 120, 1), true);
 
         }
@@ -77,7 +77,6 @@ public class ZombieRaid implements Listener {
         if (illagerCount == 44) {
             World w = e.getEntity().getWorld();
             Location exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
-            blockPortal(w, exitPortal);
             Location illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
                     exitPortal.getBlockZ() - 5);
             illagerRaidStage2(w, illagerSpawn);
@@ -138,7 +137,7 @@ public class ZombieRaid implements Listener {
     @EventHandler
     public void stage5Pass(EntityDeathEvent e) {
         if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager)
-                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount > 0
+                && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END) && illagerCount >= 0
                 && illagerCount <= 15) {
             illagerCount--;
             e.getEntity().getServer().broadcastMessage("Count" + illagerCount);
