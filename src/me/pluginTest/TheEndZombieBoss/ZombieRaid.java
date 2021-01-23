@@ -141,7 +141,7 @@ public class ZombieRaid implements Listener {
     @EventHandler
     public void stage5Pass(EntityDeathEvent e) {
         if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager) && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)
-                && illagerCount>0 && illagerCount<=15){
+                && illagerCount>=0 && illagerCount<=15){
             illagerCount--;
             e.getEntity().getServer().broadcastMessage("Count"+illagerCount);
         }
