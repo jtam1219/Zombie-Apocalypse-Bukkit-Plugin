@@ -69,11 +69,13 @@ public class ZombieRaid implements Listener {
 
     @EventHandler
     public void stagePass(EntityDeathEvent e) {
-        if((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager)
+        if ((e.getEntity() instanceof Illager || e.getEntity() instanceof Ravager)
                 && e.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END))
             illagerCount--;
+        World w;
+        Location exitPortal;
+        Location illagerSpawn;
         switch (illagerCount) {
-            World w; Location exitPortal; Location illagerSpawn;
             case 44:
                 w = e.getEntity().getWorld();
                 exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
@@ -88,25 +90,25 @@ public class ZombieRaid implements Listener {
                         exitPortal.getBlockZ() - 5);
                 illagerRaidStage3(w, illagerSpawn);
                 break;
-            case 26: 
+            case 26:
                 w = e.getEntity().getWorld();
                 exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
                 illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
-                    exitPortal.getBlockZ() - 5);
+                        exitPortal.getBlockZ() - 5);
                 illagerRaidStage4(w, illagerSpawn);
                 break;
             case 15:
-               w = e.getEntity().getWorld();
+                w = e.getEntity().getWorld();
                 exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
                 illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
-                    exitPortal.getBlockZ() - 5);
+                        exitPortal.getBlockZ() - 5);
                 illagerRaidStage5(w, illagerSpawn);
                 break;
             case 0:
                 w = e.getEntity().getWorld();
                 exitPortal = w.getEnderDragonBattle().getEndPortalLocation();
                 illagerSpawn = new Location(w, exitPortal.getBlockX() - 5, exitPortal.getBlockY() + 2,
-                    exitPortal.getBlockZ() - 5);
+                        exitPortal.getBlockZ() - 5);
                 Wither wither = (Wither) w.spawnEntity(illagerSpawn, EntityType.WITHER);
                 finalBoss(w, illagerSpawn, wither);
                 break;
