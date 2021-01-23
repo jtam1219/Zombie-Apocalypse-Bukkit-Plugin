@@ -1,12 +1,7 @@
 package me.pluginTest;
 
 import me.pluginTest.TheEndZombieBoss.ZombieRaid;
-import me.pluginTest.commands.HordeSpawn;
-import me.pluginTest.commands.SpawnGiantTest;
-import me.pluginTest.commands.ZombieCommand;
-import me.pluginTest.commands.SpawnJumper;
-import me.pluginTest.commands.SpawnWailer;
-import me.pluginTest.commands.SpawnLeech;
+import me.pluginTest.commands.*;
 import me.pluginTest.nether.empoweredMobs;
 import me.pluginTest.zombies.ZombieTypes;
 
@@ -27,5 +22,6 @@ public class Main extends JavaPlugin implements Listener {
         new SpawnWailer(this);
         new SpawnGiantTest(this);
         new SpawnLeech(this);
+        new SpawnBulwark(this);
     }
 }
