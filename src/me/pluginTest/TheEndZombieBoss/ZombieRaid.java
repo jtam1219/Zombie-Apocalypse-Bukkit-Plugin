@@ -74,6 +74,11 @@ public class ZombieRaid implements Listener {
             Wither wither = (Wither) w.spawnEntity(loc, EntityType.WITHER);
             canLeave = false;
             blockPortal(w, w.getEnderDragonBattle().getEndPortalLocation());
+            wither.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+                public void run() {
+                    blockPortal(w, loc);
+                }
+            }, 200);
             wither.getServer().broadcastMessage("[Wither]: Die.\n" + "[Core System]: Forcefield " + "activated.");
             wither.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 49));
             wither.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1));
@@ -110,7 +115,7 @@ public class ZombieRaid implements Listener {
                         stage++;
                     }
                     if ((wither.getHealth() <= 75) && (stage == 3)) {
-                        Location loc=wither.getLocation();
+                        Location loc = wither.getLocation();
                         w.strikeLightningEffect(loc);
                         wither.getServer()
                                 .broadcastMessage("[Core System]: " + "WARNING, CORE HAS SUSTAINED CRITICAL DAMAGE."
@@ -157,6 +162,7 @@ public class ZombieRaid implements Listener {
                 if (x == 0 && z == 0)
                     continue;
                 w.getBlockAt(x, y, z).setType(Material.BARRIER);
+                w.getBlockAt(x, y + 1, z).setType(Material.BARRIER);
             }
         }
     }
@@ -168,6 +174,7 @@ public class ZombieRaid implements Listener {
                 if (x == 0 && z == 0)
                     continue;
                 w.getBlockAt(x, y, z).setType(Material.AIR);
+                w.getBlockAt(x, y + 1, z).setType(Material.AIR);
             }
         }
     }

@@ -189,26 +189,21 @@ public class ZombieTypes implements Listener {
 
     Entity specialEntity;
 
-    Material[] helmets = { Material.LEATHER_HELMET, Material.CHAINMAIL_HELMET,
-         Material.GOLDEN_HELMET};
-    Material[] chestplates = { Material.LEATHER_CHESTPLATE, Material.CHAINMAIL_CHESTPLATE,
-         Material.GOLDEN_CHESTPLATE };
-    Material[] leggings = { Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS,
-         Material.GOLDEN_LEGGINGS};
-    Material[] boots = { Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS,
-        Material.GOLDEN_BOOTS };
+    Material[] helmets = { Material.LEATHER_HELMET, Material.CHAINMAIL_HELMET, Material.GOLDEN_HELMET };
+    Material[] chestplates = { Material.LEATHER_CHESTPLATE, Material.CHAINMAIL_CHESTPLATE, Material.GOLDEN_CHESTPLATE };
+    Material[] leggings = { Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS, Material.GOLDEN_LEGGINGS };
+    Material[] boots = { Material.LEATHER_BOOTS, Material.CHAINMAIL_BOOTS, Material.GOLDEN_BOOTS };
     Material[] melee = { Material.WOODEN_AXE, Material.WOODEN_SWORD, Material.STONE_AXE, Material.STONE_SWORD,
         Material.IRON_AXE, Material.IRON_SWORD };
 
-    if (effects <= 22 || effects>30) {
+    if (effects <= 22 || effects > 30) {
       specialEntity = w.spawnEntity(loc, EntityType.ZOMBIE);
       Zombie zombie = (Zombie) specialEntity;
       if (effects >= 0 && effects <= 2) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1000000, 3));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 0));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
-                1000000, 4));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         // zombie.setCustomName("Jumper");
         zombie.setMetadata("DamageAddOn", new FixedMetadataValue(plugin, "Jumper"));
         BukkitTask isOnGround = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
@@ -237,6 +232,7 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(70);
         zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.5);
         zombie.setHealth(4);
+        zombie.getEquipment().setHelmet(new ItemStack(Material.TNT));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
         zombie.setMetadata("Boomer", new FixedMetadataValue(plugin, "Boomer"));
         // Explodes upon Death
@@ -246,8 +242,7 @@ public class ZombieTypes implements Listener {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(5);
         zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.25);
         zombie.getEquipment().setHelmet(new ItemStack(Material.CREEPER_HEAD));
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
-                1000000, 19));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 19));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 2));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 3));
         return specialEntity;
@@ -264,8 +259,7 @@ public class ZombieTypes implements Listener {
       }
       if (effects >= 20 && effects <= 22) {
         zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
-        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
-                1000000, 1));
+        zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
         zombie.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 2));
         // zombie.setCustomName("Leech");
         zombie.setMetadata("Leech", new FixedMetadataValue(plugin, "Leech"));
@@ -286,23 +280,21 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setBoots(new ItemStack(boots[armor]));
           if (weapon < 6)
             zombie.getEquipment().setItemInMainHand(new ItemStack(melee[weapon]));
-        }
-        else {
+        } else {
           int num = r.nextInt(200);
           if (num < 15) {
             zombie.setAdult();
-            ItemStack chestplate=new ItemStack(Material.NETHERITE_CHESTPLATE);
+            ItemStack chestplate = new ItemStack(Material.NETHERITE_CHESTPLATE);
             chestplate.addEnchantment(Enchantment.DURABILITY, 3);
-            ItemStack boot=new ItemStack(Material.NETHERITE_BOOTS);
+            ItemStack boot = new ItemStack(Material.NETHERITE_BOOTS);
             boot.addEnchantment(Enchantment.DURABILITY, 3);
             zombie.getEquipment().setHelmet(new ItemStack(Material.IRON_HELMET));
             zombie.getEquipment().setChestplate(chestplate);
             zombie.getEquipment().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
             zombie.getEquipment().setBoots(boot);
-          }
-          else if (num > 15 && num <= 25){
+          } else if (num > 15 && num <= 25) {
             zombie.setAdult();
-            ItemStack chestplate=new ItemStack(Material.DIAMOND_CHESTPLATE);
+            ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
             chestplate.addEnchantment(Enchantment.PROTECTION_FIRE, 4);
             chestplate.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4);
             chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
@@ -312,8 +304,7 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setBoots(new ItemStack(Material.IRON_BOOTS));
             zombie.getEquipment().setItemInMainHand(new ItemStack(Material.IRON_AXE));
             zombie.getEquipment().setItemInOffHand(new ItemStack(Material.SHIELD));
-          }
-          else {
+          } else {
             if (armor < 3) {
               zombie.getEquipment().setHelmet(new ItemStack(helmets[armor]));
               zombie.getEquipment().setChestplate(new ItemStack(chestplates[armor]));
@@ -390,8 +381,7 @@ public class ZombieTypes implements Listener {
               }
             }, 5, 5);
             zombie.setMetadata("climbCycle", new FixedMetadataValue(plugin, checkCollision.getTaskId()));
-          }
-          else if (zombie.getEquipment().getChestplate().equals(new ItemStack(Material.DIAMOND_CHESTPLATE))){
+          } else if (zombie.getEquipment().getChestplate().equals(new ItemStack(Material.DIAMOND_CHESTPLATE))) {
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
             zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(2);
             zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.5);
@@ -400,11 +390,9 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setLeggingsDropChance(0.05f);
             zombie.getEquipment().setBootsDropChance(0.05f);
             zombie.getEquipment().setItemInMainHandDropChance(0.05f);
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,
-                    1000000, 1));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000,24));
-            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2,
-                    100));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1000000, 24));
+            zombie.addPotionEffect(new PotionEffect(PotionEffectType.HARM, 2, 100));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
           }
         }
@@ -414,8 +402,7 @@ public class ZombieTypes implements Listener {
       Drowned drowned = (Drowned) specialEntity;
       if (effects <= 28) {
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 1));
-        drowned.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
-                1000000, 4));
+        drowned.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         drowned.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
         // drowned.setCustomName("Drowner");
       }
@@ -425,8 +412,7 @@ public class ZombieTypes implements Listener {
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 1));
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 1000000, 0));
         drowned.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 1000000, 1));
-        drowned.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
-                1000000, 4));
+        drowned.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 4));
         ItemStack drownedBoots = new ItemStack(Material.DIAMOND_BOOTS);
         ItemStack drownedChestPlate = new ItemStack(Material.DIAMOND_CHESTPLATE);
         drownedChestPlate.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 2);
