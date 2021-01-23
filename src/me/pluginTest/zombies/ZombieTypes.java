@@ -338,7 +338,7 @@ public class ZombieTypes implements Listener {
             // entity.getServer().broadcastMessage("A Tank has been spawned!");
             zombie.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(9);
             zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(5);
-            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.75);
+            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.5);
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(35);
             zombie.getAttribute(Attribute.ZOMBIE_SPAWN_REINFORCEMENTS).setBaseValue(.5);
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,
@@ -401,7 +401,7 @@ public class ZombieTypes implements Listener {
           } else if (zombie.getEquipment().getChestplate().equals(bulwarkPlate)) {
             zombie.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(50);
             zombie.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK).setBaseValue(2);
-            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.5);
+            zombie.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(.25);
             zombie.getEquipment().setHelmetDropChance(0.05f);
             zombie.getEquipment().setChestplateDropChance(0.01f);
             zombie.getEquipment().setLeggingsDropChance(0.05f);
