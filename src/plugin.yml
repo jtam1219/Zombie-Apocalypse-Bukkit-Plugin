@@ -22,3 +22,5 @@ commands:
   summonleech:
     aliases: [leech]
     description: /leech
+  summonbulwark:
+    aliases: [bulwark]
