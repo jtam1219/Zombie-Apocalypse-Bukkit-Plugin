@@ -59,7 +59,7 @@ public class ZombieRaid implements Listener {
             Location start=e.getProjectile().getLocation();
             Vector direction=e.getProjectile().getVelocity();
             Arrow poison=start.getWorld().spawnArrow(start,direction,
-                    2, 12);
+                    1.5f, 8);
             poison.addCustomEffect(new PotionEffect(PotionEffectType.POISON,
                     120, 1), true);
 
