@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class ZombieRaid implements Listener {
     private Main plugin;
     private boolean canLeave = true;
-    private int illagerCount=50;
+    private int illagerCount;
 
     public ZombieRaid(Main plugin) {
         this.plugin = plugin;
@@ -73,6 +73,7 @@ public class ZombieRaid implements Listener {
         }
         if(illagerCount==44){
             World w=e.getEntity().getWorld();
+            blockPortal(w, w.getEnderDragonBattle().getEndPortalLocation());
             Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
             Location illagerSpawn=
                     new Location(w,
@@ -170,7 +171,8 @@ public class ZombieRaid implements Listener {
     @EventHandler
     public void commencement(EntityDeathEvent e) {
         if (e.getEntity() instanceof EnderDragon) {
-            Location loc = e.getEntity().getLocation();
+            illagerCount=50;
+            //Location loc = e.getEntity().getLocation();
             World w = e.getEntity().getWorld();
             Location exitPortal=w.getEnderDragonBattle().getEndPortalLocation();
             Location illagerSpawn=
@@ -183,6 +185,7 @@ public class ZombieRaid implements Listener {
                 }
             });
             canLeave = false;
+            blockPortal(w, w.getEnderDragonBattle().getEndPortalLocation());
             e.getEntity().getServer().broadcastMessage("Illagers have been " +
                     "discovered to be hiding in the End! They must be behind " +
                     "the zombie outbreak. Defeat them!");
