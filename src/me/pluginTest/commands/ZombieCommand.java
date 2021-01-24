@@ -65,7 +65,7 @@ public class ZombieCommand implements CommandExecutor {
         zombie.getEquipment().setChestplateDropChance(0.05f);
         zombie.getEquipment().setLeggingsDropChance(0.1f);
         zombie.getEquipment().setBootsDropChance(0.05f);
-        // zombie.setCustomName("Tank");
+        zombie.setCustomName("Tank HP: 40");
         zombie.setMetadata("Tank", new FixedMetadataValue(plugin, "Tank"));
         BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
             public void run() {

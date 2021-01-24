@@ -43,6 +43,7 @@ public class SpawnBulwark implements CommandExecutor {
         Entity specialZombie = w.spawnEntity(loc, EntityType.ZOMBIE);
         Zombie zombie = (Zombie) specialZombie;
         zombie.getServer().broadcastMessage("Bulwark spawned");
+        zombie.setCustomName("Bulwark HP: 60");
         zombie.setAdult();
         zombie.setMetadata("bulwark", new FixedMetadataValue(plugin, "bulwark"));
         ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
