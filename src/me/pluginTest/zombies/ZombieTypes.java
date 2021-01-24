@@ -122,8 +122,7 @@ public class ZombieTypes implements Listener {
        //tank.getServer().broadcastMessage("Health: " + (tank.getHealth() -
        //e.getDamage()));
       //} else {
-       tank.getServer().broadcastMessage("Health: " + tank.getHealth());
-       int HP= (int) (tank.getHealth()-e.getDamage());
+       int HP= (int) (tank.getHealth());
        tank.setCustomName("Tank HP: "+HP);
        //}
     }
@@ -138,8 +137,7 @@ public class ZombieTypes implements Listener {
       // .getHealth() -
        //         e.getDamage()));
       //} else {
-        bulwark.getServer().broadcastMessage("Health: " +bulwark.getHealth());
-      int HP= (int) (bulwark.getHealth()-e.getDamage());
+      int HP= (int) (bulwark.getHealth());
       bulwark.setCustomName("Bulwark HP: "+HP);
       //}
     }
