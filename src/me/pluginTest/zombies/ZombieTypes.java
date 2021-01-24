@@ -123,6 +123,8 @@ public class ZombieTypes implements Listener {
        //e.getDamage()));
       //} else {
        tank.getServer().broadcastMessage("Health: " + tank.getHealth());
+       int HP= (int) (tank.getHealth()-e.getDamage());
+       tank.setCustomName("Tank HP: "+HP);
        //}
     }
   }
@@ -137,6 +139,8 @@ public class ZombieTypes implements Listener {
        //         e.getDamage()));
       //} else {
         bulwark.getServer().broadcastMessage("Health: " +bulwark.getHealth());
+      int HP= (int) (bulwark.getHealth()-e.getDamage());
+      bulwark.setCustomName("Bulwark HP: "+HP);
       //}
     }
   }
@@ -350,7 +354,7 @@ public class ZombieTypes implements Listener {
             zombie.getEquipment().setChestplateDropChance(0.05f);
             zombie.getEquipment().setLeggingsDropChance(0.1f);
             zombie.getEquipment().setBootsDropChance(0.05f);
-            // zombie.setCustomName("Tank");
+            zombie.setCustomName("Tank HP: 40");
             zombie.setMetadata("Tank", new FixedMetadataValue(plugin, "Tank"));
             BukkitTask checkCollision = zombie.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
               public void run() {
@@ -414,6 +418,7 @@ public class ZombieTypes implements Listener {
                     6));
             zombie.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
             zombie.setMetadata("bulwark", new FixedMetadataValue(plugin, "bulwark"));
+            zombie.setCustomName("Bulwark HP: 60");
           }
         }
       }
