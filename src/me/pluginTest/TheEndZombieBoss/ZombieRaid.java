@@ -237,6 +237,11 @@ public class ZombieRaid implements Listener {
     }
 
     private void blockPortal(World w, Location loc) {
+        for(Player player : Bukkit.getOnlinePlayers()){
+            if(player.getWorld().getEnvironment().equals(World.Environment.THE_END) && Math.abs(player.getLocation().getBlockX()) <= 3 && Math.abs(player.getLocation().getBlockZ()) <= 3){
+                player.teleport(new Location(player.getWorld(), 5, player.getLocation().getBlockY(), 5));
+            }
+        }
         int y_start = loc.getBlockY();
         for (int y = y_start + 1; y <= 255; y++) {
             for (int x = -3; x <= 3; x++) {
@@ -264,10 +269,10 @@ public class ZombieRaid implements Listener {
 
     public void illagerRaidStage1(World w, Location loc) {
         for (int i = 0; i < 3; i++) {
-            w.spawnEntity(loc, EntityType.PILLAGER);
+            ((LivingEntity)w.spawnEntity(loc, EntityType.PILLAGER)).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 3; i++) {
-            w.spawnEntity(loc, EntityType.VINDICATOR);
+            ((LivingEntity)w.spawnEntity(loc, EntityType.VINDICATOR)).setRemoveWhenFarAway(false);
         }
     }
 
