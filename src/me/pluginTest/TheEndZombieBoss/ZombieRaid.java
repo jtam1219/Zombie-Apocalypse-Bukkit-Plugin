@@ -164,10 +164,13 @@ public class ZombieRaid implements Listener {
                 + " core of the spread of the disease. Activating defensive" + " breach protocol.");
         blockPortal(w, w.getEnderDragonBattle().getEndPortalLocation());
         wither.getServer().broadcastMessage("[Wither]: Die.\n" + "[Core System]: Forcefield " + "activated.");
-        wither.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1000000, 49));
-        wither.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 1));
-        wither.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0));
-        wither.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1000000, 1));
+        wither.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
+                1000000, 29));
+        wither.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1000000, 0));
+        wither.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,
+                1000000, 0));
+        wither.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,
+                1000000, 2));
         BukkitTask checkStage = wither.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
             int stage = 0;
 
@@ -179,12 +182,15 @@ public class ZombieRaid implements Listener {
                     wither.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
                     wither.removePotionEffect(PotionEffectType.SLOW);
                     wither.removePotionEffect(PotionEffectType.WEAKNESS);
+                    wither.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,
+                            1000000, 1));
                     stage++;
                 }
                 if ((wither.getHealth() <= 225) && (stage == 1)) {
                     wither.getServer().broadcastMessage("[Core System]: Core " + "has sustained "
                             + "supplementary damage, unleashing limiter stage 2" + ".");
                     wither.getServer().broadcastMessage("[Core System]: " + "Wither has received Speed and Strength.");
+                    wither.removePotionEffect(PotionEffectType.SLOW);
                     wither.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1000000, 0));
                     wither.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000, 0));
                     stage++;
@@ -264,16 +270,23 @@ public class ZombieRaid implements Listener {
 
     public void illagerRaidStage1(World w, Location loc) {
         for (int i = 0; i < 3; i++) {
-            w.spawnEntity(loc, EntityType.PILLAGER);
+            Pillager pillager=(Pillager) w.spawnEntity(loc,
+                    EntityType.PILLAGER);
+            pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 3; i++) {
-            w.spawnEntity(loc, EntityType.VINDICATOR);
+            Vindicator vindicator=(Vindicator) w.spawnEntity(loc,
+                    EntityType.VINDICATOR);
+            vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
     }
 
     public void illagerRaidStage2(World w, Location loc) {
         for (int i = 0; i < 5; i++) {
-            w.spawnEntity(loc, EntityType.PILLAGER);
+            Pillager pillager=(Pillager) w.spawnEntity(loc,
+                    EntityType.PILLAGER);
+            pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+
         }
         for (int i = 0; i < 3; i++) {
             ItemStack[] gear = { new ItemStack(Material.LEATHER_HELMET), new ItemStack(Material.LEATHER_CHESTPLATE),
@@ -295,33 +308,42 @@ public class ZombieRaid implements Listener {
             vindicator.getEquipment().setChestplate(gear[1]);
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
+            vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
     }
 
     public void illagerRaidStage3(World w, Location loc) {
         for (int i = 0; i < 1; i++) {
-            w.spawnEntity(loc, EntityType.EVOKER);
+            Evoker evoker= (Evoker) w.spawnEntity(loc, EntityType.EVOKER);
+            evoker.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 5; i++) {
             Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
             ItemStack crossBow = new ItemStack(Material.CROSSBOW);
             crossBow.addEnchantment(Enchantment.MULTISHOT, 1);
             pillager.getEquipment().setItemInMainHand(crossBow);
+            pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 3; i++) {
-            w.spawnEntity(loc, EntityType.VINDICATOR);
+            Vindicator vindicator=(Vindicator) w.spawnEntity(loc,
+                    EntityType.VINDICATOR);
+            vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 1; i++) {
-            w.spawnEntity(loc, EntityType.RAVAGER);
+            Ravager ravager=(Ravager) w.spawnEntity(loc, EntityType.RAVAGER);
+            ravager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
     }
 
     public void illagerRaidStage4(World w, Location loc) {
         for (int i = 0; i < 2; i++) {
-            w.spawnEntity(loc, EntityType.EVOKER);
+            Evoker evoker= (Evoker) w.spawnEntity(loc, EntityType.EVOKER);
+            evoker.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 1; i++) {
-            w.spawnEntity(loc, EntityType.ILLUSIONER);
+            Illusioner illusioner= (Illusioner) w.spawnEntity(loc,
+                    EntityType.ILLUSIONER);
+            illusioner.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 3; i++) {
             Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
@@ -347,6 +369,7 @@ public class ZombieRaid implements Listener {
             pillager.getEquipment().setLeggings(gear[2]);
             pillager.getEquipment().setBoots(gear[3]);
             pillager.getEquipment().setItemInMainHand(poisonBow);
+            pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 5; i++) {
             ItemStack[] gear = { new ItemStack(Material.CHAINMAIL_HELMET), new ItemStack(Material.CHAINMAIL_CHESTPLATE),
@@ -356,18 +379,23 @@ public class ZombieRaid implements Listener {
             vindicator.getEquipment().setChestplate(gear[1]);
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
+            vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
     }
 
     public void illagerRaidStage5(World w, Location loc) {
         for (int i = 0; i < 2; i++) {
-            w.spawnEntity(loc, EntityType.ILLUSIONER);
+            Illusioner illusioner= (Illusioner) w.spawnEntity(loc,
+                    EntityType.ILLUSIONER);
+            illusioner.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 3; i++) {
-            w.spawnEntity(loc, EntityType.EVOKER);
+            Evoker evoker= (Evoker) w.spawnEntity(loc, EntityType.EVOKER);
+            evoker.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 2; i++) {
-            w.spawnEntity(loc, EntityType.RAVAGER);
+            Ravager ravager=(Ravager) w.spawnEntity(loc, EntityType.RAVAGER);
+            ravager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 5; i++) {
             Vindicator vindicator = (Vindicator) w.spawnEntity(loc, EntityType.VINDICATOR);
@@ -380,6 +408,7 @@ public class ZombieRaid implements Listener {
             vindicator.getEquipment().setChestplate(gear[1]);
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
+            vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 3; i++) {
             Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
@@ -403,6 +432,7 @@ public class ZombieRaid implements Listener {
             pillager.getEquipment().setLeggings(gear[2]);
             pillager.getEquipment().setBoots(gear[3]);
             pillager.getEquipment().setItemInMainHand(poisonBow);
+            pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
     }
 }
