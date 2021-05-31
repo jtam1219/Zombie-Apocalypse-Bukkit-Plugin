@@ -270,8 +270,8 @@ public class ZombieRaid implements Listener {
 
     public void illagerRaidStage1(World w, Location loc) {
         for (int i = 0; i < 3; i++) {
-            Pillager pillager=(Pillager) w.spawnEntity(loc,
-                    EntityType.PILLAGER);
+            Pillager pillager=(Pillager)(w.spawnEntity(loc,
+                    EntityType.PILLAGER));
             pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
         }
         for (int i = 0; i < 3; i++) {
