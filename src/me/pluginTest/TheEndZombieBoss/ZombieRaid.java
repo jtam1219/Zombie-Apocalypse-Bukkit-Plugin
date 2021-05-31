@@ -278,11 +278,13 @@ public class ZombieRaid implements Listener {
             Pillager pillager=(Pillager)(w.spawnEntity(loc,
                     EntityType.PILLAGER));
             pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)pillager).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 3; i++) {
             Vindicator vindicator=(Vindicator) w.spawnEntity(loc,
                     EntityType.VINDICATOR);
             vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)vindicator).setRemoveWhenFarAway(false);
         }
     }
 
@@ -291,6 +293,7 @@ public class ZombieRaid implements Listener {
             Pillager pillager=(Pillager) w.spawnEntity(loc,
                     EntityType.PILLAGER);
             pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)pillager).setRemoveWhenFarAway(false);
 
         }
         for (int i = 0; i < 3; i++) {
@@ -314,6 +317,7 @@ public class ZombieRaid implements Listener {
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
             vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)vindicator).setRemoveWhenFarAway(false);
         }
     }
 
@@ -321,6 +325,7 @@ public class ZombieRaid implements Listener {
         for (int i = 0; i < 1; i++) {
             Evoker evoker= (Evoker) w.spawnEntity(loc, EntityType.EVOKER);
             evoker.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)evoker).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 5; i++) {
             Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
@@ -328,15 +333,18 @@ public class ZombieRaid implements Listener {
             crossBow.addEnchantment(Enchantment.MULTISHOT, 1);
             pillager.getEquipment().setItemInMainHand(crossBow);
             pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)pillager).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 3; i++) {
             Vindicator vindicator=(Vindicator) w.spawnEntity(loc,
                     EntityType.VINDICATOR);
             vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)vindicator).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 1; i++) {
             Ravager ravager=(Ravager) w.spawnEntity(loc, EntityType.RAVAGER);
             ravager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)ravager).setRemoveWhenFarAway(false);
         }
     }
 
@@ -344,11 +352,13 @@ public class ZombieRaid implements Listener {
         for (int i = 0; i < 2; i++) {
             Evoker evoker= (Evoker) w.spawnEntity(loc, EntityType.EVOKER);
             evoker.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)evoker).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 1; i++) {
             Illusioner illusioner= (Illusioner) w.spawnEntity(loc,
                     EntityType.ILLUSIONER);
             illusioner.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)illusioner).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 3; i++) {
             Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
@@ -375,6 +385,7 @@ public class ZombieRaid implements Listener {
             pillager.getEquipment().setBoots(gear[3]);
             pillager.getEquipment().setItemInMainHand(poisonBow);
             pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)pillager).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 5; i++) {
             ItemStack[] gear = { new ItemStack(Material.CHAINMAIL_HELMET), new ItemStack(Material.CHAINMAIL_CHESTPLATE),
@@ -385,6 +396,7 @@ public class ZombieRaid implements Listener {
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
             vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)vindicator).setRemoveWhenFarAway(false);
         }
     }
 
@@ -393,14 +405,17 @@ public class ZombieRaid implements Listener {
             Illusioner illusioner= (Illusioner) w.spawnEntity(loc,
                     EntityType.ILLUSIONER);
             illusioner.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)illusioner).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 3; i++) {
             Evoker evoker= (Evoker) w.spawnEntity(loc, EntityType.EVOKER);
             evoker.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)evoker).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 2; i++) {
             Ravager ravager=(Ravager) w.spawnEntity(loc, EntityType.RAVAGER);
             ravager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)ravager).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 5; i++) {
             Vindicator vindicator = (Vindicator) w.spawnEntity(loc, EntityType.VINDICATOR);
@@ -414,6 +429,7 @@ public class ZombieRaid implements Listener {
             vindicator.getEquipment().setLeggings(gear[2]);
             vindicator.getEquipment().setBoots(gear[3]);
             vindicator.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)vindicator).setRemoveWhenFarAway(false);
         }
         for (int i = 0; i < 3; i++) {
             Pillager pillager = (Pillager) w.spawnEntity(loc, EntityType.PILLAGER);
@@ -438,6 +454,7 @@ public class ZombieRaid implements Listener {
             pillager.getEquipment().setBoots(gear[3]);
             pillager.getEquipment().setItemInMainHand(poisonBow);
             pillager.getAttribute(Attribute.GENERIC_FOLLOW_RANGE).setBaseValue(200);
+            ((LivingEntity)pillager).setRemoveWhenFarAway(false);
         }
     }
 }
